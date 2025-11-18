@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     "download plugins",
     "buy plugins"
   ],
-  authors: [{ name: "PluginVerse Team" }],
-  creator: "PluginVerse",
-  publisher: "PluginVerse",
+  authors: [{ name: "MuneebYT" }],
+  creator: "MuneebYT",
+  publisher: "MuneebYT",
   formatDetection: {
     email: false,
     address: false,
@@ -76,8 +76,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
+    google: "ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo",
   },
 };
 
