@@ -6,9 +6,10 @@ import { Button } from './ui/Button'
 
 interface PurchaseButtonProps {
   pluginId: string
+  isFree?: boolean
 }
 
-export function PurchaseButton({ pluginId }: PurchaseButtonProps) {
+export function PurchaseButton({ pluginId, isFree = false }: PurchaseButtonProps) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -29,7 +30,11 @@ export function PurchaseButton({ pluginId }: PurchaseButtonProps) {
         return
       }
 
-      alert('Purchase successful! You can now download the plugin.')
+      const message = data.isFree 
+        ? 'Free plugin added to your library! You can now download it.'
+        : 'Purchase successful! You can now download the plugin.'
+      
+      alert(message)
       router.refresh()
     } catch (err) {
       alert('An error occurred during purchase')
@@ -43,7 +48,7 @@ export function PurchaseButton({ pluginId }: PurchaseButtonProps) {
       disabled={loading}
       className="w-full"
     >
-      {loading ? 'Processing...' : 'Purchase Plugin'}
+      {loading ? 'Processing...' : (isFree ? 'Get Free Plugin' : 'Purchase Plugin')}
     </Button>
   )
 }

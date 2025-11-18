@@ -180,7 +180,11 @@ export default function AdminPluginsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-accent-primary font-bold">
-                      {plugin.price_coins} Coins
+                      {plugin.price_coins === 0 ? (
+                        <span className="text-green-400">FREE</span>
+                      ) : (
+                        `${plugin.price_coins} Coins`
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex gap-2">
@@ -247,14 +251,19 @@ export default function AdminPluginsPage() {
             />
           </div>
 
-          <Input
-            label="Price (Coins)"
-            type="number"
-            value={formData.priceCoins}
-            onChange={(e) => setFormData({ ...formData, priceCoins: e.target.value })}
-            required
-            min="0"
-          />
+          <div>
+            <Input
+              label="Price (Coins)"
+              type="number"
+              value={formData.priceCoins}
+              onChange={(e) => setFormData({ ...formData, priceCoins: e.target.value })}
+              required
+              min="0"
+            />
+            <p className="text-xs text-text-secondary mt-1">
+              💡 Set to 0 for free plugins that users can download without payment
+            </p>
+          </div>
 
           <div>
             <label className="block text-sm font-medium mb-2">

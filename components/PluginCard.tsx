@@ -37,7 +37,11 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
         return
       }
 
-      alert('Purchase successful! You can now download the plugin.')
+      const message = data.isFree 
+        ? 'Free plugin added to your library! You can now download it.'
+        : 'Purchase successful! You can now download the plugin.'
+      
+      alert(message)
       if (onPurchase) {
         onPurchase(plugin.id)
       }
@@ -74,6 +78,11 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
+        {plugin.price_coins === 0 && (
+          <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+            FREE
+          </div>
+        )}
       </div>
 
       {/* Plugin Info */}
@@ -86,7 +95,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
         {/* Price and Action */}
         <div className="flex items-center justify-between mt-auto">
           <span className="text-2xl font-bold text-accent-primary">
-            {formatCurrency(plugin.price_coins)}
+            {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
           </span>
           
           {isPurchased ? (
@@ -102,7 +111,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               onClick={handlePurchase}
               disabled={loading}
             >
-              {loading ? 'Processing...' : 'Purchase'}
+              {loading ? 'Processing...' : (plugin.price_coins === 0 ? 'Get Free' : 'Purchase')}
             </Button>
           )}
         </div>

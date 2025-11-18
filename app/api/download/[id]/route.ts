@@ -28,19 +28,24 @@ export async function GET(
       return NextResponse.json({ error: 'Plugin not found' }, { status: 404 })
     }
 
-    // Verify purchase
-    const { data: purchase, error: purchaseError } = await supabase
-      .from('purchases')
-      .select('id')
-      .eq('user_id', user.id)
-      .eq('plugin_id', id)
-      .single()
+    // Check if plugin is free
+    const isFree = plugin.price_coins === 0
 
-    if (purchaseError || !purchase) {
-      return NextResponse.json(
-        { error: 'You must purchase this plugin before downloading' },
-        { status: 403 }
-      )
+    // Verify purchase (skip for free plugins)
+    if (!isFree) {
+      const { data: purchase, error: purchaseError } = await supabase
+        .from('purchases')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('plugin_id', id)
+        .single()
+
+      if (purchaseError || !purchase) {
+        return NextResponse.json(
+          { error: 'You must purchase this plugin before downloading' },
+          { status: 403 }
+        )
+      }
     }
 
     // Generate signed URL (valid for 60 seconds)

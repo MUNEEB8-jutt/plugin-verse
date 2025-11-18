@@ -40,36 +40,44 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Plugin already purchased' }, { status: 400 })
     }
 
-    // Get user balance
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('balance')
-      .eq('id', user.id)
-      .single()
+    // Check if plugin is free (0 coins)
+    const isFree = plugin.price_coins === 0
 
-    if (userError || !userData) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    let newBalance = 0
+
+    if (!isFree) {
+      // Get user balance for paid plugins
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('balance')
+        .eq('id', user.id)
+        .single()
+
+      if (userError || !userData) {
+        return NextResponse.json({ error: 'User not found' }, { status: 404 })
+      }
+
+      // Check sufficient balance
+      if (userData.balance < plugin.price_coins) {
+        return NextResponse.json(
+          { error: 'Insufficient balance', required: plugin.price_coins, current: userData.balance },
+          { status: 400 }
+        )
+      }
+
+      // Deduct coins from user balance
+      newBalance = userData.balance - plugin.price_coins
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({ balance: newBalance })
+        .eq('id', user.id)
+
+      if (updateError) {
+        return NextResponse.json({ error: 'Failed to update balance' }, { status: 400 })
+      }
     }
 
-    // Check sufficient balance
-    if (userData.balance < plugin.price_coins) {
-      return NextResponse.json(
-        { error: 'Insufficient balance', required: plugin.price_coins, current: userData.balance },
-        { status: 400 }
-      )
-    }
-
-    // Deduct coins from user balance
-    const { error: updateError } = await supabase
-      .from('users')
-      .update({ balance: userData.balance - plugin.price_coins })
-      .eq('id', user.id)
-
-    if (updateError) {
-      return NextResponse.json({ error: 'Failed to update balance' }, { status: 400 })
-    }
-
-    // Create purchase record
+    // Create purchase record (for both free and paid plugins)
     const { data: purchase, error: purchaseError } = await supabase
       .from('purchases')
       .insert({
@@ -80,20 +88,31 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (purchaseError) {
-      // Rollback balance update
-      await supabase
-        .from('users')
-        .update({ balance: userData.balance })
-        .eq('id', user.id)
+      // Rollback balance update for paid plugins
+      if (!isFree) {
+        const { data: userData } = await supabase
+          .from('users')
+          .select('balance')
+          .eq('id', user.id)
+          .single()
+        
+        if (userData) {
+          await supabase
+            .from('users')
+            .update({ balance: userData.balance + plugin.price_coins })
+            .eq('id', user.id)
+        }
+      }
 
       return NextResponse.json({ error: 'Failed to create purchase' }, { status: 400 })
     }
 
     return NextResponse.json(
       {
-        message: 'Purchase successful',
+        message: isFree ? 'Free plugin added to your library!' : 'Purchase successful',
         data: purchase,
-        newBalance: userData.balance - plugin.price_coins,
+        newBalance: isFree ? null : newBalance,
+        isFree,
       },
       { status: 201 }
     )

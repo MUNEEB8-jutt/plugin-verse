@@ -77,8 +77,13 @@ export default async function PluginDetailPage({
 
               <div className="mb-6">
                 <span className="text-3xl font-bold text-accent-primary">
-                  {formatCurrency(plugin.price_coins)}
+                  {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
                 </span>
+                {plugin.price_coins === 0 && (
+                  <span className="ml-3 text-sm px-3 py-1 rounded-full bg-green-500/20 text-green-400 border border-green-500">
+                    Free Plugin
+                  </span>
+                )}
               </div>
 
               <div className="mb-6 flex-1">
@@ -100,12 +105,14 @@ export default async function PluginDetailPage({
                   isPurchased ? (
                     <DownloadButton pluginId={plugin.id} pluginTitle={plugin.title} />
                   ) : (
-                    <PurchaseButton pluginId={plugin.id} />
+                    <PurchaseButton pluginId={plugin.id} isFree={plugin.price_coins === 0} />
                   )
                 ) : (
                   <div className="space-y-2">
                     <p className="text-text-secondary text-center">
-                      Please login to purchase this plugin
+                      {plugin.price_coins === 0 
+                        ? 'Please login to download this free plugin'
+                        : 'Please login to purchase this plugin'}
                     </p>
                     <Link href="/login">
                       <Button className="w-full">Login</Button>
