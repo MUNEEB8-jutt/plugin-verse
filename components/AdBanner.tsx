@@ -29,7 +29,7 @@ export function AdBanner({
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" // Yahan apna AdSense client ID dalna
+        data-ad-client="ca-pub-5368126035184531"
         data-ad-slot={dataAdSlot}
         data-ad-format={dataAdFormat}
         data-full-width-responsive={dataFullWidthResponsive.toString()}
