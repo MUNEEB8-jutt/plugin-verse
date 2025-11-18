@@ -3,6 +3,7 @@ import { Navbar } from '@/components/Navbar'
 import { Button } from '@/components/ui/Button'
 import { DownloadButton } from '@/components/DownloadButton'
 import { PurchaseButton } from '@/components/PurchaseButton'
+import { AdBanner } from '@/components/AdBanner'
 import { formatCurrency, formatDate } from '@/lib/utils/helpers'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -110,6 +111,15 @@ export default async function PluginDetailPage({
           ← Back to Marketplace
         </Link>
 
+        {/* Top Banner Ad */}
+        <div className="mb-8">
+          <AdBanner 
+            dataAdSlot="5544332211"
+            dataAdFormat="horizontal"
+            className="max-w-4xl mx-auto"
+          />
+        </div>
+
         <div className="glass rounded-lg p-8 max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Plugin Image */}
@@ -175,6 +185,15 @@ export default async function PluginDetailPage({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Bottom Banner Ad */}
+        <div className="mt-8">
+          <AdBanner 
+            dataAdSlot="6677889900"
+            dataAdFormat="horizontal"
+            className="max-w-4xl mx-auto"
+          />
         </div>
       </main>
       </div>

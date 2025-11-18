@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
 import { PluginCard } from '@/components/PluginCard'
+import { AdBanner } from '@/components/AdBanner'
 import { Plugin } from '@/lib/types/database'
 
 async function getPlugins() {
@@ -83,6 +84,15 @@ export default async function HomePage() {
         <Navbar user={user} isAdmin={isAdmin} />
 
       <main className="container mx-auto px-4 py-12">
+        {/* Top Banner Ad */}
+        <div className="mb-8">
+          <AdBanner 
+            dataAdSlot="1234567890"
+            dataAdFormat="horizontal"
+            className="max-w-4xl mx-auto"
+          />
+        </div>
+
         {/* Hero Section */}
         <div className="text-center mb-12">
           {/* Logo and Title */}
@@ -160,15 +170,38 @@ export default async function HomePage() {
 
         {/* Plugins Grid */}
         {plugins.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {plugins.map((plugin: Plugin) => (
-              <PluginCard
-                key={plugin.id}
-                plugin={plugin}
-                isPurchased={purchasedPluginIds.includes(plugin.id)}
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {plugins.map((plugin: Plugin, index: number) => (
+                <>
+                  <PluginCard
+                    key={plugin.id}
+                    plugin={plugin}
+                    isPurchased={purchasedPluginIds.includes(plugin.id)}
+                  />
+                  {/* In-feed Ad after every 6 plugins */}
+                  {(index + 1) % 6 === 0 && (
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3 my-4">
+                      <AdBanner 
+                        dataAdSlot="0987654321"
+                        dataAdFormat="fluid"
+                        className="max-w-4xl mx-auto"
+                      />
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
+
+            {/* Bottom Banner Ad */}
+            <div className="mt-12">
+              <AdBanner 
+                dataAdSlot="1122334455"
+                dataAdFormat="horizontal"
+                className="max-w-4xl mx-auto"
               />
-            ))}
-          </div>
+            </div>
+          </>
         ) : (
           <div className="text-center py-20">
             <p className="text-2xl text-text-secondary">No plugins available yet.</p>
