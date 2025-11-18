@@ -13,8 +13,72 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PluginVerse - Plugin Marketplace",
-  description: "Discover and download amazing plugins for your server",
+  metadataBase: new URL('https://pluginverse.vercel.app'),
+  title: {
+    default: "PluginVerse - Premium Minecraft Plugin Marketplace",
+    template: "%s | PluginVerse"
+  },
+  description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace for server owners and developers.",
+  keywords: [
+    "PluginVerse",
+    "Minecraft plugins",
+    "plugin marketplace",
+    "Minecraft server plugins",
+    "premium plugins",
+    "free plugins",
+    "plugin store",
+    "coins system",
+    "server plugins",
+    "Minecraft marketplace",
+    "download plugins",
+    "buy plugins"
+  ],
+  authors: [{ name: "PluginVerse Team" }],
+  creator: "PluginVerse",
+  publisher: "PluginVerse",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://pluginverse.vercel.app",
+    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
+    description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace for server owners.",
+    siteName: "PluginVerse",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "PluginVerse - Minecraft Plugin Marketplace",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
+    description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace.",
+    images: ["/og-image.png"],
+    creator: "@ItxMuneebYT",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
+  },
 };
 
 export default function RootLayout({

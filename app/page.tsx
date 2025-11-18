@@ -23,6 +23,17 @@ async function getUserPurchases(userId: string) {
   return purchases?.map(p => p.plugin_id) || []
 }
 
+export const metadata = {
+  title: "PluginVerse - Premium Minecraft Plugin Marketplace",
+  description: "Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
+  openGraph: {
+    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
+    description: "Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
+    url: "https://pluginverse.vercel.app",
+    type: "website",
+  },
+}
+
 export default async function HomePage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -31,9 +42,45 @@ export default async function HomePage() {
   const plugins = await getPlugins()
   const purchasedPluginIds = user ? await getUserPurchases(user.id) : []
 
+  // Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PluginVerse",
+    "url": "https://pluginverse.vercel.app",
+    "description": "Premium Minecraft Plugin Marketplace with coins system",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://pluginverse.vercel.app/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PluginVerse",
+    "url": "https://pluginverse.vercel.app",
+    "logo": "https://pluginverse.vercel.app/logo.png",
+    "description": "Premium Minecraft Plugin Marketplace",
+    "sameAs": [
+      "https://discord.com/invite/UnDRjTc9jP",
+      "https://www.youtube.com/@ItxMuneebYT"
+    ]
+  }
+
   return (
-    <div className="min-h-screen">
-      <Navbar user={user} isAdmin={isAdmin} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+      />
+      <div className="min-h-screen">
+        <Navbar user={user} isAdmin={isAdmin} />
 
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
@@ -133,6 +180,7 @@ export default async function HomePage() {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </>
   )
 }

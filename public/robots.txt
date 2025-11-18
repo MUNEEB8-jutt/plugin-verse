@@ -1,0 +1,16 @@
+# robots.txt for PluginVerse
+User-agent: *
+Allow: /
+Allow: /plugin/*
+Allow: /login
+Allow: /signup
+Disallow: /admin/*
+Disallow: /api/*
+Disallow: /account
+Disallow: /deposit
+
+# Sitemap
+Sitemap: https://pluginverse.vercel.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

@@ -31,6 +31,38 @@ async function checkPurchase(userId: string, pluginId: string) {
   return !!purchase
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const plugin = await getPlugin(id)
+
+  if (!plugin) {
+    return {
+      title: 'Plugin Not Found',
+    }
+  }
+
+  return {
+    title: `${plugin.title} - ${plugin.price_coins === 0 ? 'Free' : plugin.price_coins + ' Coins'}`,
+    description: plugin.description.slice(0, 160),
+    openGraph: {
+      title: plugin.title,
+      description: plugin.description.slice(0, 160),
+      images: [plugin.logo_url],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: plugin.title,
+      description: plugin.description.slice(0, 160),
+      images: [plugin.logo_url],
+    },
+  }
+}
+
 export default async function PluginDetailPage({
   params,
 }: {
@@ -48,9 +80,30 @@ export default async function PluginDetailPage({
   const isAdmin = user?.user_metadata?.role === 'admin'
   const isPurchased = user ? await checkPurchase(user.id, id) : false
 
+  // Structured Data for Plugin
+  const productData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": plugin.title,
+    "description": plugin.description,
+    "image": plugin.logo_url,
+    "offers": {
+      "@type": "Offer",
+      "price": plugin.price_coins === 0 ? "0" : plugin.price_coins.toString(),
+      "priceCurrency": "COINS",
+      "availability": "https://schema.org/InStock",
+      "url": `https://pluginverse.vercel.app/plugin/${plugin.id}`
+    }
+  }
+
   return (
-    <div className="min-h-screen">
-      <Navbar user={user} isAdmin={isAdmin} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productData) }}
+      />
+      <div className="min-h-screen">
+        <Navbar user={user} isAdmin={isAdmin} />
 
       <main className="container mx-auto px-4 py-12">
         <Link href="/" className="text-accent-primary hover:underline mb-6 inline-block">
@@ -124,6 +177,7 @@ export default async function PluginDetailPage({
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   )
 }
