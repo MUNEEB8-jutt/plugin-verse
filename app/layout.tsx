@@ -90,6 +90,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ position: 'relative', minHeight: '100vh' }}
@@ -113,7 +116,7 @@ export default function RootLayout({
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
-        
+
         {/* Dark overlay for better readability */}
         <div
           style={{
@@ -126,7 +129,7 @@ export default function RootLayout({
             zIndex: -1
           }}
         />
-        
+
         {children}
       </body>
     </html>
