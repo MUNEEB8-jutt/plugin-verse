@@ -24,8 +24,8 @@ async function getUserPurchases(userId: string) {
 
 export const metadata = {
   title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace | Premium Plugin Store",
-  description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Download premium & free plugins/mods with coins. 🇵🇰 Trusted by Pakistani Minecraft community. پاکستان میں مائن کرافٹ پلگ انز اور موڈز کی بہترین مارکیٹ",
-  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, plugin store Pakistan, Minecraft موڈز پاکستان, مائن کرافٹ پلگ انز, buy minecraft plugins pakistan, download minecraft mods pakistan",
+  description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Download premium & free plugins/mods with coins. 🇵🇰 Trusted by Pakistani Minecraft community.",
+  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, plugin store Pakistan, buy minecraft plugins pakistan, download minecraft mods pakistan, Pakistan Minecraft server, Minecraft community Pakistan",
   openGraph: {
     title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace",
     description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",

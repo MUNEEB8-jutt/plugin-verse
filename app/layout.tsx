@@ -18,9 +18,8 @@ export const metadata: Metadata = {
     default: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan | Premium Plugin Store",
     template: "%s | PluginVerse"
   },
-  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server. پاکستان میں مائن کرافٹ پلگ انز",
+  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
   keywords: [
-    "PluginVerse",
     "PluginVerse Pakistan",
     "Minecraft plugins Pakistan",
     "Minecraft mods Pakistan",
@@ -29,13 +28,12 @@ export const metadata: Metadata = {
     "premium plugins Pakistan",
     "free plugins Pakistan",
     "plugin store Pakistan",
-    "coins system",
-    "server plugins",
-    "Minecraft marketplace",
-    "download plugins Pakistan",
-    "buy plugins Pakistan",
-    "Minecraft موڈز پاکستان",
-    "مائن کرافٹ پلگ انز"
+    "buy Minecraft plugins Pakistan",
+    "download Minecraft mods Pakistan",
+    "Pakistan Minecraft community",
+    "Minecraft server Pakistan",
+    "plugin shop Pakistan",
+    "Minecraft marketplace Pakistan"
   ],
   authors: [{ name: "PluginVerse Pakistan", url: "https://pluginverse.vercel.app" }],
   creator: "PluginVerse Pakistan",
