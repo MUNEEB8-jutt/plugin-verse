@@ -10,12 +10,25 @@ export function Card({ children, className, hover = false }: CardProps) {
   return (
     <div
       className={cn(
-        'glass rounded-lg p-6',
-        hover && 'hover:scale-105 hover:shadow-2xl cursor-pointer',
+        'relative overflow-hidden p-6',
+        'bg-[#57534e] border-4 border-black',
+        'shadow-[8px_8px_0_#000,inset_0_0_20px_rgba(0,0,0,0.3)]',
+        hover && 'hover:-translate-y-2 hover:shadow-[8px_16px_0_#000,inset_0_0_20px_rgba(74,222,128,0.2)] cursor-pointer transition-all duration-200',
         className
       )}
     >
-      {children}
+      {/* Texture overlay - will show when texture image is added */}
+      <div 
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/textures/stone.png)',
+          backgroundSize: '64px 64px',
+          imageRendering: 'pixelated'
+        }}
+      />
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   )
 }

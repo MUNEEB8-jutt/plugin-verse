@@ -1,8 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
-import { PluginCard } from '@/components/PluginCard'
-import { AdBanner } from '@/components/AdBanner'
-import { Plugin } from '@/lib/types/database'
+import { HomePageClient } from '@/components/HomePageClient'
 
 async function getPlugins() {
   const supabase = await createClient()
@@ -25,13 +23,16 @@ async function getUserPurchases(userId: string) {
 }
 
 export const metadata = {
-  title: "PluginVerse - Premium Minecraft Plugin Marketplace",
-  description: "Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
+  title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
+  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins. پاکستان میں مائن کرافٹ پلگ انز اور موڈز",
+  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, Minecraft موڈز پاکستان, مائن کرافٹ پلگ انز",
   openGraph: {
-    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
-    description: "Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
+    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
     url: "https://pluginverse.vercel.app",
     type: "website",
+    locale: "en_PK",
+    alternateLocale: ["ur_PK"],
   },
 }
 
@@ -83,136 +84,122 @@ export default async function HomePage() {
       <div className="min-h-screen">
         <Navbar user={user} isAdmin={isAdmin} />
 
-      <main className="container mx-auto px-4 py-12">
-        {/* Top Banner Ad */}
-        <div className="mb-8">
-          <AdBanner 
-            dataAdSlot="1234567890"
-            dataAdFormat="horizontal"
-            className="max-w-4xl mx-auto"
-          />
-        </div>
-
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          {/* Logo and Title */}
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <img 
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
-              alt="PluginVerse Logo"
-              className="w-20 h-20 object-contain"
-            />
-            <h1 className="text-6xl font-bold" style={{ fontFamily: 'monospace', color: '#4ade80' }}>
-              PluginVerse
-            </h1>
-          </div>
-          
-          <div className="p-6 rounded-lg mb-8" style={{ backgroundColor: 'rgba(31, 41, 55, 0.8)', border: '2px solid #374151', backdropFilter: 'blur(10px)' }}>
-            <h2 className="text-2xl font-semibold mb-2" style={{ color: '#9ca3af', fontFamily: 'monospace' }}>
-              Minecraft Plugin Marketplace
-            </h2>
-            <p className="text-lg mb-6" style={{ color: '#6b7280', fontFamily: 'monospace' }}>
-              🔍 Discover and download premium Minecraft plugins
-            </p>
-
-            {/* Action Buttons */}
+        <main className="container mx-auto px-4 py-12">
+          {/* Hero Section */}
+          <div className="text-center mb-12 animate-fade-in-up">
+            {/* Logo and Title */}
             <div className="flex items-center justify-center gap-4 mb-6">
-              {user && (
-                <a 
-                  href="/account"
-                  className="px-6 py-3 rounded font-bold transition-all hover:brightness-110"
-                  style={{ 
-                    backgroundColor: '#374151', 
-                    color: 'white',
-                    border: '2px solid #4b5563',
-                    fontFamily: 'monospace'
-                  }}
-                >
-                  📊 MY DASHBOARD
-                </a>
-              )}
-              <a 
-                href="/deposit"
-                className="px-6 py-3 rounded font-bold transition-all hover:brightness-110"
-                style={{ 
-                  backgroundColor: '#ca8a04', 
-                  color: 'black',
-                  fontFamily: 'monospace'
+              <img
+                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
+                alt="PluginVerse Logo"
+                className="w-20 h-20 object-contain animate-bounce-slow"
+                style={{ imageRendering: 'pixelated' }}
+              />
+              <h1
+                className="text-6xl font-bold"
+                style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  color: '#4ade80',
+                  textShadow: '4px 4px 0 #000'
                 }}
               >
-                💰 ADD COINS
-              </a>
+                PluginVerse
+              </h1>
             </div>
 
-            {/* Social Buttons */}
-            <div className="flex items-center justify-center gap-4">
-              <a 
-                href="https://discord.com/invite/UnDRjTc9jP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110"
-                style={{ backgroundColor: '#5865F2', color: 'white', fontFamily: 'monospace' }}
-              >
-                <span>💬</span> Join Discord
-              </a>
-              <a 
-                href="https://www.youtube.com/@ItxMuneebYT"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110"
-                style={{ backgroundColor: '#FF0000', color: 'white', fontFamily: 'monospace' }}
-              >
-                <span>▶️</span> Subscribe
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Plugins Grid */}
-        {plugins.length > 0 ? (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {plugins.map((plugin: Plugin, index: number) => (
-                <>
-                  <PluginCard
-                    key={plugin.id}
-                    plugin={plugin}
-                    isPurchased={purchasedPluginIds.includes(plugin.id)}
-                  />
-                  {/* In-feed Ad after every 6 plugins */}
-                  {(index + 1) % 6 === 0 && (
-                    <div className="col-span-1 md:col-span-2 lg:col-span-3 my-4">
-                      <AdBanner 
-                        dataAdSlot="0987654321"
-                        dataAdFormat="fluid"
-                        className="max-w-4xl mx-auto"
-                      />
-                    </div>
-                  )}
-                </>
-              ))}
-            </div>
-
-            {/* Bottom Banner Ad */}
-            <div className="mt-12">
-              <AdBanner 
-                dataAdSlot="1122334455"
-                dataAdFormat="horizontal"
-                className="max-w-4xl mx-auto"
+            <div
+              className="p-6 mb-8 relative overflow-hidden border-4 border-black"
+              style={{
+                background: 'linear-gradient(180deg, #57534e 0%, #44403c 100%)',
+                boxShadow: '8px 8px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)'
+              }}
+            >
+              {/* Grass texture overlay */}
+              <div
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{
+                  backgroundImage: 'url(/textures/grass.png)',
+                  backgroundSize: '64px 64px',
+                  imageRendering: 'pixelated'
+                }}
               />
+              <div className="relative z-10">
+                <h2
+                  className="text-2xl font-semibold mb-2"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    color: '#a8a29e',
+                    textShadow: '2px 2px 0 #000'
+                  }}
+                >
+                  Minecraft Plugins & Mods
+                </h2>
+                <p
+                  className="text-lg mb-6"
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: '0.8rem',
+                    color: '#78716c',
+                    textShadow: '1px 1px 0 #000'
+                  }}
+                >
+                  🔍 Discover premium plugins
+                </p>
+
+                {/* Action Buttons - Improved */}
+                <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
+                  {user && (
+                    <a
+                      href="/account"
+                      className="px-6 py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#60a5fa] to-[#3b82f6] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px]"
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: '0.7rem'
+                      }}
+                    >
+                      📊 My Dashboard
+                    </a>
+                  )}
+                  <a
+                    href="/deposit"
+                    className="px-6 py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#f59e0b] to-[#d97706] text-black shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px]"
+                    style={{
+                      fontFamily: "'Press Start 2P', monospace",
+                      fontSize: '0.7rem'
+                    }}
+                  >
+                    💰 Add Coins
+                  </a>
+                </div>
+
+                {/* Social Buttons - Improved */}
+                <div className="flex items-center justify-center gap-4 flex-wrap">
+                  <a
+                    href="https://discord.com/invite/UnDRjTc9jP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 font-bold transition-all flex items-center gap-2 border-4 border-black bg-gradient-to-b from-[#5865F2] to-[#4752C4] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px]"
+                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                  >
+                    <span>💬</span> Join Discord
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@ItxMuneebYT"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 font-bold transition-all flex items-center gap-2 border-4 border-black bg-gradient-to-b from-[#FF0000] to-[#CC0000] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px]"
+                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                  >
+                    <span>▶️</span> Subscribe
+                  </a>
+                </div>
+              </div>
             </div>
-          </>
-        ) : (
-          <div className="text-center py-20">
-            <p className="text-2xl text-text-secondary">No plugins available yet.</p>
-            {isAdmin && (
-              <p className="text-text-secondary mt-4">
-                Go to the <a href="/admin/plugins" className="text-accent-primary hover:underline">admin panel</a> to add plugins.
-              </p>
-            )}
           </div>
-        )}
-      </main>
+
+          {/* Plugins Grid with Search */}
+          <HomePageClient plugins={plugins} purchasedPluginIds={purchasedPluginIds} />
+        </main>
       </div>
     </>
   )

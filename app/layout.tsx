@@ -43,11 +43,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_PK",
+    alternateLocale: ["ur_PK"],
     url: "https://pluginverse.vercel.app",
-    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
-    description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace for server owners.",
-    siteName: "PluginVerse",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
+    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
+    siteName: "PluginVerse Pakistan",
+    countryName: "Pakistan",
     images: [
       {
         url: "/og-image.png",
@@ -59,10 +61,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PluginVerse - Premium Minecraft Plugin Marketplace",
-    description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace.",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
+    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
     images: ["/og-image.png"],
     creator: "@ItxMuneebYT",
+  },
+  other: {
+    "geo.region": "PK",
+    "geo.placename": "Pakistan",
+    "geo.position": "30.3753;69.3451",
   },
   robots: {
     index: true,
@@ -92,12 +99,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5368126035184531"
-          crossOrigin="anonymous"
-        />
+        {/* Press Start 2P Font for Minecraft theme */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

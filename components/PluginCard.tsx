@@ -18,6 +18,13 @@ interface PluginCardProps {
 export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: PluginCardProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showFullDescription, setShowFullDescription] = useState(false)
+  
+  const MAX_DESC_LENGTH = 100
+  const shouldTruncate = plugin.description.length > MAX_DESC_LENGTH
+  const displayDescription = showFullDescription || !shouldTruncate
+    ? plugin.description
+    : plugin.description.slice(0, MAX_DESC_LENGTH) + '...'
 
   const handlePurchase = async () => {
     setLoading(true)
@@ -68,18 +75,22 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
   }
 
   return (
-    <Card hover className="flex flex-col h-full">
+    <Card hover className="flex flex-col h-full animate-block-place">
       {/* Plugin Logo */}
-      <div className="relative w-full h-48 mb-4 rounded overflow-hidden bg-bg-secondary">
+      <div className="relative w-full h-48 mb-4 overflow-hidden bg-[#292524] border-2 border-black">
         <Image
           src={plugin.logo_url}
           alt={plugin.title}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ imageRendering: 'pixelated' }}
         />
         {plugin.price_coins === 0 && (
-          <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+          <div 
+            className="absolute top-2 right-2 bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000] font-bold"
+            style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem' }}
+          >
             FREE
           </div>
         )}
@@ -87,14 +98,36 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
       {/* Plugin Info */}
       <div className="flex-1 flex flex-col">
-        <h3 className="text-xl font-bold text-text-primary mb-2">{plugin.title}</h3>
-        <p className="text-text-secondary text-sm mb-4 line-clamp-3 flex-1">
-          {plugin.description}
-        </p>
+        <h3 
+          className="text-xl font-bold mb-2"
+          style={{ fontFamily: "'Press Start 2P', monospace", color: '#4ade80', textShadow: '2px 2px 0 #000' }}
+        >
+          {plugin.title}
+        </h3>
+        <div className="mb-4 flex-1">
+          <p 
+            className="text-sm mb-2"
+            style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem', color: '#d1d5db', lineHeight: '1.6' }}
+          >
+            {displayDescription}
+          </p>
+          {shouldTruncate && (
+            <button
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              className="text-xs font-bold hover:brightness-110 transition-all"
+              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.55rem', color: '#60a5fa' }}
+            >
+              {showFullDescription ? '▲ Show Less' : '▼ Show More'}
+            </button>
+          )}
+        </div>
 
         {/* Price and Action */}
-        <div className="flex items-center justify-between mt-auto">
-          <span className="text-2xl font-bold text-accent-primary">
+        <div className="flex items-center justify-between mt-auto gap-2">
+          <span 
+            className="text-2xl font-bold"
+            style={{ fontFamily: "'Press Start 2P', monospace", color: '#ca8a04', textShadow: '2px 2px 0 #000' }}
+          >
             {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
           </span>
           
@@ -102,16 +135,17 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
             <Button
               onClick={handleDownload}
               disabled={loading}
-              variant="secondary"
+              className="bg-gradient-to-b from-[#10b981] to-[#059669] hover:from-[#34d399] hover:to-[#10b981]"
             >
-              {loading ? 'Downloading...' : 'Download'}
+              {loading ? '⏳ Loading...' : '📥 Download'}
             </Button>
           ) : (
             <Button
               onClick={handlePurchase}
               disabled={loading}
+              className="bg-gradient-to-b from-[#f59e0b] to-[#d97706] hover:from-[#fbbf24] hover:to-[#f59e0b]"
             >
-              {loading ? 'Processing...' : (plugin.price_coins === 0 ? 'Get Free' : 'Purchase')}
+              {loading ? '⏳ Wait...' : (plugin.price_coins === 0 ? '🎁 Get Free' : '💰 Buy Now')}
             </Button>
           )}
         </div>
@@ -120,9 +154,10 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       {/* View Details Link */}
       <Link
         href={`/plugin/${plugin.id}`}
-        className="mt-4 text-center text-accent-secondary hover:underline text-sm"
+        className="mt-4 text-center hover:brightness-110 transition-all font-bold"
+        style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem', color: '#3b82f6', textShadow: '1px 1px 0 #000' }}
       >
-        View Details →
+        Details →
       </Link>
     </Card>
   )

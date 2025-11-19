@@ -1,14 +1,46 @@
 @import "tailwindcss";
 
+/* Minecraft Font - Add your downloaded font here */
+@font-face {
+  font-family: 'Minecrafter';
+  src: url('/fonts/Minecrafter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-card: rgba(45, 45, 45, 0.8);
+  /* Minecraft Color Palette - Lighter & Better */
+  --mc-primary: #4ade80;
+  --mc-primary-dark: #22c55e;
+  --mc-primary-light: #86efac;
+  
+  --mc-stone: #9ca3af;
+  --mc-stone-dark: #6b7280;
+  --mc-stone-light: #d1d5db;
+  
+  --mc-diamond: #60a5fa;
+  
+  --mc-wood: #d97706;
+  --mc-wood-light: #f59e0b;
+  
+  /* Lighter backgrounds - not full dark */
+  --mc-bg-dark: #374151;
+  --mc-bg-medium: #4b5563;
+  --mc-bg-light: #6b7280;
+  
+  --mc-text-light: #f9fafb;
+  --mc-text-dark: #111827;
+  
+  /* Legacy variables for compatibility */
+  --bg-primary: #374151;
+  --bg-secondary: #4b5563;
+  --bg-card: rgba(75, 85, 99, 0.9);
   --accent-primary: #4ade80;
   --accent-secondary: #60a5fa;
-  --text-primary: #ffffff;
-  --text-secondary: #a3a3a3;
-  --border: rgba(255, 255, 255, 0.1);
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --border: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {
@@ -25,10 +57,13 @@
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--mc-bg-dark);
+  color: var(--mc-text-light);
+  font-family: 'Minecrafter', 'Press Start 2P', monospace, Arial, sans-serif;
   min-height: 100vh;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 /* Glassmorphism effect */
@@ -38,9 +73,9 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Smooth transitions */
+/* Fast transitions for better performance */
 * {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 /* Custom scrollbar */
@@ -59,4 +94,195 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-secondary);
+}
+
+/* Minecraft-Style Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Minecraft Block Place Animation - Faster */
+@keyframes blockPlace {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Minecraft Block Break Animation */
+@keyframes blockBreak {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+}
+
+/* Pixelated Fade */
+@keyframes pixelFade {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Page Transition - Swap Animation */
+@keyframes pageSwapOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) rotateY(90deg);
+  }
+}
+
+@keyframes pageSwapIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) rotateY(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 3s ease-in-out infinite;
+}
+
+.animate-block-place {
+  animation: blockPlace 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-block-break {
+  animation: blockBreak 0.3s ease-out;
+}
+
+.animate-pixel-fade {
+  animation: pixelFade 0.5s ease-out;
+}
+
+.page-transition {
+  animation: pageSwapIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading Bar */
+@keyframes loadingBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #4ade80, transparent);
+  z-index: 9999;
+  animation: loadingBar 1s ease-in-out infinite;
+}
+
+/* Admin Panel Styles - Smaller, readable fonts */
+.admin-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 0.875rem !important;
+}
+
+.admin-heading {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* Hover Effects */
+.hover-scale {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

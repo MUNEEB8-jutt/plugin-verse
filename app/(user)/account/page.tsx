@@ -47,7 +47,7 @@ export default async function AccountPage() {
     <div className="min-h-screen">
       <Navbar user={user} isAdmin={isAdmin} />
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 page-transition">
         {/* Dashboard Header */}
         <div className="mb-8 p-6 rounded-lg" style={{ backgroundColor: '#1f2937', border: '2px solid #374151' }}>
           <div className="flex items-center justify-between mb-6">
