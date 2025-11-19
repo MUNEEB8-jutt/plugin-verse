@@ -1,0 +1,24 @@
+{
+  "name": "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
+  "short_name": "PluginVerse",
+  "description": "Pakistan's #1 marketplace for Minecraft plugins and mods",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#374151",
+  "theme_color": "#4ade80",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "shopping", "entertainment"],
+  "lang": "en-PK",
+  "dir": "ltr",
+  "scope": "/",
+  "related_applications": [],
+  "prefer_related_applications": false
+}

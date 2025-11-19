@@ -23,16 +23,22 @@ async function getUserPurchases(userId: string) {
 }
 
 export const metadata = {
-  title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
-  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins. پاکستان میں مائن کرافٹ پلگ انز اور موڈز",
-  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, Minecraft موڈز پاکستان, مائن کرافٹ پلگ انز",
+  title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace | Premium Plugin Store",
+  description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Download premium & free plugins/mods with coins. 🇵🇰 Trusted by Pakistani Minecraft community. پاکستان میں مائن کرافٹ پلگ انز اور موڈز کی بہترین مارکیٹ",
+  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, plugin store Pakistan, Minecraft موڈز پاکستان, مائن کرافٹ پلگ انز, buy minecraft plugins pakistan, download minecraft mods pakistan",
   openGraph: {
-    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
-    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
+    title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",
     url: "https://pluginverse.vercel.app",
     type: "website",
     locale: "en_PK",
     alternateLocale: ["ur_PK"],
+    images: [{
+      url: "https://pluginverse.vercel.app/logo.png",
+      width: 1200,
+      height: 630,
+      alt: "PluginVerse Pakistan - Minecraft Plugin Marketplace"
+    }],
   },
 }
 

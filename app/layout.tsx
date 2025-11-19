@@ -15,27 +15,32 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://pluginverse.vercel.app'),
   title: {
-    default: "PluginVerse - Premium Minecraft Plugin Marketplace",
+    default: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan | Premium Plugin Store",
     template: "%s | PluginVerse"
   },
-  description: "Discover, purchase and download premium Minecraft plugins with coins. Free and paid plugins marketplace for server owners and developers.",
+  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server. پاکستان میں مائن کرافٹ پلگ انز",
   keywords: [
     "PluginVerse",
-    "Minecraft plugins",
-    "plugin marketplace",
-    "Minecraft server plugins",
-    "premium plugins",
-    "free plugins",
-    "plugin store",
+    "PluginVerse Pakistan",
+    "Minecraft plugins Pakistan",
+    "Minecraft mods Pakistan",
+    "plugin marketplace Pakistan",
+    "Minecraft server plugins PK",
+    "premium plugins Pakistan",
+    "free plugins Pakistan",
+    "plugin store Pakistan",
     "coins system",
     "server plugins",
     "Minecraft marketplace",
-    "download plugins",
-    "buy plugins"
+    "download plugins Pakistan",
+    "buy plugins Pakistan",
+    "Minecraft موڈز پاکستان",
+    "مائن کرافٹ پلگ انز"
   ],
-  authors: [{ name: "MuneebYT" }],
-  creator: "MuneebYT",
-  publisher: "MuneebYT",
+  authors: [{ name: "PluginVerse Pakistan", url: "https://pluginverse.vercel.app" }],
+  creator: "PluginVerse Pakistan",
+  publisher: "PluginVerse Pakistan",
+  applicationName: "PluginVerse",
   formatDetection: {
     email: false,
     address: false,
@@ -46,25 +51,27 @@ export const metadata: Metadata = {
     locale: "en_PK",
     alternateLocale: ["ur_PK"],
     url: "https://pluginverse.vercel.app",
-    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
-    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
+    title: "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Pakistan's #1 marketplace for Minecraft plugins and mods. 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",
     siteName: "PluginVerse Pakistan",
     countryName: "Pakistan",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://pluginverse.vercel.app/logo.png",
         width: 1200,
         height: 630,
-        alt: "PluginVerse - Minecraft Plugin Marketplace",
+        alt: "PluginVerse Pakistan - Minecraft Plugin & Mod Marketplace",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan",
-    description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Download premium and free plugins/mods with coins.",
-    images: ["/og-image.png"],
+    title: "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Pakistan's #1 marketplace for Minecraft plugins and mods. 💎 Premium & Free plugins. 💰 Coin-based system.",
+    images: ["https://pluginverse.vercel.app/logo.png"],
     creator: "@ItxMuneebYT",
+    site: "@PluginVersePK",
   },
   other: {
     "geo.region": "PK",
@@ -96,13 +103,44 @@ export default function RootLayout({
   const videoUrl = `${supabaseUrl}/storage/v1/object/public/background/video.mp4`;
 
   return (
-    <html lang="en">
+    <html lang="en-PK">
       <head>
         <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
+        
+        {/* Manifest & Icons */}
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <meta name="theme-color" content="#4ade80" />
+        
         {/* Press Start 2P Font for Minecraft theme */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+        
+        {/* Structured Data - Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "PluginVerse Pakistan",
+              "alternateName": "PluginVerse",
+              "url": "https://pluginverse.vercel.app",
+              "logo": "https://pluginverse.vercel.app/logo.png",
+              "description": "Pakistan's #1 marketplace for Minecraft plugins and mods",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "PK"
+              },
+              "sameAs": [
+                "https://discord.com/invite/UnDRjTc9jP",
+                "https://www.youtube.com/@ItxMuneebYT"
+              ]
+            })
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

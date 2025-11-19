@@ -1,16 +1,28 @@
-# robots.txt for PluginVerse
+# robots.txt for PluginVerse Pakistan
 User-agent: *
 Allow: /
 Allow: /plugin/*
-Allow: /login
-Allow: /signup
+Allow: /api/plugins
+Disallow: /api/auth/*
 Disallow: /admin/*
-Disallow: /api/*
-Disallow: /account
-Disallow: /deposit
+Disallow: /(admin)/*
+Disallow: /(user)/*
+Disallow: /api/deposits/*
 
 # Sitemap
 Sitemap: https://pluginverse.vercel.app/sitemap.xml
 
 # Crawl-delay
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+Allow: /plugin/*
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Allow: /plugin/*
 Crawl-delay: 1
