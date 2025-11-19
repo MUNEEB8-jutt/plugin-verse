@@ -62,6 +62,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           <div className="hidden md:flex items-center space-x-6">
             <Link 
               href="/" 
+              prefetch={true}
               className="text-white hover:text-[#4ade80] transition-colors font-bold"
               style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
             >
@@ -72,6 +73,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               <>
                 <Link 
                   href="/account" 
+                  prefetch={true}
                   className="text-white hover:text-[#4ade80] transition-colors font-bold"
                   style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
                 >
@@ -79,6 +81,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 </Link>
                 <Link 
                   href="/deposit" 
+                  prefetch={true}
                   className="text-white hover:text-[#4ade80] transition-colors font-bold"
                   style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
                 >

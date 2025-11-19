@@ -154,6 +154,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       {/* View Details Link */}
       <Link
         href={`/plugin/${plugin.id}`}
+        prefetch={true}
         className="mt-4 text-center hover:brightness-110 transition-all font-bold"
         style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem', color: '#3b82f6', textShadow: '1px 1px 0 #000' }}
       >
