@@ -276,6 +276,42 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile for better performance */
+  .animate-bounce-slow {
+    animation: none;
+  }
+  
+  /* Optimize container padding for mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Thinner scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Improve touch scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Performance optimizations */
+.animate-block-place,
+.animate-fade-in-up,
+.page-transition {
+  will-change: transform, opacity;
+}
+
+/* Contain layout for better performance */
+.grid > * {
+  contain: layout style paint;
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   *,

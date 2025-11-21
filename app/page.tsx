@@ -91,22 +91,24 @@ export default async function HomePage() {
         <Navbar user={user} isAdmin={isAdmin} />
 
         <main className="container mx-auto px-4 py-12">
-          {/* Hero Section */}
-          <div className="text-center mb-12 animate-fade-in-up">
-            {/* Logo and Title */}
-            <div className="flex items-center justify-center gap-4 mb-6">
+          {/* Hero Section - Mobile Optimized */}
+          <div className="text-center mb-8 md:mb-12 animate-fade-in-up">
+            {/* Logo and Title - Responsive */}
+            <div className="flex items-center justify-center gap-2 md:gap-4 mb-4 md:mb-6">
               <img
                 src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
                 alt="PluginVerse Logo"
-                className="w-20 h-20 object-contain animate-bounce-slow"
+                className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain md:animate-bounce-slow"
                 style={{ imageRendering: 'pixelated' }}
+                loading="eager"
+                fetchPriority="high"
               />
               <h1
-                className="text-6xl font-bold"
+                className="text-2xl md:text-4xl lg:text-6xl font-bold"
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
                   color: '#4ade80',
-                  textShadow: '4px 4px 0 #000'
+                  textShadow: '2px 2px 0 #000'
                 }}
               >
                 PluginVerse
@@ -114,10 +116,10 @@ export default async function HomePage() {
             </div>
 
             <div
-              className="p-6 mb-8 relative overflow-hidden border-4 border-black"
+              className="p-4 md:p-6 mb-6 md:mb-8 relative overflow-hidden border-4 border-black"
               style={{
                 background: 'linear-gradient(180deg, #57534e 0%, #44403c 100%)',
-                boxShadow: '8px 8px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)'
+                boxShadow: '4px 4px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)'
               }}
             >
               {/* Grass texture overlay */}
@@ -131,7 +133,7 @@ export default async function HomePage() {
               />
               <div className="relative z-10">
                 <h2
-                  className="text-2xl font-semibold mb-2"
+                  className="text-base md:text-xl lg:text-2xl font-semibold mb-2"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
                     color: '#a8a29e',
@@ -141,10 +143,10 @@ export default async function HomePage() {
                   Minecraft Plugins & Mods
                 </h2>
                 <p
-                  className="text-lg mb-6"
+                  className="text-sm md:text-base mb-4 md:mb-6"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
-                    fontSize: '0.8rem',
+                    fontSize: '0.65rem',
                     color: '#78716c',
                     textShadow: '1px 1px 0 #000'
                   }}
@@ -152,15 +154,15 @@ export default async function HomePage() {
                   🔍 Discover premium plugins
                 </p>
 
-                {/* Action Buttons - Improved */}
-                <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
+                {/* Action Buttons - Mobile Optimized */}
+                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-4 mb-4 md:mb-6">
                   {user && (
                     <a
                       href="/account"
-                      className="px-6 py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#60a5fa] to-[#3b82f6] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px]"
+                      className="w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#60a5fa] to-[#3b82f6] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] min-h-[44px] flex items-center justify-center"
                       style={{
                         fontFamily: "'Press Start 2P', monospace",
-                        fontSize: '0.7rem'
+                        fontSize: '0.6rem'
                       }}
                     >
                       📊 My Dashboard
@@ -168,24 +170,24 @@ export default async function HomePage() {
                   )}
                   <a
                     href="/deposit"
-                    className="px-6 py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#f59e0b] to-[#d97706] text-black shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px]"
+                    className="w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#f59e0b] to-[#d97706] text-black shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] min-h-[44px] flex items-center justify-center"
                     style={{
                       fontFamily: "'Press Start 2P', monospace",
-                      fontSize: '0.7rem'
+                      fontSize: '0.6rem'
                     }}
                   >
                     💰 Add Coins
                   </a>
                 </div>
 
-                {/* Social Buttons - Improved */}
-                <div className="flex items-center justify-center gap-4 flex-wrap">
+                {/* Social Buttons - Mobile Optimized */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4">
                   <a
                     href="https://discord.com/invite/UnDRjTc9jP"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 font-bold transition-all flex items-center gap-2 border-4 border-black bg-gradient-to-b from-[#5865F2] to-[#4752C4] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px]"
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                    className="w-full sm:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all flex items-center justify-center gap-2 border-4 border-black bg-gradient-to-b from-[#5865F2] to-[#4752C4] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] min-h-[44px]"
+                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem' }}
                   >
                     <span>💬</span> Join Discord
                   </a>
@@ -193,8 +195,8 @@ export default async function HomePage() {
                     href="https://www.youtube.com/@ItxMuneebYT"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 font-bold transition-all flex items-center gap-2 border-4 border-black bg-gradient-to-b from-[#FF0000] to-[#CC0000] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px]"
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                    className="w-full sm:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all flex items-center justify-center gap-2 border-4 border-black bg-gradient-to-b from-[#FF0000] to-[#CC0000] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] min-h-[44px]"
+                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem' }}
                   >
                     <span>▶️</span> Subscribe
                   </a>

@@ -38,16 +38,16 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
       />
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:brightness-110 transition-all">
+          {/* Logo - Responsive sizing */}
+          <Link href="/" className="flex items-center gap-2 md:gap-3 hover:brightness-110 transition-all">
             <img 
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
               alt="PluginVerse"
-              className="w-10 h-10 object-contain"
+              className="w-8 h-8 md:w-10 md:h-10 object-contain"
               style={{ imageRendering: 'pixelated' }}
             />
             <span 
-              className="text-2xl font-bold"
+              className="text-base md:text-xl lg:text-2xl font-bold"
               style={{ 
                 fontFamily: "'Press Start 2P', monospace", 
                 color: '#4ade80',
@@ -124,10 +124,11 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Larger touch target */}
           <button
-            className="md:hidden text-text-primary"
+            className="md:hidden text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -139,40 +140,44 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Improved with proper touch targets */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-3">
+          <div className="md:hidden py-4 space-y-2">
             <Link
               href="/"
-              className="block text-text-primary hover:text-accent-primary"
+              className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
               onClick={() => setMobileMenuOpen(false)}
+              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
             >
-              Plugins
+              🎮 Plugins
             </Link>
             
             {user ? (
               <>
                 <Link
                   href="/account"
-                  className="block text-text-primary hover:text-accent-primary"
+                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
                   onClick={() => setMobileMenuOpen(false)}
+                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
-                  Dashboard
+                  📊 Dashboard
                 </Link>
                 <Link
                   href="/deposit"
-                  className="block text-text-primary hover:text-accent-primary"
+                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
                   onClick={() => setMobileMenuOpen(false)}
+                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
-                  Deposit
+                  💰 Deposit
                 </Link>
                 {isAdmin && (
                   <Link
                     href="/admin"
-                    className="block text-accent-secondary hover:brightness-110"
+                    className="block text-[#3b82f6] hover:brightness-110 py-3 px-2 min-h-[44px] font-bold"
                     onClick={() => setMobileMenuOpen(false)}
+                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                   >
-                    Admin Panel
+                    ⚙️ Admin
                   </Link>
                 )}
                 <button
@@ -180,26 +185,29 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                     handleLogout()
                     setMobileMenuOpen(false)
                   }}
-                  className="block w-full text-left text-red-400 hover:text-red-300"
+                  className="w-full text-left bg-gradient-to-b from-[#ef4444] to-[#dc2626] text-white py-3 px-4 mt-2 border-2 border-black shadow-[2px_2px_0_#000] min-h-[44px] font-bold"
+                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem' }}
                 >
-                  Logout
+                  🚪 Logout
                 </button>
               </>
             ) : (
               <>
                 <Link
                   href="/login"
-                  className="block text-text-primary hover:text-accent-primary"
+                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
                   onClick={() => setMobileMenuOpen(false)}
+                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
-                  Login
+                  🔑 Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="block text-accent-primary hover:brightness-110"
+                  className="block w-full text-center bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black py-3 px-4 mt-2 border-2 border-black shadow-[2px_2px_0_#000] min-h-[44px] font-bold"
                   onClick={() => setMobileMenuOpen(false)}
+                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem' }}
                 >
-                  Sign Up
+                  ✨ Sign Up
                 </Link>
               </>
             )}

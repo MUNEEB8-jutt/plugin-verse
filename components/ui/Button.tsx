@@ -6,15 +6,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', className, children, ...props }: ButtonProps) {
-  // Minecraft-style blocky button with thick borders and shadows
+  // Minecraft-style blocky button with thick borders and shadows - Mobile optimized
   const baseStyles = `
-    px-6 py-3 
+    px-4 py-2.5 md:px-6 md:py-3
     font-bold 
     border-4 border-black
     transition-all duration-100
     disabled:opacity-50 disabled:cursor-not-allowed
     relative
     text-shadow-[2px_2px_0_rgba(0,0,0,0.5)]
+    min-h-[44px]
+    flex items-center justify-center
   `
   
   const variants = {
@@ -50,7 +52,7 @@ export function Button({ variant = 'primary', className, children, ...props }: B
   return (
     <button
       className={cn(baseStyles, variants[variant], className)}
-      style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
+      style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
       {...props}
     >
       {children}

@@ -103,6 +103,7 @@ export default function RootLayout({
   return (
     <html lang="en-PK">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
         
         {/* Manifest & Icons */}
