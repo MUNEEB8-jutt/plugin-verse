@@ -27,9 +27,9 @@ export function HomePageClient({ plugins, purchasedPluginIds }: HomePageClientPr
       {/* Search Bar */}
       <SearchBar onSearch={setSearchQuery} placeholder="🔍 Search plugins & mods..." />
 
-      {/* Plugins Grid - Responsive */}
+      {/* Plugins Grid - Responsive with 2 columns on mobile */}
       {filteredPlugins.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 lg:gap-6">
           {filteredPlugins.map((plugin: Plugin) => (
             <PluginCard
               key={plugin.id}
