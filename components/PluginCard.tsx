@@ -75,11 +75,11 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
   }
 
   return (
-    <Card hover className="flex flex-col h-full animate-block-place">
-      {/* Plugin Logo - Circular on mobile, square on desktop */}
-      <div className="relative w-full mb-3 md:mb-4 flex justify-center">
-        <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-full lg:h-48">
-          <div className="relative w-full h-full overflow-hidden bg-[#292524] border-2 border-black rounded-full lg:rounded-none">
+    <Card hover className="flex flex-col animate-block-place aspect-square lg:aspect-auto lg:h-full">
+      {/* Plugin Logo - Perfect square with circular image */}
+      <div className="relative w-full mb-2 md:mb-3 flex items-center justify-center">
+        <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32">
+          <div className="relative w-full h-full overflow-hidden bg-[#292524] border-2 border-black rounded-full">
             <Image
               src={plugin.logo_url}
               alt={plugin.title}
@@ -91,8 +91,8 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
           </div>
           {plugin.price_coins === 0 && (
             <div
-              className="absolute -top-1 -right-1 lg:top-2 lg:right-2 bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black px-1.5 py-0.5 md:px-2 md:py-1 border-2 border-black shadow-[2px_2px_0_#000] font-bold rounded-full lg:rounded-none"
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.45rem' }}
+              className="absolute -top-1 -right-1 bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black px-1.5 py-0.5 border-2 border-black shadow-[2px_2px_0_#000] font-bold rounded-full"
+              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.4rem' }}
             >
               FREE
             </div>
@@ -101,14 +101,14 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       </div>
 
       {/* Plugin Info - Compact for mobile */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col justify-between">
         <h3
-          className="text-sm md:text-lg lg:text-xl font-bold mb-1 md:mb-2 text-center lg:text-left line-clamp-2"
-          style={{ fontFamily: "'Press Start 2P', monospace", color: '#4ade80', textShadow: '2px 2px 0 #000' }}
+          className="text-xs md:text-sm lg:text-xl font-bold mb-1 text-center line-clamp-1 lg:line-clamp-2"
+          style={{ fontFamily: "'Press Start 2P', monospace", color: '#4ade80', textShadow: '1px 1px 0 #000', fontSize: '0.6rem' }}
         >
           {plugin.title}
         </h3>
-        <div className="mb-2 md:mb-3 lg:mb-4 flex-1">
+        <div className="mb-1 md:mb-2 lg:mb-4 flex-1 hidden lg:block">
           <p
             className="text-xs md:text-sm mb-1 md:mb-2 line-clamp-2 lg:line-clamp-none"
             style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.5rem', color: '#d1d5db', lineHeight: '1.5' }}
@@ -127,10 +127,10 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
         </div>
 
         {/* Price and Action - Compact for mobile */}
-        <div className="flex flex-col lg:flex-row items-center justify-between mt-auto gap-2">
+        <div className="flex flex-col items-center justify-center gap-1.5 md:gap-2">
           <span
-            className="text-base md:text-lg lg:text-xl font-bold"
-            style={{ fontFamily: "'Press Start 2P', monospace", color: '#ca8a04', textShadow: '2px 2px 0 #000' }}
+            className="text-sm md:text-base lg:text-xl font-bold"
+            style={{ fontFamily: "'Press Start 2P', monospace", color: '#ca8a04', textShadow: '1px 1px 0 #000', fontSize: '0.65rem' }}
           >
             {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
           </span>
@@ -139,19 +139,19 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
             <Button
               onClick={handleDownload}
               disabled={loading}
-              className="w-full lg:w-auto bg-gradient-to-b from-[#10b981] to-[#059669] hover:from-[#34d399] hover:to-[#10b981] px-2 py-2 md:px-3 md:py-2 lg:px-4 lg:py-2.5 min-h-[40px] text-xs"
-              style={{ fontSize: '0.55rem' }}
+              className="w-full bg-gradient-to-b from-[#10b981] to-[#059669] hover:from-[#34d399] hover:to-[#10b981] px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 min-h-[36px] lg:min-h-[40px] text-xs"
+              style={{ fontSize: '0.5rem' }}
             >
-              {loading ? '⏳' : '📥'}
+              {loading ? '⏳' : '📥 Get'}
             </Button>
           ) : (
             <Button
               onClick={handlePurchase}
               disabled={loading}
-              className="w-full lg:w-auto bg-gradient-to-b from-[#f59e0b] to-[#d97706] hover:from-[#fbbf24] hover:to-[#f59e0b] px-2 py-2 md:px-3 md:py-2 lg:px-4 lg:py-2.5 min-h-[40px] text-xs"
-              style={{ fontSize: '0.55rem' }}
+              className="w-full bg-gradient-to-b from-[#f59e0b] to-[#d97706] hover:from-[#fbbf24] hover:to-[#f59e0b] px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 min-h-[36px] lg:min-h-[40px] text-xs"
+              style={{ fontSize: '0.5rem' }}
             >
-              {loading ? '⏳' : (plugin.price_coins === 0 ? '🎁' : '💰')}
+              {loading ? '⏳' : (plugin.price_coins === 0 ? '🎁 Free' : '💰 Buy')}
             </Button>
           )}
         </div>
