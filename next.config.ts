@@ -17,8 +17,6 @@ const nextConfig: NextConfig = {
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
-  // Faster builds
-  swcMinify: true,
 };
 
 export default nextConfig;
