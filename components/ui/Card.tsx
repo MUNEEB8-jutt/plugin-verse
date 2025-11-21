@@ -21,7 +21,7 @@ export function Card({ children, className, hover = false }: CardProps) {
       )}
     >
       {/* Texture overlay - only on desktop */}
-      <div 
+      <div
         className="hidden lg:block absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: 'url(/textures/stone.png)',

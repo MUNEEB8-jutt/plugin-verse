@@ -17,7 +17,6 @@ interface PluginCardProps {
 
 export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: PluginCardProps) {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
   const [showFullDescription, setShowFullDescription] = useState(false)
 
   const MAX_DESC_LENGTH = 100
@@ -28,7 +27,6 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
   const handlePurchase = async () => {
     setLoading(true)
-    setError('')
     try {
       const response = await fetch('/api/plugins/purchase', {
         method: 'POST',
@@ -39,7 +37,6 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Purchase failed')
         alert(data.error || 'Purchase failed')
         return
       }
@@ -54,7 +51,6 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       }
       window.location.reload()
     } catch (err) {
-      setError('An error occurred')
       alert('An error occurred during purchase')
     } finally {
       setLoading(false)
@@ -129,14 +125,8 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
         </div>
 
         {/* Price and Action - Clean modern on mobile */}
-        <div className="flex flex-col items-center justify-center gap-1.5 md:gap-2">
-          <span
-            className="text-base md:text-lg lg:text-xl font-bold text-blue-400 lg:text-[#ca8a04]"
-            style={{ 
-              fontFamily: "window.innerWidth > 1024 ? \"'Press Start 2P', monospace\" : \"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif\"",
-              textShadow: '0 2px 4px rgba(0,0,0,0.5)'
-            }}
-          >
+        <div className="flex flex-col items-center justify-center gap-2 w-full px-2">
+          <span className="text-base md:text-lg lg:text-xl font-bold text-blue-400 lg:text-[#ca8a04]">
             {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
           </span>
 
@@ -145,7 +135,6 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               onClick={handleDownload}
               disabled={loading}
               variant="secondary"
-              className="w-full"
             >
               {loading ? '⏳ Loading...' : '📥 Download'}
             </Button>
@@ -154,7 +143,6 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               onClick={handlePurchase}
               disabled={loading}
               variant="primary"
-              className="w-full"
             >
               {loading ? '⏳ Wait...' : (plugin.price_coins === 0 ? '🎁 Get Free' : '💰 Buy Now')}
             </Button>
