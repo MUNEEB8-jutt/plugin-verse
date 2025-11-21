@@ -21,10 +21,10 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
 
   return (
     <nav 
-      className="sticky top-0 z-40 border-b-4 border-black relative overflow-hidden"
+      className="sticky top-0 z-40 border-b border-blue-500/30 lg:border-b-4 lg:border-black relative overflow-hidden backdrop-blur-md lg:backdrop-blur-none bg-gradient-to-r from-slate-800/95 to-slate-900/95 lg:bg-none shadow-lg shadow-black/30 lg:shadow-none"
       style={{ 
-        background: 'linear-gradient(180deg, #92400e 0%, #78350f 100%)',
-        boxShadow: '0 4px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)'
+        background: window.innerWidth > 1024 ? 'linear-gradient(180deg, #92400e 0%, #78350f 100%)' : undefined,
+        boxShadow: window.innerWidth > 1024 ? '0 4px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)' : undefined
       }}
     >
       {/* Wood texture overlay */}

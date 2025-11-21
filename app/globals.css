@@ -276,8 +276,14 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile Optimizations */
+/* Mobile Optimizations - Clean Modern Theme */
 @media (max-width: 768px) {
+  /* Clean dark theme for mobile */
+  body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
   /* Reduce animation complexity on mobile for better performance */
   .animate-bounce-slow {
     animation: none;
@@ -294,9 +300,21 @@ body {
     width: 6px;
   }
   
-  /* Improve touch scrolling */
-  body {
-    -webkit-overflow-scrolling: touch;
+  /* Clean card styling for mobile */
+  .mobile-clean-card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
+  }
+  
+  /* Clean button styling for mobile */
+  .mobile-clean-button {
+    border-radius: 12px !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-weight: 600 !important;
   }
 }
 
