@@ -48,20 +48,50 @@ export async function GET(
       }
     }
 
-    // Generate signed URL (valid for 60 seconds)
-    const { data: signedUrlData, error: urlError } = await adminClient.storage
-      .from('plugins')
-      .createSignedUrl(plugin.file_url, 60)
+    // Handle download based on type
+    if (plugin.download_type === 'external') {
+      // Redirect to external URL
+      if (!plugin.external_url) {
+        return NextResponse.json(
+          { error: 'External download link not configured' },
+          { status: 500 }
+        )
+      }
+      return NextResponse.redirect(plugin.external_url)
+    } else {
+      // Generate signed URL for uploaded files (valid for 60 seconds)
+      if (!plugin.file_url) {
+        return NextResponse.json(
+          { error: 'Plugin file not found' },
+          { status: 404 }
+        )
+      }
 
-    if (urlError || !signedUrlData) {
-      return NextResponse.json(
-        { error: 'Failed to generate download link' },
-        { status: 500 }
-      )
+      // Parse file_url (could be JSON array or single file)
+      let fileToDownload: string
+      try {
+        const files = JSON.parse(plugin.file_url) as string[]
+        // Download first file (or could zip multiple files in future)
+        fileToDownload = files[0]
+      } catch {
+        // Single file (backward compatibility)
+        fileToDownload = plugin.file_url
+      }
+
+      const { data: signedUrlData, error: urlError } = await adminClient.storage
+        .from('plugins')
+        .createSignedUrl(fileToDownload, 60)
+
+      if (urlError || !signedUrlData) {
+        return NextResponse.json(
+          { error: 'Failed to generate download link' },
+          { status: 500 }
+        )
+      }
+
+      // Redirect to the signed URL for direct download
+      return NextResponse.redirect(signedUrlData.signedUrl)
     }
-
-    // Redirect to the signed URL for direct download
-    return NextResponse.redirect(signedUrlData.signedUrl)
   } catch (error) {
     console.error('Download error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

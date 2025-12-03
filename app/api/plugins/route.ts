@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { generateFileName } from '@/lib/utils/helpers'
+import { generateFileName, isValidUrl } from '@/lib/utils/helpers'
 
 // GET - List all plugins
 export async function GET() {
@@ -40,12 +40,37 @@ export async function POST(request: NextRequest) {
     const title = formData.get('title') as string
     const description = formData.get('description') as string
     const priceCoins = parseInt(formData.get('priceCoins') as string)
+    const downloadType = (formData.get('downloadType') as string) || 'upload'
     const logoFile = formData.get('logo') as File
-    const pluginFile = formData.get('file') as File
+    const externalUrl = formData.get('externalUrl') as string
 
-    if (!title || !description || !priceCoins || !logoFile || !pluginFile) {
+    // Basic validation
+    if (!title || !description || isNaN(priceCoins) || !logoFile) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'Title, description, price, and logo are required' },
+        { status: 400 }
+      )
+    }
+
+    // Validate download method
+    if (downloadType === 'upload') {
+      const files = formData.getAll('files') as File[]
+      if (!files || files.length === 0) {
+        return NextResponse.json(
+          { error: 'At least one plugin file is required for upload method' },
+          { status: 400 }
+        )
+      }
+    } else if (downloadType === 'external') {
+      if (!externalUrl || !isValidUrl(externalUrl)) {
+        return NextResponse.json(
+          { error: 'Valid external URL is required for external link method' },
+          { status: 400 }
+        )
+      }
+    } else {
+      return NextResponse.json(
+        { error: 'Invalid download type' },
         { status: 400 }
       )
     }
@@ -67,23 +92,40 @@ export async function POST(request: NextRequest) {
       .from('logos')
       .getPublicUrl(logoFileName)
 
-    // Upload plugin file to private bucket
-    const pluginFileName = generateFileName(pluginFile.name)
-    const { error: fileError } = await adminClient.storage
-      .from('plugins')
-      .upload(pluginFileName, pluginFile, {
-        contentType: pluginFile.type,
-        upsert: false,
-      })
+    let fileUrl: string | null = null
+    const uploadedFiles: string[] = []
 
-    if (fileError) {
-      // Cleanup logo if plugin upload fails
-      await adminClient.storage.from('logos').remove([logoFileName])
-      return NextResponse.json({ error: `Plugin upload failed: ${fileError.message}` }, { status: 400 })
+    // Handle file uploads if upload type
+    if (downloadType === 'upload') {
+      const files = formData.getAll('files') as File[]
+      
+      for (const file of files) {
+        const fileName = generateFileName(file.name)
+        const { error: fileError } = await adminClient.storage
+          .from('plugins')
+          .upload(fileName, file, {
+            contentType: file.type,
+            upsert: false,
+          })
+
+        if (fileError) {
+          // Cleanup: remove logo and any uploaded files
+          await adminClient.storage.from('logos').remove([logoFileName])
+          if (uploadedFiles.length > 0) {
+            await adminClient.storage.from('plugins').remove(uploadedFiles)
+          }
+          return NextResponse.json(
+            { error: `File upload failed: ${fileError.message}` },
+            { status: 400 }
+          )
+        }
+
+        uploadedFiles.push(fileName)
+      }
+
+      // Store file paths as JSON array
+      fileUrl = JSON.stringify(uploadedFiles)
     }
-
-    // Store file path (not public URL for private bucket)
-    const fileUrl = pluginFileName
 
     // Create plugin record
     const { data: plugin, error: dbError } = await supabase
@@ -94,6 +136,8 @@ export async function POST(request: NextRequest) {
         price_coins: priceCoins,
         logo_url: logoUrl,
         file_url: fileUrl,
+        download_type: downloadType,
+        external_url: downloadType === 'external' ? externalUrl : null,
       })
       .select()
       .single()
@@ -101,7 +145,9 @@ export async function POST(request: NextRequest) {
     if (dbError) {
       // Cleanup uploaded files if DB insert fails
       await adminClient.storage.from('logos').remove([logoFileName])
-      await adminClient.storage.from('plugins').remove([pluginFileName])
+      if (uploadedFiles.length > 0) {
+        await adminClient.storage.from('plugins').remove(uploadedFiles)
+      }
       return NextResponse.json({ error: dbError.message }, { status: 400 })
     }
 

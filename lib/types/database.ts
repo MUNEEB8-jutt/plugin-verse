@@ -4,13 +4,17 @@ export interface User {
   created_at: string
 }
 
+export type DownloadType = 'upload' | 'external'
+
 export interface Plugin {
   id: string
   title: string
   description: string
   price_coins: number
   logo_url: string
-  file_url: string
+  file_url: string | null
+  download_type: DownloadType
+  external_url: string | null
   created_at: string
 }
 

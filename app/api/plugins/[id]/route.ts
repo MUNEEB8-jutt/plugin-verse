@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { generateFileName } from '@/lib/utils/helpers'
+import { generateFileName, isValidUrl } from '@/lib/utils/helpers'
 
 // GET - Get single plugin
 export async function GET(
@@ -49,8 +49,9 @@ export async function PUT(
     const title = formData.get('title') as string
     const description = formData.get('description') as string
     const priceCoins = parseInt(formData.get('priceCoins') as string)
+    const downloadType = (formData.get('downloadType') as string) || 'upload'
     const logoFile = formData.get('logo') as File | null
-    const pluginFile = formData.get('file') as File | null
+    const externalUrl = formData.get('externalUrl') as string
 
     // Get existing plugin
     const { data: existingPlugin, error: fetchError } = await supabase
@@ -63,8 +64,17 @@ export async function PUT(
       return NextResponse.json({ error: 'Plugin not found' }, { status: 404 })
     }
 
+    // Validate download method
+    if (downloadType === 'external' && (!externalUrl || !isValidUrl(externalUrl))) {
+      return NextResponse.json(
+        { error: 'Valid external URL is required for external link method' },
+        { status: 400 }
+      )
+    }
+
     let logoUrl = existingPlugin.logo_url
     let fileUrl = existingPlugin.file_url
+    let newExternalUrl = existingPlugin.external_url
 
     // Update logo if new file provided
     if (logoFile && logoFile.size > 0) {
@@ -93,26 +103,68 @@ export async function PUT(
       }
     }
 
-    // Update plugin file if new file provided
-    if (pluginFile && pluginFile.size > 0) {
-      const pluginFileName = generateFileName(pluginFile.name)
-      const { error: fileError } = await adminClient.storage
-        .from('plugins')
-        .upload(pluginFileName, pluginFile, {
-          contentType: pluginFile.type,
-          upsert: false,
-        })
+    // Handle download type changes
+    if (downloadType === 'upload') {
+      const files = formData.getAll('files') as File[]
+      
+      // If new files provided, upload them
+      if (files && files.length > 0) {
+        const uploadedFiles: string[] = []
 
-      if (fileError) {
-        return NextResponse.json({ error: `Plugin upload failed: ${fileError.message}` }, { status: 400 })
+        for (const file of files) {
+          const fileName = generateFileName(file.name)
+          const { error: fileError } = await adminClient.storage
+            .from('plugins')
+            .upload(fileName, file, {
+              contentType: file.type,
+              upsert: false,
+            })
+
+          if (fileError) {
+            // Cleanup any uploaded files
+            if (uploadedFiles.length > 0) {
+              await adminClient.storage.from('plugins').remove(uploadedFiles)
+            }
+            return NextResponse.json(
+              { error: `File upload failed: ${fileError.message}` },
+              { status: 400 }
+            )
+          }
+
+          uploadedFiles.push(fileName)
+        }
+
+        // Delete old files if switching from upload or updating files
+        if (existingPlugin.file_url && existingPlugin.download_type === 'upload') {
+          try {
+            const oldFiles = JSON.parse(existingPlugin.file_url) as string[]
+            await adminClient.storage.from('plugins').remove(oldFiles)
+          } catch {
+            // If not JSON, treat as single file
+            await adminClient.storage.from('plugins').remove([existingPlugin.file_url])
+          }
+        }
+
+        fileUrl = JSON.stringify(uploadedFiles)
       }
 
-      fileUrl = pluginFileName
+      newExternalUrl = null
+    } else if (downloadType === 'external') {
+      // Switching to external link
+      newExternalUrl = externalUrl
 
-      // Delete old file
-      if (existingPlugin.file_url) {
-        await adminClient.storage.from('plugins').remove([existingPlugin.file_url])
+      // Delete old files if switching from upload
+      if (existingPlugin.download_type === 'upload' && existingPlugin.file_url) {
+        try {
+          const oldFiles = JSON.parse(existingPlugin.file_url) as string[]
+          await adminClient.storage.from('plugins').remove(oldFiles)
+        } catch {
+          // If not JSON, treat as single file
+          await adminClient.storage.from('plugins').remove([existingPlugin.file_url])
+        }
       }
+
+      fileUrl = null
     }
 
     // Update plugin record
@@ -124,6 +176,8 @@ export async function PUT(
         price_coins: priceCoins,
         logo_url: logoUrl,
         file_url: fileUrl,
+        download_type: downloadType,
+        external_url: newExternalUrl,
       })
       .eq('id', id)
       .select()
@@ -177,14 +231,24 @@ export async function DELETE(
       return NextResponse.json({ error: deleteError.message }, { status: 400 })
     }
 
-    // Delete files from storage
+    // Delete logo from storage
     const logoPath = plugin.logo_url.split('/').pop()
     if (logoPath) {
       await adminClient.storage.from('logos').remove([logoPath])
     }
-    if (plugin.file_url) {
-      await adminClient.storage.from('plugins').remove([plugin.file_url])
+
+    // Delete plugin files only if upload type
+    if (plugin.download_type === 'upload' && plugin.file_url) {
+      try {
+        // Try to parse as JSON array (multiple files)
+        const files = JSON.parse(plugin.file_url) as string[]
+        await adminClient.storage.from('plugins').remove(files)
+      } catch {
+        // If not JSON, treat as single file (backward compatibility)
+        await adminClient.storage.from('plugins').remove([plugin.file_url])
+      }
     }
+    // For external type, no files to delete
 
     return NextResponse.json({ message: 'Plugin deleted successfully' }, { status: 200 })
   } catch (error) {

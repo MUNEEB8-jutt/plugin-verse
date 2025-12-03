@@ -34,3 +34,26 @@ export function validateFileSize(file: File, maxSizeMB: number): boolean {
   const maxSizeBytes = maxSizeMB * 1024 * 1024
   return file.size <= maxSizeBytes
 }
+
+export function isValidUrl(urlString: string): boolean {
+  if (!urlString || urlString.trim() === '') {
+    return false
+  }
+
+  try {
+    const url = new URL(urlString)
+    // Only allow http and https protocols
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch (error) {
+    return false
+  }
+}
+
+export function extractDomain(urlString: string): string {
+  try {
+    const url = new URL(urlString)
+    return url.hostname
+  } catch (error) {
+    return ''
+  }
+}

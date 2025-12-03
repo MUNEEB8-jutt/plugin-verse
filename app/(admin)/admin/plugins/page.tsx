@@ -17,9 +17,11 @@ export default function AdminPluginsPage() {
     title: '',
     description: '',
     priceCoins: '',
+    downloadType: 'upload' as 'upload' | 'external',
+    externalUrl: '',
   })
   const [logoFile, setLogoFile] = useState<File | null>(null)
-  const [pluginFile, setPluginFile] = useState<File | null>(null)
+  const [pluginFiles, setPluginFiles] = useState<File[]>([])
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
 
@@ -47,16 +49,35 @@ export default function AdminPluginsPage() {
     setSubmitting(true)
 
     try {
+      // Validation
+      if (formData.downloadType === 'upload' && pluginFiles.length === 0 && !editingPlugin) {
+        setError('Please select at least one plugin file')
+        setSubmitting(false)
+        return
+      }
+
+      if (formData.downloadType === 'external' && !formData.externalUrl.trim()) {
+        setError('Please provide an external download URL')
+        setSubmitting(false)
+        return
+      }
+
       const formDataToSend = new FormData()
       formDataToSend.append('title', formData.title)
       formDataToSend.append('description', formData.description)
       formDataToSend.append('priceCoins', formData.priceCoins)
+      formDataToSend.append('downloadType', formData.downloadType)
 
       if (logoFile) {
         formDataToSend.append('logo', logoFile)
       }
-      if (pluginFile) {
-        formDataToSend.append('file', pluginFile)
+
+      if (formData.downloadType === 'upload') {
+        pluginFiles.forEach((file) => {
+          formDataToSend.append('files', file)
+        })
+      } else {
+        formDataToSend.append('externalUrl', formData.externalUrl)
       }
 
       const url = editingPlugin ? `/api/plugins/${editingPlugin.id}` : '/api/plugins'
@@ -91,6 +112,8 @@ export default function AdminPluginsPage() {
       title: plugin.title,
       description: plugin.description,
       priceCoins: plugin.price_coins.toString(),
+      downloadType: plugin.download_type,
+      externalUrl: plugin.external_url || '',
     })
     setShowModal(true)
   }
@@ -112,9 +135,15 @@ export default function AdminPluginsPage() {
   }
 
   const resetForm = () => {
-    setFormData({ title: '', description: '', priceCoins: '' })
+    setFormData({ 
+      title: '', 
+      description: '', 
+      priceCoins: '',
+      downloadType: 'upload',
+      externalUrl: '',
+    })
     setLogoFile(null)
-    setPluginFile(null)
+    setPluginFiles([])
     setEditingPlugin(null)
     setError('')
   }
@@ -154,6 +183,7 @@ export default function AdminPluginsPage() {
                 <tr>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Logo</th>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Title</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">Download</th>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Price</th>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Actions</th>
                 </tr>
@@ -178,6 +208,30 @@ export default function AdminPluginsPage() {
                           {plugin.description}
                         </p>
                       </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      {plugin.download_type === 'upload' ? (
+                        <div className="flex items-center gap-2">
+                          <span className="text-blue-400">📦</span>
+                          <span className="text-sm">
+                            {(() => {
+                              try {
+                                const files = JSON.parse(plugin.file_url || '[]')
+                                return `${files.length} file${files.length !== 1 ? 's' : ''}`
+                              } catch {
+                                return '1 file'
+                              }
+                            })()}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <span className="text-green-400">🔗</span>
+                          <span className="text-sm">
+                            {plugin.external_url ? new URL(plugin.external_url).hostname : 'External'}
+                          </span>
+                        </div>
+                      )}
                     </td>
                     <td className="px-6 py-4 text-accent-primary font-bold">
                       {plugin.price_coins === 0 ? (
@@ -279,17 +333,70 @@ export default function AdminPluginsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Plugin File {editingPlugin && '(leave empty to keep current)'}
-            </label>
-            <input
-              type="file"
-              accept=".zip,.jar"
-              onChange={(e) => setPluginFile(e.target.files?.[0] || null)}
-              required={!editingPlugin}
-              className="w-full px-4 py-2 bg-bg-secondary border border-border rounded"
-            />
+            <label className="block text-sm font-medium mb-2">Download Method</label>
+            <div className="flex gap-4 mb-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="downloadType"
+                  value="upload"
+                  checked={formData.downloadType === 'upload'}
+                  onChange={(e) => setFormData({ ...formData, downloadType: 'upload' })}
+                  className="w-4 h-4"
+                />
+                <span>📦 Upload Files</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="downloadType"
+                  value="external"
+                  checked={formData.downloadType === 'external'}
+                  onChange={(e) => setFormData({ ...formData, downloadType: 'external' })}
+                  className="w-4 h-4"
+                />
+                <span>🔗 External Link</span>
+              </label>
+            </div>
           </div>
+
+          {formData.downloadType === 'upload' ? (
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Plugin Files {editingPlugin && '(leave empty to keep current)'}
+              </label>
+              <input
+                type="file"
+                accept=".zip,.jar"
+                multiple
+                onChange={(e) => setPluginFiles(Array.from(e.target.files || []))}
+                required={!editingPlugin}
+                className="w-full px-4 py-2 bg-bg-secondary border border-border rounded"
+              />
+              {pluginFiles.length > 0 && (
+                <p className="text-xs text-text-secondary mt-2">
+                  {pluginFiles.length} file(s) selected
+                </p>
+              )}
+            </div>
+          ) : (
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                External Download URL
+              </label>
+              <input
+                type="url"
+                value={formData.externalUrl}
+                onChange={(e) => setFormData({ ...formData, externalUrl: e.target.value })}
+                placeholder="https://example.com/plugin-download"
+                required={formData.downloadType === 'external'}
+                className="w-full px-4 py-2 bg-bg-secondary border border-border rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              />
+              <p className="text-xs text-text-secondary mt-1">
+                💡 Provide a direct download link from MediaFire, Google Drive, Dropbox, etc.
+              </p>
+            </div>
+          )}
 
           <div className="flex gap-3">
             <Button type="submit" disabled={submitting} className="flex-1">
