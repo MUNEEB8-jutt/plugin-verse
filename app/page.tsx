@@ -101,43 +101,9 @@ export default async function HomePage() {
               </span>
             </h1>
 
-            <p className="text-slate-400 text-base md:text-lg mb-6 max-w-xl mx-auto">
+            <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto">
               Browse, purchase and download plugins for your server
             </p>
-
-            {/* Action Buttons - Stylish */}
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              {user && (
-                <a
-                  href="/account"
-                  className="group px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-slate-900/50 border border-slate-600/50 flex items-center gap-2 text-sm"
-                >
-                  <span className="group-hover:scale-110 transition-transform">📊</span> Dashboard
-                </a>
-              )}
-              <a
-                href="/deposit"
-                className="group px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-amber-500/30 flex items-center gap-2 text-sm"
-              >
-                <span className="group-hover:scale-110 transition-transform">💰</span> Add Coins
-              </a>
-              <a
-                href="https://discord.com/invite/UnDRjTc9jP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group px-5 py-2.5 bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#6875F3] hover:to-[#5865F2] text-white font-medium rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center gap-2 text-sm"
-              >
-                <span className="group-hover:scale-110 transition-transform">💬</span> Discord
-              </a>
-              <a
-                href="https://www.youtube.com/@ItxMuneebYT"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-xl transition-all shadow-lg shadow-red-500/30 flex items-center gap-2 text-sm"
-              >
-                <span className="group-hover:scale-110 transition-transform">▶️</span> YouTube
-              </a>
-            </div>
           </div>
 
           {/* Plugins Grid with Search */}

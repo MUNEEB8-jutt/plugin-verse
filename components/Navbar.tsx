@@ -36,7 +36,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             <Link 
               href="/" 
               prefetch={true}
@@ -50,34 +50,50 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 <Link 
                   href="/account" 
                   prefetch={true}
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white rounded-xl transition-all border border-slate-600/50 flex items-center gap-2"
                 >
-                  Dashboard
+                  <span className="group-hover:scale-110 transition-transform">📊</span> Dashboard
                 </Link>
                 <Link 
                   href="/deposit" 
                   prefetch={true}
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center gap-2"
                 >
-                  Deposit
+                  <span className="group-hover:scale-110 transition-transform">💰</span> Coins
                 </Link>
                 {isAdmin && (
                   <Link 
                     href="/admin" 
-                    className="px-4 py-2 text-sm font-medium text-blue-400 hover:text-blue-300 hover:bg-slate-800 rounded-lg transition-colors"
+                    className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-400 hover:to-purple-500 text-white rounded-xl transition-all shadow-lg shadow-purple-500/20 flex items-center gap-2"
                   >
-                    Admin
+                    <span className="group-hover:scale-110 transition-transform">⚙️</span> Admin
                   </Link>
                 )}
+                <a
+                  href="https://discord.com/invite/UnDRjTc9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#6875F3] hover:to-[#5865F2] text-white rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2"
+                >
+                  <span className="group-hover:scale-110 transition-transform">💬</span> Discord
+                </a>
                 <button
                   onClick={handleLogout}
-                  className="ml-2 px-4 py-2 text-sm font-medium bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-red-500/20 to-red-600/20 hover:from-red-500/30 hover:to-red-600/30 text-red-400 rounded-xl transition-all border border-red-500/30 flex items-center gap-2"
                 >
-                  Logout
+                  <span className="group-hover:scale-110 transition-transform">🚪</span> Logout
                 </button>
               </>
             ) : (
               <>
+                <a
+                  href="https://discord.com/invite/UnDRjTc9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#6875F3] hover:to-[#5865F2] text-white rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2"
+                >
+                  <span className="group-hover:scale-110 transition-transform">💬</span> Discord
+                </a>
                 <Link 
                   href="/login" 
                   className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -86,9 +102,9 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 </Link>
                 <Link
                   href="/signup"
-                  className="ml-2 px-4 py-2 text-sm font-medium bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg shadow-emerald-500/25"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2"
                 >
-                  Sign Up
+                  <span className="group-hover:scale-110 transition-transform">✨</span> Sign Up
                 </Link>
               </>
             )}
@@ -112,7 +128,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-1 border-t border-slate-800 animate-fade-in">
+          <div className="md:hidden py-4 space-y-2 border-t border-slate-800 animate-fade-in">
             <Link
               href="/"
               className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -125,39 +141,57 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               <>
                 <Link
                   href="/account"
-                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                  className="block px-4 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-xl"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   📊 Dashboard
                 </Link>
                 <Link
                   href="/deposit"
-                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                  className="block px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  💰 Deposit
+                  💰 Add Coins
                 </Link>
                 {isAdmin && (
                   <Link
                     href="/admin"
-                    className="block px-4 py-3 text-blue-400 hover:bg-slate-800 rounded-lg transition-colors"
+                    className="block px-4 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     ⚙️ Admin
                   </Link>
                 )}
+                <a
+                  href="https://discord.com/invite/UnDRjTc9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 bg-gradient-to-r from-[#5865F2] to-[#4752C4] text-white rounded-xl"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  💬 Discord
+                </a>
                 <button
                   onClick={() => {
                     handleLogout()
                     setMobileMenuOpen(false)
                   }}
-                  className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-2"
+                  className="w-full text-left px-4 py-3 text-red-400 bg-red-500/10 rounded-xl mt-2"
                 >
                   🚪 Logout
                 </button>
               </>
             ) : (
               <>
+                <a
+                  href="https://discord.com/invite/UnDRjTc9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 bg-gradient-to-r from-[#5865F2] to-[#4752C4] text-white rounded-xl"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  💬 Discord
+                </a>
                 <Link
                   href="/login"
                   className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -167,7 +201,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 </Link>
                 <Link
                   href="/signup"
-                  className="block px-4 py-3 mt-2 text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg"
+                  className="block px-4 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   ✨ Sign Up
