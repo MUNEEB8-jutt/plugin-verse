@@ -112,7 +112,7 @@ export default async function HomePage() {
           {/* Ad Boxes */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <div className="bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl p-4 text-center">
-              <p className="text-emerald-400 text-xs mb-1">🎮 SPONSORED</p>
+              <p className="text-emerald-400 text-xs mb-1">🎮 Not SPONSORED</p>
               <p className="text-white text-sm font-medium">The Best Minecraft Server</p>
               <p className="text-emerald-400 text-lg font-bold">McFleet</p>
               <p className="text-slate-400 text-xs mt-1">IP: <span className="text-cyan-400 font-mono">player.mcfleet.net</span></p>
@@ -129,6 +129,13 @@ export default async function HomePage() {
               <p className="text-slate-400 text-xs mt-1">Join Now on <span className="text-purple-400 font-medium">Discord</span></p>
             </a>
           </div>
+          
+          {/* Join Discord for Ad */}
+          <p className="text-center text-slate-500 text-xs mt-4">
+            <a href="https://discord.com/invite/UnDRjTc9jP" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+              Join Discord for your ad here
+            </a>
+          </p>
 
           {/* Footer Note */}
           <footer className="mt-8 mb-8 text-center">
