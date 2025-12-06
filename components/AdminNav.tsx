@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils/helpers'
 
 export function AdminNav() {
   const pathname = usePathname()
@@ -15,22 +14,21 @@ export function AdminNav() {
   ]
 
   return (
-    <aside className="w-64 glass rounded-lg p-4 h-fit sticky top-20">
-      <h2 className="text-xl font-bold text-accent-primary mb-4">Admin Panel</h2>
-      <nav className="space-y-2">
+    <aside className="w-full lg:w-64 bg-slate-800/50 rounded-xl border border-slate-700/50 p-4 lg:sticky lg:top-20 lg:h-fit">
+      <h2 className="text-lg font-bold text-emerald-400 mb-4 hidden lg:block">Admin Panel</h2>
+      <nav className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-1 gap-2">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={cn(
-              'flex items-center space-x-3 px-4 py-3 rounded transition-all',
+            className={`flex items-center justify-center lg:justify-start gap-2 px-4 py-3 rounded-xl transition-all text-sm font-medium ${
               pathname === link.href
-                ? 'bg-accent-primary text-bg-primary font-semibold'
-                : 'text-text-primary hover:bg-bg-secondary'
-            )}
+                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                : 'bg-slate-700/30 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent'
+            }`}
           >
-            <span className="text-xl">{link.icon}</span>
-            <span>{link.label}</span>
+            <span className="text-lg">{link.icon}</span>
+            <span className="hidden sm:inline">{link.label}</span>
           </Link>
         ))}
       </nav>
