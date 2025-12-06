@@ -60,6 +60,19 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               Explore
             </Link>
             
+            {/* About Us */}
+            <Link 
+              href="/about" 
+              prefetch={true}
+              role="menuitem"
+              className="group px-4 py-2 text-sm font-medium bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white rounded-xl transition-all border border-slate-600/50 hover:border-slate-500/50 flex items-center gap-2"
+            >
+              <svg className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              About Us
+            </Link>
+            
             {user ? (
               <>
                 {/* My Plugins */}
@@ -215,6 +228,17 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               Explore Plugins
+            </Link>
+            <Link
+              href="/about"
+              role="menuitem"
+              className="flex items-center gap-3 px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 text-slate-200 rounded-xl transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              About Us
             </Link>
             
             {user ? (
