@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
 import { HomePageClient } from '@/components/HomePageClient'
 import { IntroButton } from '@/components/IntroButton'
+import { WhyFreeButton } from '@/components/WhyFreeButton'
 
 async function getPlugins() {
   const supabase = await createClient()
@@ -122,8 +123,11 @@ export default async function HomePage() {
                 Fun fact: Both of them are named Muneeb! 🎮✨
               </p>
               
-              {/* Who We Are Button */}
-              <IntroButton />
+              {/* Audio Buttons */}
+              <div className="flex flex-wrap gap-3 justify-center">
+                <IntroButton />
+                <WhyFreeButton />
+              </div>
             </div>
             
             <p className="text-slate-600 text-xs mt-6">
