@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Custom cursor - hide default on desktop */
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
+  
+  a, button, [role="button"], input, textarea, select, .cursor-pointer {
+    cursor: none !important;
+  }
+}
+
 :root {
   /* Clean Modern Color Palette */
   --primary: #3b82f6;
