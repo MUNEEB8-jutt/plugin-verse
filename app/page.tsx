@@ -109,8 +109,34 @@ export default async function HomePage() {
           {/* Plugins Grid with Search */}
           <HomePageClient plugins={plugins} purchasedPluginIds={purchasedPluginIds} />
 
+          {/* Ad Boxes */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <a
+              href="https://discord.com/invite/UnDRjTc9jP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-800/30 border border-dashed border-slate-600/50 rounded-xl p-4 text-center hover:border-emerald-500/50 hover:bg-slate-800/50 transition-all group"
+            >
+              <p className="text-slate-500 text-xs mb-1">📢 ADS HERE</p>
+              <p className="text-slate-400 text-sm group-hover:text-emerald-400 transition-colors">
+                To add your ad here, <span className="text-emerald-400 font-medium">join Discord</span>
+              </p>
+            </a>
+            <a
+              href="https://discord.com/invite/UnDRjTc9jP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-800/30 border border-dashed border-slate-600/50 rounded-xl p-4 text-center hover:border-emerald-500/50 hover:bg-slate-800/50 transition-all group"
+            >
+              <p className="text-slate-500 text-xs mb-1">📢 ADS HERE</p>
+              <p className="text-slate-400 text-sm group-hover:text-emerald-400 transition-colors">
+                To add your ad here, <span className="text-emerald-400 font-medium">join Discord</span>
+              </p>
+            </a>
+          </div>
+
           {/* Footer Note */}
-          <footer className="mt-16 mb-8 text-center">
+          <footer className="mt-8 mb-8 text-center">
             <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-6 max-w-2xl mx-auto">
               <p className="text-slate-400 text-sm mb-2">
                 📝 <span className="text-slate-300 font-medium">Note:</span> All the plugins and mods are made by{' '}
