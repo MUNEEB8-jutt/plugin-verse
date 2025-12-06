@@ -65,17 +65,17 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
   }
 
   return (
-    <article 
+    <article
       className="group relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1"
-      itemScope 
+      itemScope
       itemType="https://schema.org/SoftwareApplication"
     >
       {/* Background Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
+
       {/* Content Container */}
       <div className="relative p-4 sm:p-5 flex flex-col h-full">
-        
+
         {/* Header: Logo + Title + Price Badge */}
         <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
           {/* Plugin Logo - BIGGER SIZE */}
@@ -100,17 +100,39 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
           {/* Title & Meta */}
           <div className="flex-1 min-w-0">
-            <h3 
+            <h3
               className="text-sm sm:text-base md:text-lg font-bold text-white leading-tight line-clamp-2 group-hover:text-emerald-400 transition-colors"
               itemProp="name"
             >
               {plugin.title}
             </h3>
+
+            {/* Version & Platform Badges */}
+            <div className="mt-1.5 sm:mt-2 flex flex-wrap items-center gap-1.5">
+              {plugin.version && (
+                <span className="inline-flex items-center px-1.5 py-0.5 bg-slate-700/50 text-slate-300 rounded text-[10px] sm:text-xs font-medium">
+                  v{plugin.version}
+                </span>
+              )}
+              {plugin.platform && (
+                <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-medium ${
+                  plugin.platform === 'plugin' ? 'bg-blue-500/20 text-blue-400' :
+                  plugin.platform === 'mod-fabric' ? 'bg-purple-500/20 text-purple-400' :
+                  plugin.platform === 'mod-forge' ? 'bg-red-500/20 text-red-400' :
+                  'bg-slate-700/50 text-slate-300'
+                }`}>
+                  {plugin.platform === 'plugin' ? '📄 Plugin' :
+                   plugin.platform === 'mod-fabric' ? '🧵 Fabric' :
+                   plugin.platform === 'mod-forge' ? '🔨 Forge' :
+                   plugin.platform}
+                </span>
+              )}
+            </div>
             
             {/* Price Display */}
-            <div className="mt-1.5 sm:mt-2 flex items-center gap-2">
-              <span 
-                className={`text-base sm:text-lg font-bold ${plugin.price_coins === 0 ? 'text-emerald-400' : 'text-amber-400'}`}
+            <div className="mt-1 flex items-center gap-2">
+              <span
+                className={`text-sm sm:text-base font-bold ${plugin.price_coins === 0 ? 'text-emerald-400' : 'text-amber-400'}`}
                 itemProp="offers"
                 itemScope
                 itemType="https://schema.org/Offer"
@@ -124,7 +146,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
 
         {/* Description - SEO optimized */}
-        <p 
+        <p
           className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-2 sm:line-clamp-3 mb-4 flex-1"
           itemProp="description"
         >
@@ -160,11 +182,10 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               disabled={loading}
               variant="primary"
               size="sm"
-              className={`flex-1 text-xs sm:text-sm py-2.5 sm:py-3 border-0 shadow-lg ${
-                plugin.price_coins === 0 
-                  ? 'bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 shadow-emerald-500/20' 
+              className={`flex-1 text-xs sm:text-sm py-2.5 sm:py-3 border-0 shadow-lg ${plugin.price_coins === 0
+                  ? 'bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 shadow-emerald-500/20'
                   : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
-              }`}
+                }`}
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-1.5">
@@ -191,7 +212,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               )}
             </Button>
           )}
-          
+
           {/* Details Link */}
           <Link
             href={`/plugin/${plugin.id}`}

@@ -19,7 +19,7 @@ export default function AdminPluginsPage() {
     description: '',
     priceCoins: '',
     version: '1.0.0',
-    platform: 'plugin-paper' as 'plugin-paper' | 'plugin-bukkit' | 'mod-fabric' | 'mod-forge',
+    platform: 'plugin' as 'plugin' | 'mod-fabric' | 'mod-forge',
     downloadType: 'upload' as 'upload' | 'external',
     externalUrl: '',
   })
@@ -118,7 +118,7 @@ export default function AdminPluginsPage() {
       description: plugin.description,
       priceCoins: plugin.price_coins.toString(),
       version: plugin.version || '1.0.0',
-      platform: plugin.platform || 'plugin-paper',
+      platform: plugin.platform || 'plugin',
       downloadType: plugin.download_type,
       externalUrl: plugin.external_url || '',
     })
@@ -147,7 +147,7 @@ export default function AdminPluginsPage() {
       description: '', 
       priceCoins: '',
       version: '1.0.0',
-      platform: 'plugin-paper',
+      platform: 'plugin',
       downloadType: 'upload',
       externalUrl: '',
     })
@@ -411,24 +411,19 @@ export default function AdminPluginsPage() {
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Platform</label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {[
-                { value: 'plugin-paper', label: '📄 Paper/Spigot', color: 'blue' },
-                { value: 'plugin-bukkit', label: '🪣 Bukkit', color: 'orange' },
-                { value: 'mod-fabric', label: '🧵 Fabric Mod', color: 'purple' },
-                { value: 'mod-forge', label: '🔨 Forge Mod', color: 'red' },
+                { value: 'plugin', label: '📄 Plugin', desc: 'Paper/Spigot/Bukkit' },
+                { value: 'mod-fabric', label: '🧵 Fabric', desc: 'Fabric Mod' },
+                { value: 'mod-forge', label: '🔨 Forge', desc: 'Forge Mod' },
               ].map((p) => (
                 <label
                   key={p.value}
-                  className={`flex items-center justify-center gap-2 p-2.5 rounded-xl cursor-pointer border transition-all text-sm ${
+                  className={`flex flex-col items-center justify-center gap-1 p-3 rounded-xl cursor-pointer border transition-all text-sm ${
                     formData.platform === p.value
-                      ? `bg-${p.color}-500/20 border-${p.color}-500/50 text-${p.color}-400`
+                      ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'
                       : 'bg-slate-800 border-slate-600 text-slate-400 hover:bg-slate-700'
                   }`}
-                  style={{
-                    backgroundColor: formData.platform === p.value ? `var(--${p.color}-bg)` : undefined,
-                    borderColor: formData.platform === p.value ? `var(--${p.color}-border)` : undefined,
-                  }}
                 >
                   <input
                     type="radio"
@@ -438,7 +433,8 @@ export default function AdminPluginsPage() {
                     onChange={() => setFormData({ ...formData, platform: p.value as any })}
                     className="sr-only"
                   />
-                  {p.label}
+                  <span className="font-medium">{p.label}</span>
+                  <span className="text-[10px] text-slate-500">{p.desc}</span>
                 </label>
               ))}
             </div>
