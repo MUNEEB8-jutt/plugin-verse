@@ -111,17 +111,12 @@ export default async function HomePage() {
 
           {/* Ad Boxes */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
-            <a
-              href="https://discord.com/invite/UnDRjTc9jP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-slate-800/30 border border-dashed border-slate-600/50 rounded-xl p-4 text-center hover:border-emerald-500/50 hover:bg-slate-800/50 transition-all group"
-            >
-              <p className="text-slate-500 text-xs mb-1">📢 ADS HERE</p>
-              <p className="text-slate-400 text-sm group-hover:text-emerald-400 transition-colors">
-                To add your ad here, <span className="text-emerald-400 font-medium">join Discord</span>
-              </p>
-            </a>
+            <div className="bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl p-4 text-center">
+              <p className="text-emerald-400 text-xs mb-1">🎮 SPONSORED</p>
+              <p className="text-white text-sm font-medium">The Best Minecraft Server</p>
+              <p className="text-emerald-400 text-lg font-bold">McFleet</p>
+              <p className="text-slate-400 text-xs mt-1">IP: <span className="text-cyan-400 font-mono">player.mcfleet.net</span></p>
+            </div>
             <a
               href="https://discord.com/invite/UnDRjTc9jP"
               target="_blank"
