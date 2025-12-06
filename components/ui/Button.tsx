@@ -1,18 +1,32 @@
+'use client'
+
 import { cn } from '@/lib/utils/helpers'
+import { useClickSound } from '@/hooks/useClickSound'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
+  enableSound?: boolean
   children: React.ReactNode
 }
 
 export function Button({ 
   variant = 'primary', 
   size = 'md',
+  enableSound = true,
   className, 
-  children, 
+  children,
+  onClick,
   ...props 
 }: ButtonProps) {
+  const { playClick } = useClickSound()
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (enableSound) {
+      playClick()
+    }
+    onClick?.(e)
+  }
   const baseStyles = `
     inline-flex items-center justify-center
     font-medium
@@ -68,6 +82,7 @@ export function Button({
   return (
     <button
       className={cn(baseStyles, sizes[size], variants[variant], className)}
+      onClick={handleClick}
       {...props}
     >
       {children}
