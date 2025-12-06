@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
-import { AboutContent } from '@/components/AboutContent'
+import { AboutPageContent } from '@/components/AboutPageContent'
 
 export const metadata = {
   title: "About Us - PluginVerse",
@@ -15,7 +15,7 @@ export default async function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-900">
       <Navbar user={user} isAdmin={isAdmin} />
-      <AboutContent />
+      <AboutPageContent />
     </div>
   )
 }
