@@ -118,15 +118,15 @@ export default async function HomePage() {
               <p className="text-slate-400 text-xs mt-1">IP: <span className="text-cyan-400 font-mono">player.mcfleet.net</span></p>
             </div>
             <a
-              href="https://discord.com/invite/UnDRjTc9jP"
+              href="https://discord.gg/pk8cmFNm6P"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-800/30 border border-dashed border-slate-600/50 rounded-xl p-4 text-center hover:border-emerald-500/50 hover:bg-slate-800/50 transition-all group"
+              className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-xl p-4 text-center hover:border-blue-400/50 transition-all"
             >
-              <p className="text-slate-500 text-xs mb-1">📢 ADS HERE</p>
-              <p className="text-slate-400 text-sm group-hover:text-emerald-400 transition-colors">
-                To add your ad here, <span className="text-emerald-400 font-medium">join Discord</span>
-              </p>
+              <p className="text-blue-400 text-xs mb-1">💎 SPONSORED</p>
+              <p className="text-white text-sm font-medium">The Best Minecraft Hosting</p>
+              <p className="text-blue-400 text-lg font-bold">Diamond Host</p>
+              <p className="text-slate-400 text-xs mt-1">Join Now on <span className="text-purple-400 font-medium">Discord</span></p>
             </a>
           </div>
 
