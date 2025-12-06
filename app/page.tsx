@@ -88,7 +88,7 @@ export default async function HomePage() {
         <Navbar user={user} isAdmin={isAdmin} />
 
         <main className="container mx-auto px-4 py-6 md:py-10">
-          {/* Hero Section - Compact & Clean */}
+          {/* Hero Section - Stylish */}
           <div className="text-center mb-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm mb-4">
               ✨ Free & Premium Minecraft Plugins
@@ -105,23 +105,37 @@ export default async function HomePage() {
               Browse, purchase and download plugins for your server
             </p>
 
-            {/* Social Buttons Only */}
+            {/* Action Buttons - Stylish */}
             <div className="flex items-center justify-center gap-3 flex-wrap">
+              {user && (
+                <a
+                  href="/account"
+                  className="group px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-slate-900/50 border border-slate-600/50 flex items-center gap-2 text-sm"
+                >
+                  <span className="group-hover:scale-110 transition-transform">📊</span> Dashboard
+                </a>
+              )}
+              <a
+                href="/deposit"
+                className="group px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-amber-500/30 flex items-center gap-2 text-sm"
+              >
+                <span className="group-hover:scale-110 transition-transform">💰</span> Add Coins
+              </a>
               <a
                 href="https://discord.com/invite/UnDRjTc9jP"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium rounded-lg transition-colors flex items-center gap-2 text-sm"
+                className="group px-5 py-2.5 bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#6875F3] hover:to-[#5865F2] text-white font-medium rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center gap-2 text-sm"
               >
-                💬 Discord
+                <span className="group-hover:scale-110 transition-transform">💬</span> Discord
               </a>
               <a
                 href="https://www.youtube.com/@ItxMuneebYT"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2 text-sm"
+                className="group px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-xl transition-all shadow-lg shadow-red-500/30 flex items-center gap-2 text-sm"
               >
-                ▶️ YouTube
+                <span className="group-hover:scale-110 transition-transform">▶️</span> YouTube
               </a>
             </div>
           </div>
