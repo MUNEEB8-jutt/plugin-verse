@@ -1,8 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
 import { HomePageClient } from '@/components/HomePageClient'
-import { IntroButton } from '@/components/IntroButton'
-import { WhyFreeButton } from '@/components/WhyFreeButton'
 
 async function getPlugins() {
   const supabase = await createClient()
@@ -119,15 +117,9 @@ export default async function HomePage() {
                 <span className="text-emerald-400 font-semibold">MuneebYT</span> and{' '}
                 <span className="text-blue-400 font-semibold">HoneyBoy</span>
               </p>
-              <p className="text-slate-500 text-xs italic mb-4">
+              <p className="text-slate-500 text-xs italic">
                 Fun fact: Both of them are named Muneeb! 🎮✨
               </p>
-              
-              {/* Audio Buttons */}
-              <div className="flex flex-wrap gap-3 justify-center">
-                <IntroButton />
-                <WhyFreeButton />
-              </div>
             </div>
             
             <p className="text-slate-600 text-xs mt-6">
