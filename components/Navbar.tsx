@@ -40,9 +40,9 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             <Link 
               href="/" 
               prefetch={true}
-              className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 flex items-center gap-2"
             >
-              Plugins
+              <span className="group-hover:scale-110 transition-transform">🔍</span> Explore Plugins
             </Link>
             
             {user ? (
@@ -52,7 +52,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                   prefetch={true}
                   className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white rounded-xl transition-all border border-slate-600/50 flex items-center gap-2"
                 >
-                  <span className="group-hover:scale-110 transition-transform">📊</span> Dashboard
+                  <span className="group-hover:scale-110 transition-transform">🎮</span> My Plugins
                 </Link>
                 <Link 
                   href="/deposit" 
@@ -131,10 +131,10 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           <div className="md:hidden py-4 space-y-2 border-t border-slate-800 animate-fade-in">
             <Link
               href="/"
-              className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="block px-4 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-xl shadow-lg shadow-emerald-500/25"
               onClick={() => setMobileMenuOpen(false)}
             >
-              🎮 Plugins
+              🔍 Explore Plugins
             </Link>
             
             {user ? (
@@ -144,7 +144,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                   className="block px-4 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-xl"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  📊 Dashboard
+                  🎮 My Plugins
                 </Link>
                 <Link
                   href="/deposit"
