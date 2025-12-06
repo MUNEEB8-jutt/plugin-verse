@@ -108,6 +108,24 @@ export default async function HomePage() {
 
           {/* Plugins Grid with Search */}
           <HomePageClient plugins={plugins} purchasedPluginIds={purchasedPluginIds} />
+
+          {/* Footer Note */}
+          <footer className="mt-16 mb-8 text-center">
+            <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-6 max-w-2xl mx-auto">
+              <p className="text-slate-400 text-sm mb-2">
+                📝 <span className="text-slate-300 font-medium">Note:</span> All the plugins and mods are made by{' '}
+                <span className="text-emerald-400 font-semibold">MuneebYT</span> and{' '}
+                <span className="text-blue-400 font-semibold">HoneyBoy</span>
+              </p>
+              <p className="text-slate-500 text-xs italic">
+                Fun fact: Both of them are named Muneeb! 🎮✨
+              </p>
+            </div>
+            
+            <p className="text-slate-600 text-xs mt-6">
+              © 2024 PluginVerse. All rights reserved.
+            </p>
+          </footer>
         </main>
       </div>
     </>
