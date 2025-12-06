@@ -24,7 +24,7 @@ export function SearchBar({ onSearch, placeholder = "Search plugins..." }: Searc
   return (
     <div className="relative w-full max-w-xl mx-auto mb-8">
       <div className="relative">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -35,7 +35,7 @@ export function SearchBar({ onSearch, placeholder = "Search plugins..." }: Searc
           value={query}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full pl-12 pr-12 py-3.5 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+          className="relative w-full pl-12 pr-12 py-3.5 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
         />
         
         {query && (
