@@ -10,7 +10,7 @@ export function ClickSoundProvider({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     // Preload audio
     audioRef.current = new Audio(CLICK_SOUND_URL)
-    audioRef.current.volume = 0.3
+    audioRef.current.volume = 0.15
 
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
