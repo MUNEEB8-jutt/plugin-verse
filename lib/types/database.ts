@@ -5,6 +5,7 @@ export interface User {
 }
 
 export type DownloadType = 'upload' | 'external'
+export type Platform = 'plugin-paper' | 'plugin-bukkit' | 'mod-fabric' | 'mod-forge'
 
 export interface Plugin {
   id: string
@@ -15,6 +16,8 @@ export interface Plugin {
   file_url: string | null
   download_type: DownloadType
   external_url: string | null
+  version: string
+  platform: Platform
   created_at: string
 }
 

@@ -22,8 +22,8 @@ export function AdminNav() {
             key={link.href}
             href={link.href}
             className={`flex items-center justify-center lg:justify-start gap-2 px-4 py-3 rounded-xl transition-all text-sm font-medium ${pathname === link.href
-                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                : 'bg-slate-700/30 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent'
+              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+              : 'bg-slate-700/30 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent'
               }`}
           >
             <span className="text-lg">{link.icon}</span>
@@ -31,6 +31,15 @@ export function AdminNav() {
           </Link>
         ))}
       </nav>
+
+      {/* Return to Dashboard Button */}
+      <Link
+        href="/"
+        className="mt-4 flex items-center justify-center lg:justify-start gap-2 px-4 py-3 rounded-xl transition-all text-sm font-medium bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 border border-blue-500/30"
+      >
+        <span className="text-lg">🏠</span>
+        <span className="hidden sm:inline">Return to Site</span>
+      </Link>
     </aside>
   )
 }

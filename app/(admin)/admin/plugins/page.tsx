@@ -18,6 +18,8 @@ export default function AdminPluginsPage() {
     title: '',
     description: '',
     priceCoins: '',
+    version: '1.0.0',
+    platform: 'plugin-paper' as 'plugin-paper' | 'plugin-bukkit' | 'mod-fabric' | 'mod-forge',
     downloadType: 'upload' as 'upload' | 'external',
     externalUrl: '',
   })
@@ -67,6 +69,8 @@ export default function AdminPluginsPage() {
       formDataToSend.append('title', formData.title)
       formDataToSend.append('description', formData.description)
       formDataToSend.append('priceCoins', formData.priceCoins)
+      formDataToSend.append('version', formData.version)
+      formDataToSend.append('platform', formData.platform)
       formDataToSend.append('downloadType', formData.downloadType)
 
       if (logoFile) {
@@ -113,6 +117,8 @@ export default function AdminPluginsPage() {
       title: plugin.title,
       description: plugin.description,
       priceCoins: plugin.price_coins.toString(),
+      version: plugin.version || '1.0.0',
+      platform: plugin.platform || 'plugin-paper',
       downloadType: plugin.download_type,
       externalUrl: plugin.external_url || '',
     })
@@ -140,6 +146,8 @@ export default function AdminPluginsPage() {
       title: '', 
       description: '', 
       priceCoins: '',
+      version: '1.0.0',
+      platform: 'plugin-paper',
       downloadType: 'upload',
       externalUrl: '',
     })
@@ -378,16 +386,62 @@ export default function AdminPluginsPage() {
             />
           </div>
 
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <Input
+                label="Price (Coins)"
+                type="number"
+                value={formData.priceCoins}
+                onChange={(e) => setFormData({ ...formData, priceCoins: e.target.value })}
+                required
+                min="0"
+              />
+              <p className="text-xs text-slate-500 mt-1">0 = Free</p>
+            </div>
+            <div>
+              <Input
+                label="Version"
+                value={formData.version}
+                onChange={(e) => setFormData({ ...formData, version: e.target.value })}
+                placeholder="1.0.0"
+                required
+              />
+            </div>
+          </div>
+
           <div>
-            <Input
-              label="Price (Coins)"
-              type="number"
-              value={formData.priceCoins}
-              onChange={(e) => setFormData({ ...formData, priceCoins: e.target.value })}
-              required
-              min="0"
-            />
-            <p className="text-xs text-slate-500 mt-1">Set to 0 for free plugins</p>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Platform</label>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { value: 'plugin-paper', label: '📄 Paper/Spigot', color: 'blue' },
+                { value: 'plugin-bukkit', label: '🪣 Bukkit', color: 'orange' },
+                { value: 'mod-fabric', label: '🧵 Fabric Mod', color: 'purple' },
+                { value: 'mod-forge', label: '🔨 Forge Mod', color: 'red' },
+              ].map((p) => (
+                <label
+                  key={p.value}
+                  className={`flex items-center justify-center gap-2 p-2.5 rounded-xl cursor-pointer border transition-all text-sm ${
+                    formData.platform === p.value
+                      ? `bg-${p.color}-500/20 border-${p.color}-500/50 text-${p.color}-400`
+                      : 'bg-slate-800 border-slate-600 text-slate-400 hover:bg-slate-700'
+                  }`}
+                  style={{
+                    backgroundColor: formData.platform === p.value ? `var(--${p.color}-bg)` : undefined,
+                    borderColor: formData.platform === p.value ? `var(--${p.color}-border)` : undefined,
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="platform"
+                    value={p.value}
+                    checked={formData.platform === p.value}
+                    onChange={() => setFormData({ ...formData, platform: p.value as any })}
+                    className="sr-only"
+                  />
+                  {p.label}
+                </label>
+              ))}
+            </div>
           </div>
 
           <div>

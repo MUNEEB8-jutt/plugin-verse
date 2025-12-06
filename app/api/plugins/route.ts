@@ -40,6 +40,8 @@ export async function POST(request: NextRequest) {
     const title = formData.get('title') as string
     const description = formData.get('description') as string
     const priceCoins = parseInt(formData.get('priceCoins') as string)
+    const version = (formData.get('version') as string) || '1.0.0'
+    const platform = (formData.get('platform') as string) || 'plugin-paper'
     const downloadType = (formData.get('downloadType') as string) || 'upload'
     const logoFile = formData.get('logo') as File
     const externalUrl = formData.get('externalUrl') as string
@@ -134,6 +136,8 @@ export async function POST(request: NextRequest) {
         title,
         description,
         price_coins: priceCoins,
+        version,
+        platform,
         logo_url: logoUrl,
         file_url: fileUrl,
         download_type: downloadType,
