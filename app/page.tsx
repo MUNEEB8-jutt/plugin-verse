@@ -89,73 +89,42 @@ export default async function HomePage() {
       <div className="min-h-screen">
         <Navbar user={user} isAdmin={isAdmin} />
 
-        <main className="container mx-auto px-4 py-8 md:py-12">
-          {/* Hero Section */}
-          <div className="text-center mb-10 md:mb-14 animate-fade-in-up">
-            {/* Logo and Title */}
-            <div className="flex items-center justify-center gap-3 md:gap-4 mb-4">
-              <img
-                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
-                alt="PluginVerse Logo"
-                className="w-14 h-14 md:w-16 md:h-16 object-contain rounded-2xl shadow-lg"
-                loading="eager"
-                fetchPriority="high"
-              />
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                PluginVerse
-              </h1>
+        <main className="container mx-auto px-4 py-6 md:py-10">
+          {/* Hero Section - Compact & Clean */}
+          <div className="text-center mb-8 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm mb-4">
+              🇵🇰 Pakistan&apos;s #1 Plugin Marketplace
             </div>
-
-            <p className="text-slate-400 text-base md:text-lg mb-6 max-w-2xl mx-auto">
-              Pakistan&apos;s #1 Minecraft Plugin Marketplace
+            
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
+              Discover Premium{' '}
+              <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+                Minecraft Plugins
+              </span>
+            </h1>
+            
+            <p className="text-slate-400 text-base md:text-lg mb-6 max-w-xl mx-auto">
+              Browse, purchase and download plugins for your server
             </p>
 
-            {/* Hero Card */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 md:p-8 mb-8 max-w-3xl mx-auto">
-              <h2 className="text-xl md:text-2xl font-semibold text-white mb-2">
-                Minecraft Plugins & Mods
-              </h2>
-              <p className="text-slate-400 text-sm md:text-base mb-6">
-                🔍 Discover premium plugins for your server
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-                {user && (
-                  <a
-                    href="/account"
-                    className="w-full sm:w-auto px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
-                  >
-                    📊 My Dashboard
-                  </a>
-                )}
-                <a
-                  href="/deposit"
-                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2"
-                >
-                  💰 Add Coins
-                </a>
-              </div>
-
-              {/* Social Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href="https://discord.com/invite/UnDRjTc9jP"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
-                >
-                  💬 Join Discord
-                </a>
-                <a
-                  href="https://www.youtube.com/@ItxMuneebYT"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
-                >
-                  ▶️ Subscribe
-                </a>
-              </div>
+            {/* Social Buttons Only */}
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <a
+                href="https://discord.com/invite/UnDRjTc9jP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium rounded-lg transition-colors flex items-center gap-2 text-sm"
+              >
+                💬 Discord
+              </a>
+              <a
+                href="https://www.youtube.com/@ItxMuneebYT"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2 text-sm"
+              >
+                ▶️ YouTube
+              </a>
             </div>
           </div>
 

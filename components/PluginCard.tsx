@@ -70,20 +70,20 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
   return (
     <Card hover className="flex flex-col h-full animate-fade-in-up">
-      {/* Plugin Logo */}
+      {/* Plugin Logo - Bigger */}
       <div className="relative w-full mb-4 flex items-center justify-center">
-        <div className="relative w-20 h-20 md:w-24 md:h-24">
-          <div className="relative w-full h-full overflow-hidden bg-slate-700/50 rounded-2xl ring-1 ring-slate-600/50">
+        <div className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
+          <div className="relative w-full h-full overflow-hidden bg-slate-700/50 rounded-2xl ring-1 ring-slate-600/50 shadow-lg">
             <Image
               src={plugin.logo_url}
               alt={plugin.title}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 768px) 150px, 200px"
             />
           </div>
           {plugin.price_coins === 0 && (
-            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-lg">
+            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
               FREE
             </div>
           )}
