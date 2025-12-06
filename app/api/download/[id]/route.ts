@@ -78,19 +78,34 @@ export async function GET(
         fileToDownload = plugin.file_url
       }
 
-      const { data: signedUrlData, error: urlError } = await adminClient.storage
+      // Download file from storage
+      const { data: fileData, error: downloadError } = await adminClient.storage
         .from('plugins')
-        .createSignedUrl(fileToDownload, 60)
+        .download(fileToDownload)
 
-      if (urlError || !signedUrlData) {
+      if (downloadError || !fileData) {
         return NextResponse.json(
-          { error: 'Failed to generate download link' },
+          { error: 'Failed to download file' },
           { status: 500 }
         )
       }
 
-      // Redirect to the signed URL for direct download
-      return NextResponse.redirect(signedUrlData.signedUrl)
+      // Get original filename from path or use plugin name
+      const originalFileName = fileToDownload.split('/').pop() || `${plugin.name}.jar`
+
+      // Create proper filename for download (sanitize plugin name)
+      const sanitizedPluginName = plugin.name.replace(/[^a-zA-Z0-9-_]/g, '_')
+      const fileExtension = originalFileName.split('.').pop() || 'jar'
+      const downloadFileName = `${sanitizedPluginName}.${fileExtension}`
+
+      // Return file with proper Content-Disposition header
+      return new NextResponse(fileData, {
+        headers: {
+          'Content-Type': 'application/java-archive',
+          'Content-Disposition': `attachment; filename="${downloadFileName}"`,
+          'Content-Length': fileData.size.toString(),
+        },
+      })
     }
   } catch (error) {
     console.error('Download error:', error)
