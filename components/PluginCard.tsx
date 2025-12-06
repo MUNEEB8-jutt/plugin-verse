@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Plugin } from '@/lib/types/database'
-import { Card } from './ui/Card'
 import { Button } from './ui/Button'
+import { useToast } from './ui/Toast'
 import { formatCurrency } from '@/lib/utils/helpers'
 import { useState } from 'react'
 
@@ -17,6 +17,7 @@ interface PluginCardProps {
 
 export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: PluginCardProps) {
   const [loading, setLoading] = useState(false)
+  const { showToast } = useToast()
 
   const handlePurchase = async () => {
     setLoading(true)
@@ -30,28 +31,30 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       const data = await response.json()
 
       if (!response.ok) {
-        alert(data.error || 'Purchase failed')
+        showToast(data.error || 'Purchase failed', 'error')
         return
       }
 
       const message = data.isFree
-        ? 'Free plugin added to your library! You can now download it.'
-        : 'Purchase successful! You can now download the plugin.'
+        ? 'Free plugin added to your library!'
+        : 'Purchase successful! You can now download.'
 
-      alert(message)
+      showToast(message, 'success')
       if (onPurchase) {
         onPurchase(plugin.id)
       }
-      window.location.reload()
+      setTimeout(() => window.location.reload(), 1500)
     } catch (err) {
-      alert('An error occurred during purchase')
+      showToast('An error occurred during purchase', 'error')
     } finally {
       setLoading(false)
     }
   }
 
+
   const handleDownload = () => {
     setLoading(true)
+    showToast('Starting download...', 'info')
     window.location.href = `/api/download/${plugin.id}`
 
     if (onDownload) {
@@ -75,15 +78,15 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
         
         {/* Header: Logo + Title + Price Badge */}
         <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-          {/* Plugin Logo */}
+          {/* Plugin Logo - BIGGER SIZE */}
           <div className="relative flex-shrink-0">
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 overflow-hidden rounded-xl sm:rounded-2xl bg-slate-700/50 ring-2 ring-slate-600/30 group-hover:ring-emerald-500/30 transition-all shadow-lg">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 overflow-hidden rounded-xl sm:rounded-2xl bg-slate-700/50 ring-2 ring-slate-600/30 group-hover:ring-emerald-500/30 transition-all shadow-lg">
               <Image
                 src={plugin.logo_url}
                 alt={`${plugin.title} - Minecraft Plugin Logo`}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
-                sizes="(max-width: 640px) 56px, (max-width: 768px) 64px, 80px"
+                sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
                 itemProp="image"
               />
             </div>
@@ -118,6 +121,7 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
             </div>
           </div>
         </div>
+
 
         {/* Description - SEO optimized */}
         <p 
