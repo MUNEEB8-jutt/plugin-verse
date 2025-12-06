@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { CustomCursor } from "@/components/CustomCursor";
+import { ClickSoundProvider } from "@/components/ClickSoundProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -154,8 +155,10 @@ export default function RootLayout({
         />
 
         <ToastProvider>
-          <CustomCursor />
-          {children}
+          <ClickSoundProvider>
+            <CustomCursor />
+            {children}
+          </ClickSoundProvider>
         </ToastProvider>
       </body>
     </html>
