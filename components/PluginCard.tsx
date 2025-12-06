@@ -70,20 +70,20 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
   return (
     <Card hover className="flex flex-col h-full animate-fade-in-up">
-      {/* Plugin Logo - Bigger */}
-      <div className="relative w-full mb-4 flex items-center justify-center">
-        <div className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
-          <div className="relative w-full h-full overflow-hidden bg-slate-700/50 rounded-2xl ring-1 ring-slate-600/50 shadow-lg">
+      {/* Plugin Logo */}
+      <div className="relative w-full mb-3 flex items-center justify-center">
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32">
+          <div className="relative w-full h-full overflow-hidden bg-slate-700/50 rounded-xl sm:rounded-2xl ring-1 ring-slate-600/50 shadow-lg">
             <Image
               src={plugin.logo_url}
               alt={plugin.title}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 150px, 200px"
+              sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
             />
           </div>
           {plugin.price_coins === 0 && (
-            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
+            <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded-full shadow-lg">
               FREE
             </div>
           )}
@@ -92,27 +92,20 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
 
       {/* Plugin Info */}
       <div className="flex-1 flex flex-col">
-        <h3 className="text-base md:text-lg font-semibold text-white mb-2 text-center line-clamp-2">
+        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-1 sm:mb-2 text-center line-clamp-2">
           {plugin.title}
         </h3>
         
-        <div className="mb-4 flex-1">
-          <p className="text-sm text-slate-400 line-clamp-3 text-center">
+        {/* Description - Hidden on mobile for compact view */}
+        <div className="mb-3 flex-1 hidden sm:block">
+          <p className="text-xs sm:text-sm text-slate-400 line-clamp-2 text-center">
             {displayDescription}
           </p>
-          {shouldTruncate && (
-            <button
-              onClick={() => setShowFullDescription(!showFullDescription)}
-              className="text-xs text-blue-400 hover:text-blue-300 mt-1 w-full text-center transition-colors"
-            >
-              {showFullDescription ? 'Show Less' : 'Show More'}
-            </button>
-          )}
         </div>
 
         {/* Price and Action */}
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-lg font-bold text-emerald-400">
+        <div className="flex flex-col items-center gap-2 sm:gap-3">
+          <span className="text-base sm:text-lg font-bold text-emerald-400">
             {plugin.price_coins === 0 ? 'FREE' : formatCurrency(plugin.price_coins)}
           </span>
 
@@ -121,18 +114,20 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               onClick={handleDownload}
               disabled={loading}
               variant="secondary"
-              className="w-full"
+              size="sm"
+              className="w-full text-xs sm:text-sm"
             >
-              {loading ? 'Loading...' : '📥 Download'}
+              {loading ? '...' : '📥 Download'}
             </Button>
           ) : (
             <Button
               onClick={handlePurchase}
               disabled={loading}
               variant="primary"
-              className="w-full"
+              size="sm"
+              className="w-full text-xs sm:text-sm"
             >
-              {loading ? 'Wait...' : (plugin.price_coins === 0 ? '🎁 Get Free' : '💰 Buy Now')}
+              {loading ? '...' : (plugin.price_coins === 0 ? '🎁 Get' : '💰 Buy')}
             </Button>
           )}
         </div>
@@ -142,9 +137,9 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
       <Link
         href={`/plugin/${plugin.id}`}
         prefetch={true}
-        className="mt-4 text-center text-sm text-blue-400 hover:text-blue-300 transition-colors py-2"
+        className="mt-2 sm:mt-3 text-center text-xs sm:text-sm text-blue-400 hover:text-blue-300 transition-colors py-1"
       >
-        View Details →
+        Details →
       </Link>
     </Card>
   )
