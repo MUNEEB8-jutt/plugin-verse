@@ -54,3 +54,22 @@ export interface ApiResponse<T = any> {
   error?: string
   message?: string
 }
+
+export type RequestStatus = 'pending' | 'in_progress' | 'completed' | 'rejected'
+
+export interface PluginRequest {
+  id: string
+  user_id: string
+  name: string
+  email: string
+  request_type: Platform
+  plugin_name: string
+  minecraft_versions: string
+  category: string
+  core_features: string
+  detailed_description: string
+  status: RequestStatus
+  admin_notes?: string
+  created_at: string
+  updated_at: string
+}

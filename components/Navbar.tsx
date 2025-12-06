@@ -75,6 +75,19 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                   My Plugins
                 </Link>
                 
+                {/* Request Plugin */}
+                <Link 
+                  href="/request" 
+                  prefetch={true}
+                  role="menuitem"
+                  className="group px-4 py-2 text-sm font-medium bg-gradient-to-r from-pink-500/20 to-rose-500/20 hover:from-pink-500/30 hover:to-rose-500/30 text-pink-400 hover:text-pink-300 rounded-xl transition-all border border-pink-500/30 hover:border-pink-500/50 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  Request Plugin
+                </Link>
+                
                 {/* Coins - Highlighted */}
                 <Link 
                   href="/deposit" 
@@ -216,6 +229,17 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                   My Plugins
+                </Link>
+                <Link
+                  href="/request"
+                  role="menuitem"
+                  className="flex items-center gap-3 px-4 py-3 bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 rounded-xl transition-all border border-pink-500/20"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  Request Plugin
                 </Link>
                 <Link
                   href="/deposit"

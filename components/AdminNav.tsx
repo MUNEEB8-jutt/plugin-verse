@@ -9,6 +9,7 @@ export function AdminNav() {
   const links = [
     { href: '/admin', label: 'Dashboard', icon: '📊' },
     { href: '/admin/plugins', label: 'Plugins', icon: '🔌' },
+    { href: '/admin/requests', label: 'Requests', icon: '📝' },
     { href: '/admin/deposits', label: 'Deposits', icon: '💰' },
     { href: '/admin/settings', label: 'Settings', icon: '⚙️' },
   ]
