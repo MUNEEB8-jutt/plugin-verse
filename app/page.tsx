@@ -23,21 +23,19 @@ async function getUserPurchases(userId: string) {
 }
 
 export const metadata = {
-  title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace | Premium Plugin Store",
-  description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Download premium & free plugins/mods with coins. 🇵🇰 Trusted by Pakistani Minecraft community.",
-  keywords: "PluginVerse Pakistan, Minecraft plugins Pakistan, Minecraft mods Pakistan, Pakistan plugin marketplace, Minecraft server plugins PK, Free Minecraft mods Pakistan, Premium plugins Pakistan, plugin store Pakistan, buy minecraft plugins pakistan, download minecraft mods pakistan, Pakistan Minecraft server, Minecraft community Pakistan",
+  title: "PluginVerse - Best Minecraft Plugins & Mods | Free Download",
+  description: "Download free and premium Minecraft plugins. Best Spigot, Bukkit, Paper plugins for your server. Economy, protection, minigames and more.",
+  keywords: "Minecraft plugins, free plugins, Spigot plugins, Bukkit plugins, Paper plugins, server plugins, download mods, plugin marketplace",
   openGraph: {
-    title: "PluginVerse Pakistan - #1 Minecraft Plugins & Mods Marketplace",
-    description: "🎮 Pakistan's leading Minecraft plugin marketplace! 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Best marketplace for Minecraft plugins. 💎 Free & Premium plugins for Spigot, Bukkit, Paper servers.",
     url: "https://pluginverse.vercel.app",
     type: "website",
-    locale: "en_PK",
-    alternateLocale: ["ur_PK"],
     images: [{
       url: "https://pluginverse.vercel.app/logo.png",
       width: 1200,
       height: 630,
-      alt: "PluginVerse Pakistan - Minecraft Plugin Marketplace"
+      alt: "PluginVerse - Minecraft Plugin Marketplace"
     }],
   },
 }
@@ -93,16 +91,16 @@ export default async function HomePage() {
           {/* Hero Section - Compact & Clean */}
           <div className="text-center mb-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm mb-4">
-              🇵🇰 Pakistan&apos;s #1 Plugin Marketplace
+              ✨ Free & Premium Minecraft Plugins
             </div>
-            
+
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
               Discover Premium{' '}
               <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
                 Minecraft Plugins
               </span>
             </h1>
-            
+
             <p className="text-slate-400 text-base md:text-lg mb-6 max-w-xl mx-auto">
               Browse, purchase and download plugins for your server
             </p>

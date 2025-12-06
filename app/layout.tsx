@@ -10,29 +10,44 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://pluginverse.vercel.app'),
   title: {
-    default: "PluginVerse - Minecraft Plugins & Mods Marketplace Pakistan | Premium Plugin Store",
+    default: "PluginVerse - Best Minecraft Plugins & Mods Marketplace | Free & Premium Plugins",
     template: "%s | PluginVerse"
   },
-  description: "Pakistan's #1 marketplace for Minecraft plugins and mods. Discover, purchase and download premium Minecraft plugins with coins. Browse free and paid plugins for your Minecraft server.",
+  description: "Download free and premium Minecraft plugins & mods. Best marketplace for Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins and more.",
   keywords: [
-    "PluginVerse Pakistan",
-    "Minecraft plugins Pakistan",
-    "Minecraft mods Pakistan",
-    "plugin marketplace Pakistan",
-    "Minecraft server plugins PK",
-    "premium plugins Pakistan",
-    "free plugins Pakistan",
-    "plugin store Pakistan",
-    "buy Minecraft plugins Pakistan",
-    "download Minecraft mods Pakistan",
-    "Pakistan Minecraft community",
-    "Minecraft server Pakistan",
-    "plugin shop Pakistan",
-    "Minecraft marketplace Pakistan"
+    "Minecraft plugins",
+    "Minecraft mods",
+    "Spigot plugins",
+    "Bukkit plugins",
+    "Paper plugins",
+    "free Minecraft plugins",
+    "premium Minecraft plugins",
+    "Minecraft server plugins",
+    "plugin marketplace",
+    "download Minecraft mods",
+    "server plugins",
+    "Minecraft essentials",
+    "economy plugins",
+    "protection plugins",
+    "minigame plugins",
+    "best Minecraft plugins 2024",
+    "Minecraft plugin download",
+    "Minecraft server mods",
+    "PvP plugins",
+    "survival plugins",
+    "Minecraft plugin store",
+    "buy Minecraft plugins",
+    "WorldEdit plugin",
+    "EssentialsX",
+    "Vault plugin",
+    "LuckPerms",
+    "Minecraft permissions plugin",
+    "anti cheat plugin",
+    "Minecraft shop plugin"
   ],
-  authors: [{ name: "PluginVerse Pakistan", url: "https://pluginverse.vercel.app" }],
-  creator: "PluginVerse Pakistan",
-  publisher: "PluginVerse Pakistan",
+  authors: [{ name: "PluginVerse", url: "https://pluginverse.vercel.app" }],
+  creator: "PluginVerse",
+  publisher: "PluginVerse",
   applicationName: "PluginVerse",
   formatDetection: {
     email: false,
@@ -41,34 +56,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_PK",
-    alternateLocale: ["ur_PK"],
+    locale: "en_US",
     url: "https://pluginverse.vercel.app",
-    title: "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
-    description: "🎮 Pakistan's #1 marketplace for Minecraft plugins and mods. 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",
-    siteName: "PluginVerse Pakistan",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Best marketplace for Minecraft plugins and mods. 💎 Free & Premium plugins. Download Spigot, Bukkit, Paper plugins for your server.",
+    siteName: "PluginVerse",
     images: [
       {
         url: "https://pluginverse.vercel.app/logo.png",
         width: 1200,
         height: 630,
-        alt: "PluginVerse Pakistan - Minecraft Plugin & Mod Marketplace",
+        alt: "PluginVerse - Minecraft Plugin Marketplace",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
-    description: "🎮 Pakistan's #1 marketplace for Minecraft plugins and mods. 💎 Premium & Free plugins. 💰 Coin-based system.",
+    title: "PluginVerse - Minecraft Plugins & Mods Marketplace",
+    description: "🎮 Best marketplace for Minecraft plugins and mods. 💎 Free & Premium plugins for your server.",
     images: ["https://pluginverse.vercel.app/logo.png"],
     creator: "@ItxMuneebYT",
-    site: "@PluginVersePK",
-  },
-  other: {
-    "geo.region": "PK",
-    "geo.placename": "Pakistan",
-    "geo.position": "30.3753;69.3451",
   },
   robots: {
     index: true,
@@ -91,9 +99,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const videoUrl = `${supabaseUrl}/storage/v1/object/public/background/video.mp4`;
-
   return (
     <html lang="en-PK">
       <head>
@@ -111,15 +116,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "PluginVerse Pakistan",
-              "alternateName": "PluginVerse",
+              "name": "PluginVerse",
               "url": "https://pluginverse.vercel.app",
               "logo": "https://pluginverse.vercel.app/logo.png",
-              "description": "Pakistan's #1 marketplace for Minecraft plugins and mods",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "PK"
-              },
+              "description": "Best marketplace for Minecraft plugins and mods",
               "sameAs": [
                 "https://discord.com/invite/UnDRjTc9jP",
                 "https://www.youtube.com/@ItxMuneebYT"
@@ -132,19 +132,25 @@ export default function RootLayout({
         className={`${inter.variable} antialiased font-sans`}
         style={{ position: 'relative', minHeight: '100vh' }}
       >
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="fixed inset-0 w-full h-full object-cover -z-10 opacity-20"
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
+        {/* Background with gradient and pattern */}
+        <div 
+          className="fixed inset-0 -z-10"
+          style={{
+            background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #0f172a 50%, #134e4a 75%, #0f172a 100%)',
+          }}
+        />
+        
+        {/* Subtle grid pattern overlay */}
+        <div 
+          className="fixed inset-0 -z-10 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
 
-        {/* Dark overlay */}
-        <div className="fixed inset-0 bg-slate-900/60 -z-10" />
+        {/* Gradient orbs for visual interest */}
+        <div className="fixed top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -z-10" />
+        <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-10" />
 
         {children}
       </body>
