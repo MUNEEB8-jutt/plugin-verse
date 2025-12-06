@@ -123,7 +123,7 @@ export default async function HomePage() {
             </div>
             
             <p className="text-slate-600 text-xs mt-6">
-              © 2024 PluginVerse. All rights reserved.
+              © 2025 PluginVerse. All rights reserved.
             </p>
           </footer>
         </main>
