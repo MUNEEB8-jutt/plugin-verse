@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/Navbar'
-import { Card } from '@/components/ui/Card'
 import { formatCurrency, formatDate } from '@/lib/utils/helpers'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
@@ -47,60 +46,55 @@ export default async function AccountPage() {
     <div className="min-h-screen">
       <Navbar user={user} isAdmin={isAdmin} />
 
-      <main className="container mx-auto px-4 py-12 page-transition">
+      <main className="container mx-auto px-4 py-8 md:py-12">
         {/* Dashboard Header */}
-        <div className="mb-8 p-6 rounded-lg" style={{ backgroundColor: '#1f2937', border: '2px solid #374151' }}>
-          <div className="flex items-center justify-between mb-6">
+        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 md:p-8 mb-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'monospace', color: '#4ade80' }}>
+              <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 📊 Dashboard
               </h1>
-              <p style={{ color: '#9ca3af', fontFamily: 'monospace' }}>👤 {isAdmin ? 'admin' : 'user'}</p>
-              <p style={{ color: '#6b7280', fontFamily: 'monospace', fontSize: '14px' }}>{user.email}</p>
+              <p className="text-slate-400 text-sm">
+                {isAdmin ? '👑 Admin' : '👤 User'} • {user.email}
+              </p>
             </div>
             <div className="flex gap-3">
               <Link href="/deposit">
-                <button 
-                  className="px-6 py-3 rounded font-bold transition-all"
-                  style={{ backgroundColor: '#ca8a04', color: 'black', fontFamily: 'monospace' }}
-                >
-                  💰 DEPOSIT
+                <button className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-amber-500/25">
+                  💰 Deposit
                 </button>
               </Link>
               <Link href="/">
-                <button 
-                  className="px-6 py-3 rounded font-bold transition-all"
-                  style={{ backgroundColor: '#10b981', color: 'black', fontFamily: 'monospace' }}
-                >
-                  🔍 DISCOVER
+                <button className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl transition-colors">
+                  🔍 Browse
                 </button>
               </Link>
             </div>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="p-4 rounded text-center" style={{ backgroundColor: '#111827', border: '2px solid #374151' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-5 text-center">
               <div className="text-3xl mb-2">📦</div>
-              <div style={{ color: '#9ca3af', fontFamily: 'monospace', fontSize: '14px' }}>Plugins Owned</div>
-              <div className="text-2xl font-bold" style={{ color: '#4ade80', fontFamily: 'monospace' }}>
+              <div className="text-slate-400 text-sm mb-1">Plugins Owned</div>
+              <div className="text-2xl font-bold text-emerald-400">
                 {purchases.length}
               </div>
             </div>
             
-            <div className="p-4 rounded text-center" style={{ backgroundColor: '#111827', border: '2px solid #374151' }}>
+            <div className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-5 text-center">
               <div className="text-3xl mb-2">💰</div>
-              <div style={{ color: '#9ca3af', fontFamily: 'monospace', fontSize: '14px' }}>Coins Balance</div>
-              <div className="text-2xl font-bold" style={{ color: '#ca8a04', fontFamily: 'monospace' }}>
+              <div className="text-slate-400 text-sm mb-1">Coins Balance</div>
+              <div className="text-2xl font-bold text-amber-400">
                 {userData?.balance || 0}
               </div>
             </div>
             
-            <div className="p-4 rounded text-center" style={{ backgroundColor: '#111827', border: '2px solid #374151' }}>
+            <div className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-5 text-center">
               <div className="text-3xl mb-2">💸</div>
-              <div style={{ color: '#9ca3af', fontFamily: 'monospace', fontSize: '14px' }}>Deposits Made</div>
-              <div className="text-2xl font-bold" style={{ color: '#4ade80', fontFamily: 'monospace' }}>
-                0
+              <div className="text-slate-400 text-sm mb-1">Total Spent</div>
+              <div className="text-2xl font-bold text-blue-400">
+                {purchases.reduce((acc: number, p: any) => acc + (p.plugin?.price_coins || 0), 0)}
               </div>
             </div>
           </div>
@@ -108,16 +102,16 @@ export default async function AccountPage() {
 
         {/* My Plugins Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: 'monospace', color: '#4ade80' }}>
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
             📦 My Plugins
           </h2>
           
-          <div className="p-6 rounded-lg" style={{ backgroundColor: '#1f2937', border: '2px solid #374151' }}>
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
             {purchases.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {purchases.map((purchase: any) => (
-                  <div key={purchase.id} className="p-4 rounded" style={{ backgroundColor: '#111827', border: '2px solid #374151' }}>
-                    <div className="relative w-full h-32 mb-3 rounded overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
+                  <div key={purchase.id} className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-4 hover:border-slate-600 transition-colors">
+                    <div className="relative w-full h-32 mb-3 rounded-lg overflow-hidden bg-slate-800">
                       <Image
                         src={purchase.plugin.logo_url}
                         alt={purchase.plugin.title}
@@ -126,52 +120,35 @@ export default async function AccountPage() {
                       />
                     </div>
 
-                    <h3 className="font-bold mb-2" style={{ fontFamily: 'monospace', color: 'white' }}>
+                    <h3 className="font-semibold text-white mb-1 line-clamp-1">
                       {purchase.plugin.title}
                     </h3>
 
-                    <p className="text-sm mb-3" style={{ color: '#6b7280', fontFamily: 'monospace' }}>
+                    <p className="text-sm text-slate-500 mb-3">
                       {formatDate(purchase.purchased_at)}
                     </p>
 
                     <a
                       href={`/api/download/${purchase.plugin.id}`}
-                      className="block w-full text-center py-2 rounded font-bold transition-all"
-                      style={{ backgroundColor: '#10b981', color: 'black', fontFamily: 'monospace' }}
+                      className="block w-full text-center py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25"
                     >
-                      DOWNLOAD
+                      📥 Download
                     </a>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="text-center py-12">
-                <p className="mb-4" style={{ color: '#9ca3af', fontFamily: 'monospace' }}>
+                <p className="text-slate-400 mb-4">
                   No plugins purchased yet
                 </p>
                 <Link href="/">
-                  <button 
-                    className="px-6 py-3 rounded font-bold transition-all"
-                    style={{ backgroundColor: '#10b981', color: 'black', fontFamily: 'monospace' }}
-                  >
-                    BROWSE PLUGINS
+                  <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-emerald-500/25">
+                    Browse Plugins
                   </button>
                 </Link>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Deposit History Section */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: 'monospace', color: '#ca8a04' }}>
-            💸 Deposit History
-          </h2>
-          
-          <div className="p-6 rounded-lg text-center" style={{ backgroundColor: '#1f2937', border: '2px solid #374151' }}>
-            <p style={{ color: '#9ca3af', fontFamily: 'monospace' }}>
-              No deposits yet
-            </p>
           </div>
         </div>
       </main>

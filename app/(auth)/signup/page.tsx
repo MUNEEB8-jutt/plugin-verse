@@ -52,20 +52,20 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="glass rounded-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-accent-primary">
+      <div className="bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 w-full max-w-md shadow-2xl">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
           Join PluginVerse
         </h1>
 
         {error && (
-          <div className="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded mb-4">
+          <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-xl mb-4 text-sm">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
               Email
             </label>
             <input
@@ -74,13 +74,13 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-bg-secondary border border-border rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
               Password
             </label>
             <input
@@ -89,13 +89,13 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-bg-secondary border border-border rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
               placeholder="••••••••"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-300 mb-2">
               Confirm Password
             </label>
             <input
@@ -104,7 +104,7 @@ export default function SignupPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-bg-secondary border border-border rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
               placeholder="••••••••"
             />
           </div>
@@ -112,15 +112,15 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-accent-primary text-bg-primary font-bold py-3 rounded hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creating account...' : 'Sign Up'}
           </button>
         </form>
 
-        <p className="text-center mt-6 text-text-secondary">
+        <p className="text-center mt-6 text-slate-400 text-sm">
           Already have an account?{' '}
-          <Link href="/login" className="text-accent-primary hover:underline">
+          <Link href="/login" className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors">
             Login
           </Link>
         </p>

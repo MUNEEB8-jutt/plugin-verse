@@ -23,13 +23,13 @@ export function HomePageClient({ plugins, purchasedPluginIds }: HomePageClientPr
   })
 
   return (
-    <div className="page-transition">
+    <div className="animate-fade-in">
       {/* Search Bar */}
-      <SearchBar onSearch={setSearchQuery} placeholder="🔍 Search plugins & mods..." />
+      <SearchBar onSearch={setSearchQuery} placeholder="Search plugins..." />
 
-      {/* Plugins Grid - Responsive with 2 columns on mobile */}
+      {/* Plugins Grid */}
       {filteredPlugins.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {filteredPlugins.map((plugin: Plugin) => (
             <PluginCard
               key={plugin.id}
@@ -39,12 +39,9 @@ export function HomePageClient({ plugins, purchasedPluginIds }: HomePageClientPr
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 md:py-20">
-          <p 
-            className="text-base md:text-xl mb-4 px-4"
-            style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem', color: '#d1d5db' }}
-          >
-            {searchQuery ? 'No plugins found' : 'No plugins available yet'}
+        <div className="text-center py-16">
+          <p className="text-slate-400 text-lg">
+            {searchQuery ? 'No plugins found matching your search' : 'No plugins available yet'}
           </p>
         </div>
       )}

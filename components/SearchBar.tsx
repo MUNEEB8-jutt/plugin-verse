@@ -13,7 +13,6 @@ export function SearchBar({ onSearch, placeholder = "Search plugins..." }: Searc
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setQuery(value)
-    // Debounced search
     setTimeout(() => onSearch(value), 300)
   }
 
@@ -23,31 +22,31 @@ export function SearchBar({ onSearch, placeholder = "Search plugins..." }: Searc
   }
 
   return (
-    <div className="relative w-full md:max-w-2xl mx-auto mb-6 md:mb-8">
+    <div className="relative w-full max-w-xl mx-auto mb-8">
       <div className="relative">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        
         <input
           type="text"
           value={query}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full px-4 py-3 md:px-6 md:py-4 pr-16 md:pr-24 bg-[#4b5563] border-4 border-black shadow-[4px_4px_0_#000,inset_2px_2px_0_rgba(0,0,0,0.3)] text-white placeholder-gray-300 focus:outline-none focus:border-[#4ade80] focus:shadow-[4px_4px_0_#000,inset_2px_2px_0_rgba(0,0,0,0.3),0_0_0_3px_rgba(74,222,128,0.3)] transition-all min-h-[44px]"
-          style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '1rem' }}
+          className="w-full pl-12 pr-12 py-3.5 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
         />
         
-        {/* Search Icon - Responsive positioning */}
-        <div className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm md:text-base">
-          🔍
-        </div>
-        
-        {/* Clear Button - Responsive sizing */}
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 px-2 py-1.5 md:px-3 md:py-2 bg-red-500 border-2 border-black shadow-[2px_2px_0_#000] hover:shadow-[3px_3px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] transition-all text-white font-bold min-w-[32px] min-h-[32px] flex items-center justify-center"
-            style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.55rem' }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
             aria-label="Clear search"
           >
-            ✕
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         )}
       </div>

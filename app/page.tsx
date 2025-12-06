@@ -50,7 +50,6 @@ export default async function HomePage() {
   const plugins = await getPlugins()
   const purchasedPluginIds = user ? await getUserPurchases(user.id) : []
 
-  // Structured Data for SEO
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -90,117 +89,72 @@ export default async function HomePage() {
       <div className="min-h-screen">
         <Navbar user={user} isAdmin={isAdmin} />
 
-        <main className="container mx-auto px-4 py-12">
-          {/* Hero Section - Mobile Optimized */}
-          <div className="text-center mb-8 md:mb-12 animate-fade-in-up">
-            {/* Logo and Title - Responsive */}
-            <div className="flex items-center justify-center gap-2 md:gap-4 mb-4 md:mb-6">
+        <main className="container mx-auto px-4 py-8 md:py-12">
+          {/* Hero Section */}
+          <div className="text-center mb-10 md:mb-14 animate-fade-in-up">
+            {/* Logo and Title */}
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-4">
               <img
                 src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
                 alt="PluginVerse Logo"
-                className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain md:animate-bounce-slow"
-                style={{ imageRendering: 'pixelated' }}
+                className="w-14 h-14 md:w-16 md:h-16 object-contain rounded-2xl shadow-lg"
                 loading="eager"
                 fetchPriority="high"
               />
-              <h1
-                className="text-2xl md:text-4xl lg:text-6xl font-bold"
-                style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  color: '#4ade80',
-                  textShadow: '2px 2px 0 #000'
-                }}
-              >
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 PluginVerse
               </h1>
             </div>
 
-            <div
-              className="p-4 md:p-6 mb-6 md:mb-8 relative overflow-hidden border-4 border-black"
-              style={{
-                background: 'linear-gradient(180deg, #57534e 0%, #44403c 100%)',
-                boxShadow: '4px 4px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)'
-              }}
-            >
-              {/* Grass texture overlay */}
-              <div
-                className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{
-                  backgroundImage: 'url(/textures/grass.png)',
-                  backgroundSize: '64px 64px',
-                  imageRendering: 'pixelated'
-                }}
-              />
-              <div className="relative z-10">
-                <h2
-                  className="text-base md:text-xl lg:text-2xl font-semibold mb-2"
-                  style={{
-                    fontFamily: "'Press Start 2P', monospace",
-                    color: '#a8a29e',
-                    textShadow: '2px 2px 0 #000'
-                  }}
-                >
-                  Minecraft Plugins & Mods
-                </h2>
-                <p
-                  className="text-sm md:text-base mb-4 md:mb-6"
-                  style={{
-                    fontFamily: "'Press Start 2P', monospace",
-                    fontSize: '0.65rem',
-                    color: '#78716c',
-                    textShadow: '1px 1px 0 #000'
-                  }}
-                >
-                  🔍 Discover premium plugins
-                </p>
+            <p className="text-slate-400 text-base md:text-lg mb-6 max-w-2xl mx-auto">
+              Pakistan&apos;s #1 Minecraft Plugin Marketplace
+            </p>
 
-                {/* Action Buttons - Mobile Optimized */}
-                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-4 mb-4 md:mb-6">
-                  {user && (
-                    <a
-                      href="/account"
-                      className="w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#60a5fa] to-[#3b82f6] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] min-h-[44px] flex items-center justify-center"
-                      style={{
-                        fontFamily: "'Press Start 2P', monospace",
-                        fontSize: '0.6rem'
-                      }}
-                    >
-                      📊 My Dashboard
-                    </a>
-                  )}
-                  <a
-                    href="/deposit"
-                    className="w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all border-4 border-black bg-gradient-to-b from-[#f59e0b] to-[#d97706] text-black shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] min-h-[44px] flex items-center justify-center"
-                    style={{
-                      fontFamily: "'Press Start 2P', monospace",
-                      fontSize: '0.6rem'
-                    }}
-                  >
-                    💰 Add Coins
-                  </a>
-                </div>
+            {/* Hero Card */}
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 md:p-8 mb-8 max-w-3xl mx-auto">
+              <h2 className="text-xl md:text-2xl font-semibold text-white mb-2">
+                Minecraft Plugins & Mods
+              </h2>
+              <p className="text-slate-400 text-sm md:text-base mb-6">
+                🔍 Discover premium plugins for your server
+              </p>
 
-                {/* Social Buttons - Mobile Optimized */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+                {user && (
                   <a
-                    href="https://discord.com/invite/UnDRjTc9jP"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all flex items-center justify-center gap-2 border-4 border-black bg-gradient-to-b from-[#5865F2] to-[#4752C4] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] min-h-[44px]"
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem' }}
+                    href="/account"
+                    className="w-full sm:w-auto px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                   >
-                    <span>💬</span> Join Discord
+                    📊 My Dashboard
                   </a>
-                  <a
-                    href="https://www.youtube.com/@ItxMuneebYT"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-4 py-2.5 md:px-6 md:py-3 font-bold transition-all flex items-center justify-center gap-2 border-4 border-black bg-gradient-to-b from-[#FF0000] to-[#CC0000] text-white shadow-[3px_3px_0_#000] hover:shadow-[4px_4px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] min-h-[44px]"
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem' }}
-                  >
-                    <span>▶️</span> Subscribe
-                  </a>
-                </div>
+                )}
+                <a
+                  href="/deposit"
+                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2"
+                >
+                  💰 Add Coins
+                </a>
+              </div>
+
+              {/* Social Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href="https://discord.com/invite/UnDRjTc9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  💬 Join Discord
+                </a>
+                <a
+                  href="https://www.youtube.com/@ItxMuneebYT"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  ▶️ Subscribe
+                </a>
               </div>
             </div>
           </div>

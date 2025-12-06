@@ -20,51 +20,27 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
   }
 
   return (
-    <nav 
-      className="sticky top-0 z-40 border-b border-blue-500/30 lg:border-b-4 lg:border-black relative overflow-hidden backdrop-blur-md lg:backdrop-blur-none bg-gradient-to-r from-slate-800/95 to-slate-900/95 lg:bg-none shadow-lg shadow-black/30 lg:shadow-none"
-      style={{ 
-        background: window.innerWidth > 1024 ? 'linear-gradient(180deg, #92400e 0%, #78350f 100%)' : undefined,
-        boxShadow: window.innerWidth > 1024 ? '0 4px 0 #000, inset 0 2px 0 rgba(255,255,255,0.2)' : undefined
-      }}
-    >
-      {/* Wood texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage: 'url(/textures/wood.png)',
-          backgroundSize: '64px 64px',
-          imageRendering: 'pixelated'
-        }}
-      />
-      <div className="container mx-auto px-4 relative z-10">
+    <nav className="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Responsive sizing */}
-          <Link href="/" className="flex items-center gap-2 md:gap-3 hover:brightness-110 transition-all">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <img 
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
               alt="PluginVerse"
-              className="w-8 h-8 md:w-10 md:h-10 object-contain"
-              style={{ imageRendering: 'pixelated' }}
+              className="w-9 h-9 object-contain rounded-lg"
             />
-            <span 
-              className="text-base md:text-xl lg:text-2xl font-bold"
-              style={{ 
-                fontFamily: "'Press Start 2P', monospace", 
-                color: '#4ade80',
-                textShadow: '2px 2px 0 #000'
-              }}
-            >
+            <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
               PluginVerse
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center gap-1">
             <Link 
               href="/" 
               prefetch={true}
-              className="text-white hover:text-[#4ade80] transition-colors font-bold"
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
+              className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
             >
               Plugins
             </Link>
@@ -74,32 +50,28 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                 <Link 
                   href="/account" 
                   prefetch={true}
-                  className="text-white hover:text-[#4ade80] transition-colors font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
+                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                 >
                   Dashboard
                 </Link>
                 <Link 
                   href="/deposit" 
                   prefetch={true}
-                  className="text-white hover:text-[#4ade80] transition-colors font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
+                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                 >
                   Deposit
                 </Link>
                 {isAdmin && (
                   <Link 
                     href="/admin" 
-                    className="text-[#3b82f6] hover:brightness-110 font-bold"
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
+                    className="px-4 py-2 text-sm font-medium text-blue-400 hover:text-blue-300 hover:bg-slate-800 rounded-lg transition-colors"
                   >
                     Admin
                   </Link>
                 )}
                 <button
                   onClick={handleLogout}
-                  className="bg-gradient-to-b from-[#ef4444] to-[#dc2626] text-white px-4 py-2 border-2 border-black shadow-[2px_2px_0_#000] hover:shadow-[3px_3px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                  className="ml-2 px-4 py-2 text-sm font-medium bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
                 >
                   Logout
                 </button>
@@ -108,15 +80,13 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               <>
                 <Link 
                   href="/login" 
-                  className="text-white hover:text-[#4ade80] transition-colors font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem', textShadow: '1px 1px 0 #000' }}
+                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black px-4 py-2 border-2 border-black shadow-[2px_2px_0_#000] hover:shadow-[3px_3px_0_#000] hover:-translate-x-[1px] hover:-translate-y-[1px] active:shadow-[1px_1px_0_#000] active:translate-x-[1px] active:translate-y-[1px] transition-all font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem' }}
+                  className="ml-2 px-4 py-2 text-sm font-medium bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg shadow-emerald-500/25"
                 >
                   Sign Up
                 </Link>
@@ -124,9 +94,9 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             )}
           </div>
 
-          {/* Mobile Menu Button - Larger touch target */}
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            className="md:hidden text-slate-300 p-2 hover:bg-slate-800 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -140,14 +110,13 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           </button>
         </div>
 
-        {/* Mobile Menu - Improved with proper touch targets */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2">
+          <div className="md:hidden py-4 space-y-1 border-t border-slate-800 animate-fade-in">
             <Link
               href="/"
-              className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
+              className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(false)}
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
             >
               🎮 Plugins
             </Link>
@@ -156,26 +125,23 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               <>
                 <Link
                   href="/account"
-                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
+                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
                   📊 Dashboard
                 </Link>
                 <Link
                   href="/deposit"
-                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
+                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
                   💰 Deposit
                 </Link>
                 {isAdmin && (
                   <Link
                     href="/admin"
-                    className="block text-[#3b82f6] hover:brightness-110 py-3 px-2 min-h-[44px] font-bold"
+                    className="block px-4 py-3 text-blue-400 hover:bg-slate-800 rounded-lg transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
-                    style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                   >
                     ⚙️ Admin
                   </Link>
@@ -185,8 +151,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
                     handleLogout()
                     setMobileMenuOpen(false)
                   }}
-                  className="w-full text-left bg-gradient-to-b from-[#ef4444] to-[#dc2626] text-white py-3 px-4 mt-2 border-2 border-black shadow-[2px_2px_0_#000] min-h-[44px] font-bold"
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem' }}
+                  className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-2"
                 >
                   🚪 Logout
                 </button>
@@ -195,17 +160,15 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
               <>
                 <Link
                   href="/login"
-                  className="block text-white hover:text-[#4ade80] py-3 px-2 min-h-[44px] transition-colors font-bold"
+                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.75rem' }}
                 >
                   🔑 Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="block w-full text-center bg-gradient-to-b from-[#4ade80] to-[#22c55e] text-black py-3 px-4 mt-2 border-2 border-black shadow-[2px_2px_0_#000] min-h-[44px] font-bold"
+                  className="block px-4 py-3 mt-2 text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.7rem' }}
                 >
                   ✨ Sign Up
                 </Link>

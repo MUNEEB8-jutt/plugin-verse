@@ -1,54 +1,38 @@
 @import "tailwindcss";
 
-/* Minecraft Font - Add your downloaded font here */
-@font-face {
-  font-family: 'Minecrafter';
-  src: url('/fonts/Minecrafter.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  /* Minecraft Color Palette - Lighter & Better */
-  --mc-primary: #4ade80;
-  --mc-primary-dark: #22c55e;
-  --mc-primary-light: #86efac;
+  /* Clean Modern Color Palette */
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #60a5fa;
   
-  --mc-stone: #9ca3af;
-  --mc-stone-dark: #6b7280;
-  --mc-stone-light: #d1d5db;
+  --secondary: #10b981;
+  --secondary-dark: #059669;
+  --secondary-light: #34d399;
   
-  --mc-diamond: #60a5fa;
+  --accent: #8b5cf6;
+  --accent-dark: #7c3aed;
   
-  --mc-wood: #d97706;
-  --mc-wood-light: #f59e0b;
+  /* Clean backgrounds */
+  --bg-dark: #0f172a;
+  --bg-medium: #1e293b;
+  --bg-light: #334155;
+  --bg-card: rgba(30, 41, 59, 0.8);
   
-  /* Lighter backgrounds - not full dark */
-  --mc-bg-dark: #374151;
-  --mc-bg-medium: #4b5563;
-  --mc-bg-light: #6b7280;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
   
-  --mc-text-light: #f9fafb;
-  --mc-text-dark: #111827;
-  
-  /* Legacy variables for compatibility */
-  --bg-primary: #374151;
-  --bg-secondary: #4b5563;
-  --bg-card: rgba(75, 85, 99, 0.9);
-  --accent-primary: #4ade80;
-  --accent-secondary: #60a5fa;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --border: rgba(0, 0, 0, 0.3);
+  --border: rgba(148, 163, 184, 0.2);
+  --border-light: rgba(148, 163, 184, 0.1);
 }
 
 @theme inline {
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-primary: var(--bg-dark);
+  --color-bg-secondary: var(--bg-medium);
   --color-bg-card: var(--bg-card);
-  --color-accent-primary: var(--accent-primary);
-  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-primary: var(--primary);
+  --color-accent-secondary: var(--secondary);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-border: var(--border);
@@ -57,67 +41,52 @@
 }
 
 body {
-  background: var(--mc-bg-dark);
-  color: var(--mc-text-light);
-  font-family: 'Minecrafter', 'Press Start 2P', monospace, Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 50%, var(--bg-medium) 100%);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   min-height: 100vh;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Glassmorphism effect */
 .glass {
   background: var(--bg-card);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border);
 }
 
-/* Fast transitions for better performance */
+/* Smooth transitions */
 * {
-  transition: all 0.15s ease-in-out;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--bg-medium);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 5px;
+  background: var(--primary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
+  background: var(--primary-light);
 }
 
-/* Minecraft-Style Animations */
+/* Clean Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -128,119 +97,43 @@ body {
   }
 }
 
-@keyframes bounceSlow {
-  0%, 100% {
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-10px);
-  }
 }
 
-/* Minecraft Block Place Animation - Faster */
-@keyframes blockPlace {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Minecraft Block Break Animation */
-@keyframes blockBreak {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.1) rotate(5deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.8) rotate(-5deg);
-  }
-}
-
-/* Pixelated Fade */
-@keyframes pixelFade {
-  0% {
-    opacity: 0;
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-/* Page Transition - Swap Animation */
-@keyframes pageSwapOut {
-  0% {
-    opacity: 1;
-    transform: scale(1) rotateY(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9) rotateY(90deg);
-  }
-}
-
-@keyframes pageSwapIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) rotateY(-90deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotateY(0deg);
-  }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.4s ease-out;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.5s ease-out;
   animation-fill-mode: both;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.8s ease-out;
+  animation: slideUp 0.4s ease-out;
 }
 
-.animate-bounce-slow {
-  animation: bounceSlow 3s ease-in-out infinite;
-}
-
-.animate-block-place {
-  animation: blockPlace 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-block-break {
-  animation: blockBreak 0.3s ease-out;
-}
-
-.animate-pixel-fade {
-  animation: pixelFade 0.5s ease-out;
-}
-
-.page-transition {
-  animation: pageSwapIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
 }
 
 /* Loading Bar */
 @keyframes loadingBar {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .loading-bar {
@@ -249,85 +142,55 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #4ade80, transparent);
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
   z-index: 9999;
   animation: loadingBar 1s ease-in-out infinite;
 }
 
-/* Admin Panel Styles - Smaller, readable fonts */
-.admin-text {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-size: 0.875rem !important;
-}
-
-.admin-heading {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-size: 1.5rem !important;
-  font-weight: 700 !important;
-}
-
 /* Hover Effects */
-.hover-scale {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hover-scale:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile Optimizations - Clean Modern Theme */
+/* Card glow effect */
+.card-glow {
+  position: relative;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-glow:hover::before {
+  opacity: 0.5;
+}
+
+/* Mobile Optimizations */
 @media (max-width: 768px) {
-  /* Clean dark theme for mobile */
   body {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
-    -webkit-overflow-scrolling: touch;
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
   }
   
-  /* Reduce animation complexity on mobile for better performance */
-  .animate-bounce-slow {
-    animation: none;
-  }
-  
-  /* Optimize container padding for mobile */
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   
-  /* Thinner scrollbar on mobile */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
-  
-  /* Clean card styling for mobile */
-  .mobile-clean-card {
-    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
-    border: 1px solid rgba(59, 130, 246, 0.3) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
-  }
-  
-  /* Clean button styling for mobile */
-  .mobile-clean-button {
-    border-radius: 12px !important;
-    border: 1px solid rgba(59, 130, 246, 0.4) !important;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-weight: 600 !important;
-  }
-}
-
-/* Performance optimizations */
-.animate-block-place,
-.animate-fade-in-up,
-.page-transition {
-  will-change: transform, opacity;
-}
-
-/* Contain layout for better performance */
-.grid > * {
-  contain: layout style paint;
 }
 
 /* Reduced Motion Support */
@@ -339,4 +202,48 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Button base styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Input styles */
+input, textarea, select {
+  background: var(--bg-medium);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
 }

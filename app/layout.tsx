@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -52,7 +47,6 @@ export const metadata: Metadata = {
     title: "PluginVerse Pakistan - Minecraft Plugins & Mods Marketplace",
     description: "🎮 Pakistan's #1 marketplace for Minecraft plugins and mods. 💎 Premium & Free plugins. 💰 Coin-based system. 🇵🇰 Made for Pakistani Minecraft community.",
     siteName: "PluginVerse Pakistan",
-    countryName: "Pakistan",
     images: [
       {
         url: "https://pluginverse.vercel.app/logo.png",
@@ -106,18 +100,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
         
-        {/* Manifest & Icons */}
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
-        <meta name="theme-color" content="#4ade80" />
+        <meta name="theme-color" content="#10b981" />
         
-        {/* Press Start 2P Font for Minecraft theme */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-        
-        {/* Structured Data - Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -142,7 +129,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased font-sans`}
         style={{ position: 'relative', minHeight: '100vh' }}
       >
         {/* Background Video */}
@@ -151,32 +138,13 @@ export default function RootLayout({
           loop
           muted
           playsInline
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: -1,
-            opacity: 0.3
-          }}
+          className="fixed inset-0 w-full h-full object-cover -z-10 opacity-20"
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
 
-        {/* Dark overlay for better readability */}
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: -1
-          }}
-        />
+        {/* Dark overlay */}
+        <div className="fixed inset-0 bg-slate-900/60 -z-10" />
 
         {children}
       </body>

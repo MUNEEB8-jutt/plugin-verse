@@ -1,64 +1,73 @@
 import { cn } from '@/lib/utils/helpers'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger'
+  variant?: 'primary' | 'secondary' | 'danger' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
 }
 
-export function Button({ variant = 'primary', className, children, ...props }: ButtonProps) {
-  // Mobile: Clean modern style, Desktop: Minecraft blocky style
+export function Button({ 
+  variant = 'primary', 
+  size = 'md',
+  className, 
+  children, 
+  ...props 
+}: ButtonProps) {
   const baseStyles = `
-    px-4 py-2.5 md:px-6 md:py-3
-    text-xs sm:text-sm md:text-base
-    font-semibold lg:font-bold
+    inline-flex items-center justify-center
+    font-medium
     transition-all duration-200
     disabled:opacity-50 disabled:cursor-not-allowed
-    relative
-    min-h-[44px]
-    w-full
-    flex items-center justify-center
-    rounded-xl lg:rounded-none
-    border-2 lg:border-4 border-blue-500/40 lg:border-black
-    shadow-lg shadow-blue-500/30 lg:shadow-[3px_3px_0_#000,inset_2px_2px_0_rgba(255,255,255,0.3)]
-    touch-manipulation
+    rounded-xl
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900
+    active:scale-[0.98]
   `
+
+  const sizes = {
+    sm: 'px-3 py-1.5 text-sm min-h-[36px]',
+    md: 'px-4 py-2.5 text-sm min-h-[44px]',
+    lg: 'px-6 py-3 text-base min-h-[52px]',
+  }
 
   const variants = {
     primary: `
-      bg-gradient-to-br from-green-500 to-green-600 lg:bg-gradient-to-b lg:from-[#4ade80] lg:to-[#22c55e]
-      text-white lg:text-black
-      hover:from-green-400 hover:to-green-500 hover:shadow-xl hover:shadow-green-500/40
-      lg:hover:shadow-[4px_4px_0_#000,inset_2px_2px_0_rgba(255,255,255,0.4)]
-      lg:hover:-translate-x-[1px] lg:hover:-translate-y-[1px]
-      active:scale-95 lg:active:scale-100
-      lg:active:shadow-[1px_1px_0_#000,inset_2px_2px_0_rgba(0,0,0,0.2)]
-      lg:active:translate-x-[1px] lg:active:translate-y-[1px]
+      bg-gradient-to-r from-emerald-500 to-emerald-600
+      hover:from-emerald-400 hover:to-emerald-500
+      text-white
+      shadow-lg shadow-emerald-500/25
+      hover:shadow-xl hover:shadow-emerald-500/30
+      focus:ring-emerald-500
     `,
     secondary: `
-      bg-gradient-to-br from-blue-500 to-blue-600 lg:bg-gradient-to-b lg:from-[#60a5fa] lg:to-[#3b82f6]
+      bg-gradient-to-r from-blue-500 to-blue-600
+      hover:from-blue-400 hover:to-blue-500
       text-white
-      hover:from-blue-400 hover:to-blue-500 hover:shadow-xl hover:shadow-blue-500/40
-      lg:hover:shadow-[4px_4px_0_#000,inset_2px_2px_0_rgba(255,255,255,0.4)]
-      lg:hover:-translate-x-[1px] lg:hover:-translate-y-[1px]
-      active:scale-95 lg:active:scale-100
-      lg:active:shadow-[1px_1px_0_#000,inset_2px_2px_0_rgba(0,0,0,0.2)]
-      lg:active:translate-x-[1px] lg:active:translate-y-[1px]
+      shadow-lg shadow-blue-500/25
+      hover:shadow-xl hover:shadow-blue-500/30
+      focus:ring-blue-500
     `,
     danger: `
-      bg-gradient-to-br from-red-500 to-red-600 lg:bg-gradient-to-b lg:from-[#ef4444] lg:to-[#dc2626]
+      bg-gradient-to-r from-red-500 to-red-600
+      hover:from-red-400 hover:to-red-500
       text-white
-      hover:from-red-400 hover:to-red-500 hover:shadow-xl hover:shadow-red-500/40
-      lg:hover:shadow-[4px_4px_0_#000,inset_2px_2px_0_rgba(255,255,255,0.4)]
-      lg:hover:-translate-x-[1px] lg:hover:-translate-y-[1px]
-      active:scale-95 lg:active:scale-100
-      lg:active:shadow-[1px_1px_0_#000,inset_2px_2px_0_rgba(0,0,0,0.2)]
-      lg:active:translate-x-[1px] lg:active:translate-y-[1px]
+      shadow-lg shadow-red-500/25
+      hover:shadow-xl hover:shadow-red-500/30
+      focus:ring-red-500
+    `,
+    ghost: `
+      bg-transparent
+      hover:bg-slate-800
+      text-slate-300
+      hover:text-white
+      border border-slate-700
+      hover:border-slate-600
+      focus:ring-slate-500
     `,
   }
 
   return (
     <button
-      className={cn(baseStyles, variants[variant], className)}
+      className={cn(baseStyles, sizes[size], variants[variant], className)}
       {...props}
     >
       {children}
