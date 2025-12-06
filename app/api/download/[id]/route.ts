@@ -78,9 +78,9 @@ export async function GET(
         fileToDownload = plugin.file_url
       }
 
-      // Create proper filename for download (sanitize plugin name)
-      const originalFileName = fileToDownload.split('/').pop() || `${plugin.name}.jar`
-      const sanitizedPluginName = plugin.name.replace(/[^a-zA-Z0-9-_]/g, '_')
+      // Create proper filename for download (sanitize plugin title)
+      const originalFileName = fileToDownload.split('/').pop() || `${plugin.title}.jar`
+      const sanitizedPluginName = plugin.title.replace(/[^a-zA-Z0-9-_]/g, '_')
       const fileExtension = originalFileName.split('.').pop() || 'jar'
       const downloadFileName = `${sanitizedPluginName}.${fileExtension}`
 
