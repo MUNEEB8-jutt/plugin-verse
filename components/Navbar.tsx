@@ -26,7 +26,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
       aria-label="Main navigation"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between py-2">
           {/* Logo */}
           <Link
             href="/"
@@ -36,7 +36,8 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             <img
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
               alt="PluginVerse"
-              className="h-12 sm:h-14 w-auto object-contain max-h-full"
+              className="w-auto object-contain"
+              style={{ height: '145px' }}
             />
           </Link>
 
