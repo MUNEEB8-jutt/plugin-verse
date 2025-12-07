@@ -34,7 +34,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             aria-label="PluginVerse Home"
           >
             <img
-              src="/logo.png"
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
               alt="PluginVerse"
               className="h-10 sm:h-12 w-auto object-contain"
             />
