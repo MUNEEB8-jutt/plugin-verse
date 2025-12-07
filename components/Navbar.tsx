@@ -36,9 +36,8 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             <img
               src="/logo.png"
               alt="PluginVerse"
-              className="h-14 w-48 object-fill"
-              width={192}
-              height={56}
+              className="h-12 w-auto object-contain drop-shadow-lg"
+              style={{ maxWidth: '160px' }}
             />
           </Link>
 
