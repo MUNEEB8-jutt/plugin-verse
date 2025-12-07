@@ -123,13 +123,13 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-xl p-4 text-center hover:border-blue-400/50 transition-all"
             >
-              <p className="text-blue-400 text-xs mb-1">💎 SPONSORED</p>
+              <p className="text-blue-400 text-xs mb-1">💎 Not SPONSORED</p>
               <p className="text-white text-sm font-medium">The Best Minecraft Hosting</p>
               <p className="text-blue-400 text-lg font-bold">Diamond Host</p>
               <p className="text-slate-400 text-xs mt-1">Join Now on <span className="text-purple-400 font-medium">Discord</span></p>
             </a>
           </div>
-          
+
           {/* Join Discord for Ad */}
           <p className="text-center text-slate-500 text-xs mt-4">
             <a href="https://discord.com/invite/UnDRjTc9jP" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
@@ -149,7 +149,7 @@ export default async function HomePage() {
                 Fun fact: Both of them are named Muneeb! 🎮✨
               </p>
             </div>
-            
+
             <p className="text-slate-600 text-xs mt-6">
               © 2025 PluginVerse. All rights reserved.
             </p>

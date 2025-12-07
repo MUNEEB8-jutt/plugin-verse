@@ -67,8 +67,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://pluginverse.vercel.app/logo.png",
-        width: 1200,
-        height: 630,
+        width: 500,
+        height: 500,
         alt: "PluginVerse - Minecraft Plugin Marketplace",
         type: "image/png",
       },
@@ -109,7 +109,7 @@ export default function RootLayout({
         <meta name="google-site-verification" content="ZNW4Kq5aHaE1VIMnIktb42XCMfHZlbv21nrfpNJH1Uo" />
 
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
         <meta name="theme-color" content="#10b981" />
 
