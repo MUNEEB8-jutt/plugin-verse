@@ -118,14 +118,86 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "PluginVerse",
+              "alternateName": ["PluginVerse Pakistan", "Minecraft Plugin Store"],
+              "url": "https://pluginverse.vercel.app",
+              "description": "Pakistan's #1 marketplace for Minecraft plugins and mods. Download free & premium Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins. Custom plugin requests available.",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://pluginverse.vercel.app/?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
               "@type": "Organization",
               "name": "PluginVerse",
               "url": "https://pluginverse.vercel.app",
               "logo": "https://pluginverse.vercel.app/logo.png",
-              "description": "Best marketplace for Minecraft plugins and mods",
+              "description": "Best marketplace for Minecraft plugins and mods in Pakistan",
+              "foundingDate": "2024",
               "sameAs": [
                 "https://discord.com/invite/UnDRjTc9jP",
                 "https://www.youtube.com/@ItxMuneebYT"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "url": "https://discord.com/invite/UnDRjTc9jP"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SiteNavigationElement",
+              "name": "Main Navigation",
+              "hasPart": [
+                {
+                  "@type": "WebPage",
+                  "name": "Browse Plugins",
+                  "description": "Explore all free and premium Minecraft plugins",
+                  "url": "https://pluginverse.vercel.app/"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Login",
+                  "description": "Sign in to your PluginVerse account",
+                  "url": "https://pluginverse.vercel.app/login"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Sign Up",
+                  "description": "Create a new PluginVerse account for free",
+                  "url": "https://pluginverse.vercel.app/signup"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Request Plugin",
+                  "description": "Request a custom Minecraft plugin",
+                  "url": "https://pluginverse.vercel.app/request"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "My Account",
+                  "description": "Manage your PluginVerse account and downloads",
+                  "url": "https://pluginverse.vercel.app/account"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Deposit Coins",
+                  "description": "Add coins to your account for premium plugins",
+                  "url": "https://pluginverse.vercel.app/deposit"
+                }
               ]
             })
           }}
