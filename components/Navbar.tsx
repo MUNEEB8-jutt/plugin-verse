@@ -26,7 +26,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
       aria-label="Main navigation"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-2">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href="/"
@@ -34,10 +34,10 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             aria-label="PluginVerse Home"
           >
             <img
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo1.png`}
               alt="PluginVerse"
               className="w-auto object-contain"
-              style={{ height: '145px' }}
+              style={{ height: '145px', marginTop: '-40px', marginBottom: '-40px' }}
             />
           </Link>
 
