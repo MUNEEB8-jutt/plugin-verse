@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: "PluginVerse - Best Minecraft Plugins & Mods Marketplace | Free & Premium Plugins",
     template: "%s | PluginVerse"
   },
-  description: "Download free and premium Minecraft plugins & mods. Best marketplace for Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins and more.",
+  description: "Download completely FREE Minecraft plugins & mods. Best marketplace for Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins. 100% Free downloads!",
   keywords: [
     "Minecraft plugins",
     "Minecraft mods",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://pluginverse.vercel.app",
     title: "PluginVerse - Minecraft Plugins & Mods Marketplace",
-    description: "🎮 Best marketplace for Minecraft plugins and mods. 💎 Free & Premium plugins. Download Spigot, Bukkit, Paper plugins for your server.",
+    description: "🎮 Best marketplace for Minecraft plugins and mods. ✨ Completely FREE downloads! Spigot, Bukkit, Paper plugins for your server.",
     siteName: "PluginVerse",
     images: [
       {
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "PluginVerse - Minecraft Plugins & Mods Marketplace",
-    description: "🎮 Best marketplace for Minecraft plugins and mods. 💎 Free & Premium plugins for your server.",
+    description: "🎮 Best marketplace for Minecraft plugins and mods. ✨ Completely FREE downloads for your server!",
     images: ["https://pluginverse.vercel.app/logo.png"],
     creator: "@ItxMuneebYT",
   },
@@ -122,7 +122,7 @@ export default function RootLayout({
               "name": "PluginVerse",
               "alternateName": ["PluginVerse Pakistan", "Minecraft Plugin Store"],
               "url": "https://pluginverse.vercel.app",
-              "description": "Pakistan's #1 marketplace for Minecraft plugins and mods. Download free & premium Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins. Custom plugin requests available.",
+              "description": "Pakistan's #1 marketplace for Minecraft plugins and mods. Download completely FREE Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins. Get your own custom plugin made!",
               "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://pluginverse.vercel.app/?search={search_term_string}",
@@ -140,7 +140,7 @@ export default function RootLayout({
               "name": "PluginVerse",
               "url": "https://pluginverse.vercel.app",
               "logo": "https://pluginverse.vercel.app/logo.png",
-              "description": "Best marketplace for Minecraft plugins and mods in Pakistan",
+              "description": "Completely FREE Minecraft plugins and mods marketplace in Pakistan",
               "foundingDate": "2024",
               "sameAs": [
                 "https://discord.com/invite/UnDRjTc9jP",
@@ -165,7 +165,7 @@ export default function RootLayout({
                 {
                   "@type": "WebPage",
                   "name": "Browse Plugins",
-                  "description": "Explore all free and premium Minecraft plugins",
+                  "description": "Explore all completely FREE Minecraft plugins",
                   "url": "https://pluginverse.vercel.app/"
                 },
                 {
@@ -182,8 +182,8 @@ export default function RootLayout({
                 },
                 {
                   "@type": "WebPage",
-                  "name": "Request Plugin",
-                  "description": "Request a custom Minecraft plugin",
+                  "name": "Make Your Own Plugin",
+                  "description": "Get your own custom Minecraft plugin made for free",
                   "url": "https://pluginverse.vercel.app/request"
                 },
                 {
@@ -191,12 +191,6 @@ export default function RootLayout({
                   "name": "My Account",
                   "description": "Manage your PluginVerse account and downloads",
                   "url": "https://pluginverse.vercel.app/account"
-                },
-                {
-                  "@type": "WebPage",
-                  "name": "Deposit Coins",
-                  "description": "Add coins to your account for premium plugins",
-                  "url": "https://pluginverse.vercel.app/deposit"
                 }
               ]
             })
