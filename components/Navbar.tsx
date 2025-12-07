@@ -30,19 +30,16 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+            className="flex items-center hover:opacity-90 transition-opacity"
             aria-label="PluginVerse Home"
           >
             <img 
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
-              alt="PluginVerse Logo"
-              className="w-9 h-9 object-contain rounded-lg"
-              width={36}
-              height={36}
+              src="/logo.png"
+              alt="PluginVerse"
+              className="h-10 w-auto object-contain"
+              width={40}
+              height={40}
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              PluginVerse
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
