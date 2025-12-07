@@ -36,7 +36,7 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             <img
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo.png`}
               alt="PluginVerse"
-              className="h-14 sm:h-16 w-auto object-contain"
+              className="h-36 sm:h-44 w-auto object-contain"
             />
           </Link>
 
