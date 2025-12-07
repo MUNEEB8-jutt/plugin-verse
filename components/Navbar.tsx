@@ -33,12 +33,9 @@ export function Navbar({ user, isAdmin }: NavbarProps) {
             className="flex items-center hover:opacity-90 transition-opacity"
             aria-label="PluginVerse Home"
           >
-            <img
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/background/logo1.png`}
-              alt="PluginVerse"
-              className="w-auto object-contain"
-              style={{ height: '145px', marginTop: '-40px', marginBottom: '-40px' }}
-            />
+            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              PluginVerse
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
