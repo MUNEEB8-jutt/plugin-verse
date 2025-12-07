@@ -116,11 +116,10 @@ export default async function PluginDetailPage({ params }: { params: Promise<{ i
                   )}
 
                   {/* Price */}
-                  <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-bold border ${
-                    plugin.price_coins === 0 
-                      ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' 
+                  <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-bold border ${plugin.price_coins === 0
+                      ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
                       : 'bg-amber-500/20 text-amber-400 border-amber-500/30'
-                  }`}>
+                    }`}>
                     {plugin.price_coins === 0 ? '✨ FREE' : `🪙 ${formatCurrency(plugin.price_coins)}`}
                   </span>
                 </div>
@@ -157,18 +156,18 @@ export default async function PluginDetailPage({ params }: { params: Promise<{ i
                   <div className="space-y-4">
                     <p className="text-center text-emerald-400 text-sm mb-2">✅ You own this plugin</p>
                     <DownloadButton pluginId={plugin.id} pluginTitle={plugin.title} />
-                    
+
                     {/* Donate Section */}
                     <div className="pt-4 border-t border-slate-700/50">
                       <p className="text-center text-slate-400 text-sm mb-3">
                         💖 Enjoyed this plugin? Support us!
                       </p>
-                      <button 
+                      <button
                         className="w-full py-3 px-4 bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30 border border-pink-500/30 rounded-xl text-pink-400 font-medium transition-all duration-200 flex items-center justify-center gap-2"
                         disabled
                       >
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
                         Donate Us (Coming Soon)
                       </button>
@@ -183,7 +182,7 @@ export default async function PluginDetailPage({ params }: { params: Promise<{ i
               ) : (
                 <div className="text-center space-y-4">
                   <p className="text-slate-400">
-                    {plugin.price_coins === 0 
+                    {plugin.price_coins === 0
                       ? 'Login to download this free plugin'
                       : 'Login to purchase this plugin'}
                   </p>

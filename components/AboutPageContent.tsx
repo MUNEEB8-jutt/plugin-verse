@@ -78,6 +78,30 @@ export function AboutPageContent() {
         <p className="text-slate-500 text-sm italic text-center mt-8">✨ Fun fact: Both are named Muneeb! 🎲</p>
       </div>
 
+      {/* Influencer Section */}
+      <div className="max-w-4xl mx-auto mb-16">
+        <h2 className="text-2xl font-bold text-white text-center mb-8">🌟 Our Influencer</h2>
+        <div className="max-w-md mx-auto">
+          <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center">
+            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-4xl">⚔️</div>
+            <h3 className="text-xl font-bold text-orange-400 mb-2">Mr Billu</h3>
+            <p className="text-slate-400 text-sm mb-4">Influencer & Community Ambassador</p>
+            <p className="text-slate-300 text-sm leading-relaxed mb-4">A dedicated gamer and content creator helping spread the word about PluginVerse. His passion for Minecraft brings our community together!</p>
+            <a 
+              href="https://www.youtube.com/@billu_warrior_op" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-500/20 text-red-400 rounded-xl border border-red-500/30 font-medium text-sm hover:bg-red-500/30 transition-all"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              MrBillu&apos;s Channel
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-2xl mx-auto text-center mb-16">
         <h2 className="text-2xl font-bold text-white mb-6">🔗 Connect With Us</h2>
         <div className="flex flex-wrap justify-center gap-4">
