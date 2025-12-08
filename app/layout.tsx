@@ -18,35 +18,71 @@ export const metadata: Metadata = {
   },
   description: "Download completely FREE Minecraft plugins & mods. Best marketplace for Spigot, Bukkit, Paper plugins. Server essentials, minigames, economy, protection plugins. 100% Free downloads!",
   keywords: [
+    // Main keywords
     "Minecraft plugins",
     "Minecraft mods",
-    "Spigot plugins",
-    "Bukkit plugins",
-    "Paper plugins",
     "free Minecraft plugins",
-    "premium Minecraft plugins",
+    "download Minecraft plugins free",
+    "Minecraft plugin marketplace",
+    
+    // Create plugin keywords
+    "create free Minecraft plugin",
+    "create your own Minecraft plugin",
+    "how to create Minecraft plugin",
+    "make your own plugin",
+    "custom Minecraft plugin",
+    "get custom plugin made",
+    "request Minecraft plugin",
+    "plugin development",
+    "free plugin creation",
+    
+    // Server types
+    "Spigot plugins",
+    "Bukkit plugins", 
+    "Paper plugins",
     "Minecraft server plugins",
-    "plugin marketplace",
-    "download Minecraft mods",
-    "server plugins",
-    "Minecraft essentials",
+    "server plugins free",
+    
+    // Plugin types
     "economy plugins",
     "protection plugins",
     "minigame plugins",
-    "best Minecraft plugins 2024",
-    "Minecraft plugin download",
-    "Minecraft server mods",
     "PvP plugins",
     "survival plugins",
-    "Minecraft plugin store",
-    "buy Minecraft plugins",
+    "anti cheat plugin",
+    "permissions plugin",
+    "shop plugin",
+    "essentials plugin",
+    
+    // Popular plugins
     "WorldEdit plugin",
     "EssentialsX",
     "Vault plugin",
     "LuckPerms",
-    "Minecraft permissions plugin",
-    "anti cheat plugin",
-    "Minecraft shop plugin"
+    
+    // Search terms
+    "best Minecraft plugins 2024",
+    "best Minecraft plugins 2025",
+    "top Minecraft plugins",
+    "Minecraft plugin download",
+    "free plugin download",
+    "Minecraft server mods",
+    "download Minecraft mods free",
+    
+    // Pakistan specific
+    "Minecraft plugins Pakistan",
+    "Pakistani Minecraft server",
+    "free plugins Pakistan",
+    
+    // Long tail keywords
+    "how to get free Minecraft plugins",
+    "where to download Minecraft plugins",
+    "best free Minecraft server plugins",
+    "Minecraft plugin store free",
+    "custom plugin request free",
+    "Minecraft plugin maker",
+    "plugin for Minecraft server",
+    "free server plugins download"
   ],
   authors: [{ name: "PluginVerse", url: "https://pluginverse.vercel.app" }],
   creator: "PluginVerse",
