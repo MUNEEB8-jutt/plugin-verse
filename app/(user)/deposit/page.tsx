@@ -214,6 +214,24 @@ export default function DepositPage() {
                               <p className="text-emerald-400 font-semibold">
                                 {getPaymentNumber()}
                               </p>
+                              {/* QR Code */}
+                              {(() => {
+                                const qrKey = method === 'Easypaisa' ? 'easypaisa_qr' : method === 'JazzCash' ? 'jazzcash_qr' : 'upi_qr'
+                                const qrUrl = settings[qrKey]
+                                if (qrUrl) {
+                                  return (
+                                    <div className="mt-3 pt-3 border-t border-slate-700/50">
+                                      <p className="text-slate-400 text-xs mb-2">Or scan QR code:</p>
+                                      <img 
+                                        src={qrUrl} 
+                                        alt={`${method} QR Code`} 
+                                        className="w-32 h-32 rounded-lg border border-slate-600 bg-white p-1"
+                                      />
+                                    </div>
+                                  )
+                                }
+                                return null
+                              })()}
                             </div>
                           )}
                         </label>

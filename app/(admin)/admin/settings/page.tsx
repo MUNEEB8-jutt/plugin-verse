@@ -10,7 +10,11 @@ export default function AdminSettingsPage() {
     easypaisa_number: '',
     jazzcash_number: '',
     upi_id: '',
+    easypaisa_qr: '',
+    jazzcash_qr: '',
+    upi_qr: '',
   })
+  const [uploadingQr, setUploadingQr] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -33,12 +37,42 @@ export default function AdminSettingsPage() {
           easypaisa_number: settingsObj.easypaisa_number || '',
           jazzcash_number: settingsObj.jazzcash_number || '',
           upi_id: settingsObj.upi_id || '',
+          easypaisa_qr: settingsObj.easypaisa_qr || '',
+          jazzcash_qr: settingsObj.jazzcash_qr || '',
+          upi_qr: settingsObj.upi_qr || '',
         })
       }
     } catch (err) {
       console.error('Failed to fetch settings:', err)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleQrUpload = async (file: File, type: string) => {
+    setUploadingQr(type)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('type', type)
+      
+      const response = await fetch('/api/settings/qr-upload', {
+        method: 'POST',
+        body: formData,
+      })
+      
+      const data = await response.json()
+      if (response.ok && data.url) {
+        setSettings(prev => ({ ...prev, [`${type}_qr`]: data.url }))
+        setSuccess(true)
+        setTimeout(() => setSuccess(false), 3000)
+      } else {
+        setError(data.error || 'Failed to upload QR code')
+      }
+    } catch (err) {
+      setError('Failed to upload QR code')
+    } finally {
+      setUploadingQr(null)
     }
   }
 
@@ -117,40 +151,115 @@ export default function AdminSettingsPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Easypaisa Number</label>
-                  <input
-                    type="text"
-                    value={settings.easypaisa_number}
-                    onChange={(e) => setSettings({ ...settings, easypaisa_number: e.target.value })}
-                    placeholder="03001234567"
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  />
-                  <p className="text-xs text-slate-500 mt-1">Users will send Easypaisa payments here</p>
+                {/* Easypaisa */}
+                <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                  <h3 className="text-sm font-semibold text-emerald-400 mb-3">💚 Easypaisa</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">Number</label>
+                      <input
+                        type="text"
+                        value={settings.easypaisa_number}
+                        onChange={(e) => setSettings({ ...settings, easypaisa_number: e.target.value })}
+                        placeholder="03001234567"
+                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">QR Code (Optional)</label>
+                      <div className="flex items-center gap-3">
+                        {settings.easypaisa_qr && (
+                          <img src={settings.easypaisa_qr} alt="Easypaisa QR" className="w-16 h-16 rounded-lg object-cover border border-slate-600" />
+                        )}
+                        <label className="flex-1 cursor-pointer">
+                          <div className="px-3 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg text-center text-sm text-slate-300 transition-colors">
+                            {uploadingQr === 'easypaisa' ? 'Uploading...' : settings.easypaisa_qr ? 'Change QR' : 'Upload QR'}
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => e.target.files?.[0] && handleQrUpload(e.target.files[0], 'easypaisa')}
+                            disabled={uploadingQr !== null}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">JazzCash Number</label>
-                  <input
-                    type="text"
-                    value={settings.jazzcash_number}
-                    onChange={(e) => setSettings({ ...settings, jazzcash_number: e.target.value })}
-                    placeholder="03001234567"
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  />
-                  <p className="text-xs text-slate-500 mt-1">Users will send JazzCash payments here</p>
+                {/* JazzCash */}
+                <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                  <h3 className="text-sm font-semibold text-red-400 mb-3">❤️ JazzCash</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">Number</label>
+                      <input
+                        type="text"
+                        value={settings.jazzcash_number}
+                        onChange={(e) => setSettings({ ...settings, jazzcash_number: e.target.value })}
+                        placeholder="03001234567"
+                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">QR Code (Optional)</label>
+                      <div className="flex items-center gap-3">
+                        {settings.jazzcash_qr && (
+                          <img src={settings.jazzcash_qr} alt="JazzCash QR" className="w-16 h-16 rounded-lg object-cover border border-slate-600" />
+                        )}
+                        <label className="flex-1 cursor-pointer">
+                          <div className="px-3 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg text-center text-sm text-slate-300 transition-colors">
+                            {uploadingQr === 'jazzcash' ? 'Uploading...' : settings.jazzcash_qr ? 'Change QR' : 'Upload QR'}
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => e.target.files?.[0] && handleQrUpload(e.target.files[0], 'jazzcash')}
+                            disabled={uploadingQr !== null}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">UPI ID</label>
-                  <input
-                    type="text"
-                    value={settings.upi_id}
-                    onChange={(e) => setSettings({ ...settings, upi_id: e.target.value })}
-                    placeholder="example@upi"
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  />
-                  <p className="text-xs text-slate-500 mt-1">Users will send UPI payments here</p>
+                {/* UPI */}
+                <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                  <h3 className="text-sm font-semibold text-purple-400 mb-3">💜 UPI</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">UPI ID</label>
+                      <input
+                        type="text"
+                        value={settings.upi_id}
+                        onChange={(e) => setSettings({ ...settings, upi_id: e.target.value })}
+                        placeholder="example@upi"
+                        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-400 mb-1">QR Code (Optional)</label>
+                      <div className="flex items-center gap-3">
+                        {settings.upi_qr && (
+                          <img src={settings.upi_qr} alt="UPI QR" className="w-16 h-16 rounded-lg object-cover border border-slate-600" />
+                        )}
+                        <label className="flex-1 cursor-pointer">
+                          <div className="px-3 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg text-center text-sm text-slate-300 transition-colors">
+                            {uploadingQr === 'upi' ? 'Uploading...' : settings.upi_qr ? 'Change QR' : 'Upload QR'}
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => e.target.files?.[0] && handleQrUpload(e.target.files[0], 'upi')}
+                            disabled={uploadingQr !== null}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <Button type="submit" disabled={saving} className="w-full py-3">
