@@ -18,6 +18,7 @@ export interface Plugin {
   external_url: string | null
   version: string
   platform: Platform
+  is_external: boolean
   created_at: string
 }
 

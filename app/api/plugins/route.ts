@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
     const downloadType = (formData.get('downloadType') as string) || 'upload'
     const logoFile = formData.get('logo') as File
     const externalUrl = formData.get('externalUrl') as string
+    const isExternal = formData.get('isExternal') === 'true'
 
     // Basic validation
     if (!title || !description || isNaN(priceCoins) || !logoFile) {
@@ -142,6 +143,7 @@ export async function POST(request: NextRequest) {
         file_url: fileUrl,
         download_type: downloadType,
         external_url: downloadType === 'external' ? externalUrl : null,
+        is_external: isExternal,
       })
       .select()
       .single()

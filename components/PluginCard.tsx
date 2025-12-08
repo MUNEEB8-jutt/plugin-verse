@@ -115,16 +115,15 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
                 </span>
               )}
               {plugin.platform && (
-                <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-medium ${
-                  plugin.platform === 'plugin' ? 'bg-blue-500/20 text-blue-400' :
+                <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-medium ${plugin.platform === 'plugin' ? 'bg-blue-500/20 text-blue-400' :
                   plugin.platform === 'mod-fabric' ? 'bg-purple-500/20 text-purple-400' :
-                  plugin.platform === 'mod-forge' ? 'bg-red-500/20 text-red-400' :
-                  'bg-slate-700/50 text-slate-300'
-                }`}>
+                    plugin.platform === 'mod-forge' ? 'bg-red-500/20 text-red-400' :
+                      'bg-slate-700/50 text-slate-300'
+                  }`}>
                   {plugin.platform === 'plugin' ? '📄 Plugin' :
-                   plugin.platform === 'mod-fabric' ? '🧵 Fabric' :
-                   plugin.platform === 'mod-forge' ? '🔨 Forge' :
-                   plugin.platform}
+                    plugin.platform === 'mod-fabric' ? '🧵 Fabric' :
+                      plugin.platform === 'mod-forge' ? '🔨 Forge' :
+                        plugin.platform}
                 </span>
               )}
             </div>
@@ -182,11 +181,10 @@ export function PluginCard({ plugin, isPurchased, onPurchase, onDownload }: Plug
               disabled={loading}
               variant="primary"
               size="sm"
-              className={`flex-1 text-xs sm:text-sm py-2.5 sm:py-3 border-0 shadow-lg ${
-                plugin.price_coins === 0
-                  ? 'bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 shadow-emerald-500/20'
-                  : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
-              }`}
+              className={`flex-1 text-xs sm:text-sm py-2.5 sm:py-3 border-0 shadow-lg ${plugin.price_coins === 0
+                ? 'bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 shadow-emerald-500/20'
+                : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
+                }`}
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-1.5">

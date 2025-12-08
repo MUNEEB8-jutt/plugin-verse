@@ -117,8 +117,8 @@ export default async function PluginDetailPage({ params }: { params: Promise<{ i
 
                   {/* Price */}
                   <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-bold border ${plugin.price_coins === 0
-                      ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
-                      : 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                    : 'bg-amber-500/20 text-amber-400 border-amber-500/30'
                     }`}>
                     {plugin.price_coins === 0 ? '✨ FREE' : `🪙 ${formatCurrency(plugin.price_coins)}`}
                   </span>

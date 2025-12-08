@@ -54,6 +54,7 @@ export async function PUT(
     const downloadType = (formData.get('downloadType') as string) || 'upload'
     const logoFile = formData.get('logo') as File | null
     const externalUrl = formData.get('externalUrl') as string
+    const isExternal = formData.get('isExternal') === 'true'
 
     // Get existing plugin
     const { data: existingPlugin, error: fetchError } = await supabase
@@ -182,6 +183,7 @@ export async function PUT(
         file_url: fileUrl,
         download_type: downloadType,
         external_url: newExternalUrl,
+        is_external: isExternal,
       })
       .eq('id', id)
       .select()

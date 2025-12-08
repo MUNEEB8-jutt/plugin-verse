@@ -22,6 +22,7 @@ export default function AdminPluginsPage() {
     platform: 'plugin' as 'plugin' | 'mod-fabric' | 'mod-forge',
     downloadType: 'upload' as 'upload' | 'external',
     externalUrl: '',
+    isExternal: false,
   })
   const [logoFile, setLogoFile] = useState<File | null>(null)
   const [pluginFiles, setPluginFiles] = useState<File[]>([])
@@ -72,6 +73,7 @@ export default function AdminPluginsPage() {
       formDataToSend.append('version', formData.version)
       formDataToSend.append('platform', formData.platform)
       formDataToSend.append('downloadType', formData.downloadType)
+      formDataToSend.append('isExternal', formData.isExternal.toString())
 
       if (logoFile) {
         formDataToSend.append('logo', logoFile)
@@ -121,6 +123,7 @@ export default function AdminPluginsPage() {
       platform: plugin.platform || 'plugin',
       downloadType: plugin.download_type,
       externalUrl: plugin.external_url || '',
+      isExternal: plugin.is_external || false,
     })
     setShowModal(true)
   }
@@ -150,6 +153,7 @@ export default function AdminPluginsPage() {
       platform: 'plugin',
       downloadType: 'upload',
       externalUrl: '',
+      isExternal: false,
     })
     setLogoFile(null)
     setPluginFiles([])
@@ -511,6 +515,21 @@ export default function AdminPluginsPage() {
               />
             </div>
           )}
+
+          {/* External Plugin Checkbox */}
+          <div className="flex items-center gap-3 p-4 bg-slate-800/50 rounded-xl border border-slate-600">
+            <input
+              type="checkbox"
+              id="isExternal"
+              checked={formData.isExternal}
+              onChange={(e) => setFormData({ ...formData, isExternal: e.target.checked })}
+              className="w-5 h-5 rounded bg-slate-700 border-slate-600 text-orange-500 focus:ring-orange-500"
+            />
+            <label htmlFor="isExternal" className="flex-1 cursor-pointer">
+              <span className="text-sm font-medium text-orange-400">🌐 Community Plugin</span>
+              <p className="text-xs text-slate-500 mt-0.5">This plugin is not made by PluginVerse team</p>
+            </label>
+          </div>
 
           <div className="flex gap-3 pt-2">
             <Button type="submit" disabled={submitting} className="flex-1">
