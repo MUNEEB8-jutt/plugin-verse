@@ -142,21 +142,19 @@ export default function DepositPage() {
           ) : (
             <>
               {/* Coin Conversion Info */}
-              <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-4 mb-6">
-                <h3 className="text-amber-400 font-semibold mb-2">💱 Coin Conversion Rate</h3>
-                <div className="flex flex-wrap gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-emerald-400 font-bold">1 PKR</span>
-                    <span className="text-slate-400">=</span>
-                    <span className="text-white font-bold">1 Coin</span>
+              <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-5 mb-6">
+                <h3 className="text-amber-400 font-bold text-lg mb-3">💱 Coin Conversion Rate</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl">
+                    <span className="text-2xl">🇵🇰</span>
+                    <span className="text-emerald-400 font-bold text-lg">1 PKR = 1 Coin</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-purple-400 font-bold">1 INR</span>
-                    <span className="text-slate-400">=</span>
-                    <span className="text-white font-bold">3 Coins</span>
+                  <div className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl">
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="text-purple-400 font-bold text-lg">1 INR = 3 Coins</span>
                   </div>
                 </div>
-                <p className="text-slate-500 text-xs mt-2">Pay according to your currency and receive coins!</p>
+                <p className="text-slate-400 text-sm mt-3">💡 Pay according to your currency and receive coins!</p>
               </div>
 
               {/* Instructions Card */}
