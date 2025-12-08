@@ -19,6 +19,7 @@ export default function DepositPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [qrFullscreen, setQrFullscreen] = useState<string | null>(null)
 
   useEffect(() => {
     checkUser()
@@ -140,17 +141,36 @@ export default function DepositPage() {
             </div>
           ) : (
             <>
+              {/* Coin Conversion Info */}
+              <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-4 mb-6">
+                <h3 className="text-amber-400 font-semibold mb-2">💱 Coin Conversion Rate</h3>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-400 font-bold">1 PKR</span>
+                    <span className="text-slate-400">=</span>
+                    <span className="text-white font-bold">1 Coin</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-purple-400 font-bold">1 INR</span>
+                    <span className="text-slate-400">=</span>
+                    <span className="text-white font-bold">3 Coins</span>
+                  </div>
+                </div>
+                <p className="text-slate-500 text-xs mt-2">Pay according to your currency and receive coins!</p>
+              </div>
+
               {/* Instructions Card */}
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 mb-6">
                 <h2 className="text-lg font-semibold text-amber-400 mb-4">
                   📋 How to Deposit
                 </h2>
                 <div className="space-y-2 text-slate-400 text-sm">
-                  <p>1. Select your payment method</p>
-                  <p>2. Send payment to the displayed number</p>
-                  <p>3. Enter your transaction ID</p>
-                  <p>4. Upload payment screenshot</p>
-                  <p>5. Submit and wait for approval</p>
+                  <p>1. Enter amount of coins you want to deposit</p>
+                  <p>2. Select your payment method</p>
+                  <p>3. Send payment (PKR = Coins, INR × 3 = Coins)</p>
+                  <p>4. Enter your transaction ID</p>
+                  <p>5. Upload payment screenshot</p>
+                  <p>6. Submit and wait for approval</p>
                   <p className="text-emerald-400 mt-3">
                     ⏱️ Coins will be added within minutes after approval!
                   </p>
@@ -169,7 +189,7 @@ export default function DepositPage() {
                   {/* Amount */}
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Amount (Coins)
+                      Amount in Coins to Deposit
                     </label>
                     <input
                       type="number"
@@ -177,9 +197,16 @@ export default function DepositPage() {
                       onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                       required
                       min="1"
-                      placeholder="Enter amount"
+                      placeholder="Enter coins amount (e.g., 100)"
                       className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all"
                     />
+                    {formData.amount && parseInt(formData.amount) > 0 && (
+                      <div className="mt-2 p-2 bg-slate-800/50 rounded-lg text-xs">
+                        <p className="text-slate-400">You need to pay:</p>
+                        <p className="text-emerald-400">🇵🇰 PKR {formData.amount} (Easypaisa/JazzCash)</p>
+                        <p className="text-purple-400">🇮🇳 INR {Math.ceil(parseInt(formData.amount) / 3)} (UPI)</p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Payment Method */}
@@ -221,11 +248,12 @@ export default function DepositPage() {
                                 if (qrUrl) {
                                   return (
                                     <div className="mt-3 pt-3 border-t border-slate-700/50">
-                                      <p className="text-slate-400 text-xs mb-2">Or scan QR code:</p>
+                                      <p className="text-slate-400 text-xs mb-2">Or scan QR code (click to enlarge):</p>
                                       <img 
                                         src={qrUrl} 
                                         alt={`${method} QR Code`} 
-                                        className="w-32 h-32 rounded-lg border border-slate-600 bg-white p-1"
+                                        className="w-40 h-40 rounded-lg border border-slate-600 bg-white p-2 cursor-pointer hover:scale-105 transition-transform"
+                                        onClick={() => setQrFullscreen(qrUrl)}
                                       />
                                     </div>
                                   )
@@ -292,6 +320,28 @@ export default function DepositPage() {
           )}
         </div>
       </main>
+      {/* QR Fullscreen Modal */}
+      {qrFullscreen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setQrFullscreen(null)}
+        >
+          <div className="relative max-w-lg w-full">
+            <button 
+              className="absolute -top-12 right-0 text-white text-lg hover:text-slate-300"
+              onClick={() => setQrFullscreen(null)}
+            >
+              ✕ Close
+            </button>
+            <img 
+              src={qrFullscreen} 
+              alt="QR Code" 
+              className="w-full h-auto rounded-2xl bg-white p-4"
+            />
+            <p className="text-center text-slate-400 mt-4 text-sm">Tap anywhere to close</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
